@@ -2,7 +2,7 @@ import { Hero } from "../models/Hero";
 
 
 // Tạo danh sách hero với thông tin chi tiết
-export const heroData: Hero[] = [
+export const herosData: Hero[] = [
     new Hero(
         1,         // ID của hero
         "Warrior", // Tên hero

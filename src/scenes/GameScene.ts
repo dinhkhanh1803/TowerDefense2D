@@ -17,6 +17,8 @@ import { TowerInfoPannel } from './TowerInfoPannel';
 import { TowerSelectionPannel } from './TowerSelectionPannel';
 import { MapBuilder } from './GameScenesHelpers/MapBuilder';
 import { ResultPannel } from './GameScenesHelpers/ResultPannel';
+import { HeroController } from '../controllers/HeroController';
+import { SkillSystemPannel } from './SkillSystemPannel';
 
 
 export class GameScene extends Container {
@@ -25,10 +27,12 @@ export class GameScene extends Container {
     private mapContainer: Container;
     private towerSelectionPannel: TowerSelectionPannel;
     private towerInfoPannel: TowerInfoPannel;
+    private skillSystemPannel: SkillSystemPannel;
     private towerController: TowerController;
     private projectileController: ProjectileController;
     private enemyController: EnemyController;
     private playerController: PlayerController;
+    private heroController!: HeroController;
     private mapBuilder: MapBuilder;
     private headsUpDisplay: HUD;
 
@@ -36,9 +40,8 @@ export class GameScene extends Container {
     private levelId: number;
     private levelData: LevelTypes;
     private isGameOver: boolean = false;
-    constructor(levelId: number) {
+    constructor(levelId: number, heroId?: number) {
         super();
-
 
         this.levelId = levelId;
 
@@ -54,9 +57,14 @@ export class GameScene extends Container {
         this.enemyController = new EnemyController(this.mapContainer, this.levelData.map.tiles);
         this.playerController = new PlayerController(this.levelData.id);
 
+        if (heroId) {
+            this.heroController = new HeroController(heroId, this.mapContainer, this.levelData);
+        }
 
         this.mapBuilder = new MapBuilder(this.mapContainer, this.levelData);
         this.mapBuilder.buildMap();
+        this.skillSystemPannel = new SkillSystemPannel();
+        this.addChild(this.skillSystemPannel);
         this.towerSelectionPannel = new TowerSelectionPannel();
         this.addChild(this.towerSelectionPannel);
         this.towerInfoPannel = new TowerInfoPannel();
@@ -80,6 +88,7 @@ export class GameScene extends Container {
             this.enemyController.update(deltaTime);
             this.towerController.update(deltaTime);
             this.projectileController.update(deltaTime);
+            this.heroController.update(deltaTime);
         }
     }
 }

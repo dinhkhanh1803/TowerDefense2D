@@ -3,6 +3,8 @@ import { TowerSelectionPannel } from "../TowerSelectionPannel";
 import { TowerInfoPannel } from "../TowerInfoPannel";
 import { LevelTypes } from "../../types/LevelTypes";
 import { EnemyController } from "../../controllers/EnemyController";
+import { EventHandle } from "../../utils/EventHandle";
+import { SkillSystemPannel } from "../SkillSystemPannel";
 
 export class MapBuilder {
     private mapContainer: Container;
@@ -63,6 +65,10 @@ export class MapBuilder {
         grap.on('pointerdown', () => {
             TowerSelectionPannel.instance.visible = false;
             TowerInfoPannel.instance.visible = false;
+
+            if (SkillSystemPannel.instance.isHeroSelected) {
+                EventHandle.emit('postion_click', x, y);
+            }
         });
         this.mapContainer.addChild(grap);
     }
@@ -92,7 +98,7 @@ export class MapBuilder {
         spawnButton.eventMode = 'static';
         spawnButton.cursor = 'pointer';
 
-        spawnButton.on('pointerdown', () => {
+        spawnButton.once('pointerdown', () => {
             EnemyController.instance.spawnEnemyFromLevel(this.levelData);
             spawnButton.visible = false;
         });

@@ -20,7 +20,7 @@ export class Game {
 
     // Chuyển đổi sang scene GameScene
     loadGameScene(): void {
-        const currentScene = new GameScene(1);
+        const currentScene = new GameScene(1, 1);
         this.app.ticker.add(time => {
             currentScene.update(time.deltaTime);
         });
