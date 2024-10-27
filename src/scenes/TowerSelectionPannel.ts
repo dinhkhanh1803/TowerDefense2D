@@ -23,7 +23,7 @@ export class TowerSelectionPannel extends Container {
         grapbg.fill(0xFEF9F2);
         this.addChild(grapbg);
 
-        const towerType: TowerType[] = [TowerType.Archer, TowerType.Mage, TowerType.Fire, TowerType.Cannon];
+        const towerType: TowerType[] = [TowerType.Archer, TowerType.Mage, TowerType.Fire, TowerType.Ice, TowerType.Cannon];
         const startX = 50;
         const startY = 660;
         const cardSpacing = 20;
@@ -38,8 +38,11 @@ export class TowerSelectionPannel extends Container {
 
     createCardTower(type: TowerType, x: number, y: number): Container {
         const card = new Container();
-        const spriteTower = new Sprite(AssetLoad.getTexture('Archer_01'));
-        spriteTower.position.set(x, y);
+        const cardTower = new Sprite(AssetLoad.getTexture('card_tower'));
+        cardTower.scale.set(0.5);
+        cardTower.position.set(x, y);
+        const spriteTower = new Sprite(AssetLoad.getTexture(`${type}_01`));
+        spriteTower.position.set(x + 20, y + 5);
 
         spriteTower.interactive = true;
         spriteTower.cursor = 'pointer';
@@ -47,6 +50,7 @@ export class TowerSelectionPannel extends Container {
             PlayerController.instance.buyTower(type, this.slotTower);
             this.visible = false;
         });
+        card.addChild(cardTower);
         card.addChild(spriteTower);
         return card;
     }

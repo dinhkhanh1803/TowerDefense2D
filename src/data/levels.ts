@@ -45,7 +45,7 @@ export const levels = [
             { type: 'cannon', count: 2 }
         ],
         resources: {
-            gold: 500,
+            gold: 1000,
             health: 10
         }
     },

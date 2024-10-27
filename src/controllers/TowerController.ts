@@ -24,6 +24,7 @@ export class TowerController {
 
     createTower(towerType: TowerType, baseSprite: Sprite) {
         const tower = ObjectPool.instance.getTowerFromPool(towerType);
+
         const towerData = towersData.find(t => t.name === towerType);
 
         if (towerData) {
@@ -33,7 +34,7 @@ export class TowerController {
         baseSprite.removeAllListeners();
         this.map.removeChild(baseSprite);
 
-        tower.sprite.texture = AssetLoad.getTexture('Archer_01');
+        tower.sprite.texture = AssetLoad.getTexture(`${towerType}_01`);
         tower.sprite.position = baseSprite.position;
         tower.sprite.interactive = true;
         tower.sprite.cursor = 'pointer';

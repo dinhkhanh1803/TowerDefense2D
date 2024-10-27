@@ -21,7 +21,8 @@ import AssetLoad from './utils/AssetLoad';
     //load atlas
     await AssetLoad.loadAtlas([
         './atlas/towers_atlas.json',
-        './atlas/projectiles_atlas.json'
+        './atlas/projectiles_atlas.json',
+        './atlas/ui_atlas.json'
     ]);
 
 

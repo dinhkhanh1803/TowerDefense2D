@@ -18,7 +18,7 @@ export class ProjectileController {
 
 
     createProjectile(tower: Tower, enemy: Enemy) {
-        const projectile = ObjectPool.instance.getProjectileFromPool(tower.name);
+        const projectile = ObjectPool.instance.getProjectileFromPool(tower.projectileType);
 
         projectile.sprite.x = tower.sprite.x + 32;
         projectile.sprite.y = tower.sprite.y + 32;
@@ -31,13 +31,13 @@ export class ProjectileController {
         this.map.addChild(projectile.sprite);
     }
 
-    removeProjectile(typeTower: string, projectile: Projectile) {
+    removeProjectile(projectileType: string, projectile: Projectile) {
         const index = this.projectiles.indexOf(projectile);
 
         if (index !== -1) {
             this.projectiles.splice(index, 1);
 
-            ObjectPool.instance.returnProjectileToPool(typeTower, projectile);
+            ObjectPool.instance.returnProjectileToPool(projectileType, projectile);
 
             this.map.removeChild(projectile.sprite);
 

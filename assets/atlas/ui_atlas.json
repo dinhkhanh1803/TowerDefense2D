@@ -1,0 +1,39 @@
+{
+  "frames": {
+    "card_tower": {
+      "frame": {
+        "x": 2,
+        "y": 2,
+        "w": 192,
+        "h": 267
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 267
+      },
+      "sourceSize": {
+        "w": 195,
+        "h": 270
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "app": "http://github.com/odrick/free-tex-packer-core",
+    "version": "0.3.4",
+    "image": "ui_atlas.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 196,
+      "h": 271
+    },
+    "scale": 1
+  }
+}

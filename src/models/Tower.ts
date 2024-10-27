@@ -60,6 +60,7 @@ export class Tower {
     // Phương thức nâng cấp tháp
     upgrade(): void {
         this.level++;
+        this.sprite.texture = AssetLoad.getTexture(`${this.name}_0${this.level}`);
         this.damage *= 1.2;     // Mỗi lần nâng cấp tăng sát thương 20%
         this.range *= 1.1;      // Phạm vi tăng 10%
         this.fireRate *= 1.2;   // Tốc độ bắn tăng (giảm thời gian giữa các lần bắn)

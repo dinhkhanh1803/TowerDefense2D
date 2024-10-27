@@ -6,6 +6,7 @@ import { TowerType } from '../types/TowerType';
 import { TowerFactory } from '../factories/TowerFactory';
 import { Projectile } from '../models/Projectile';
 import { ProjectileFactory } from '../factories/ProjectileFactory';
+import { ProjectileType } from '../types/ProjectileTypes';
 
 
 export class ObjectPool {
@@ -14,7 +15,7 @@ export class ObjectPool {
 
     private _towerPool: { [towerType: string]: Tower[] } = {};
     private _enemyPool: { [enemyType: string]: Enemy[] } = {};
-    private _projectilePool: { [towerType: string]: Projectile[] } = {};
+    private _projectilePool: { [projectileType: string]: Projectile[] } = {};
 
 
     constructor() {
@@ -43,14 +44,16 @@ export class ObjectPool {
                     console.error(`Không thể tạo công trình với loại ${towerType}`);
                 }
             }
+        });
 
-            this._projectilePool[towerType] = [];
+        Object.values(ProjectileType).forEach((projectileType) => {
+            this._projectilePool[projectileType] = [];
             for (let i = 0; i < this.poolSize; i++) {
-                const tower = TowerFactory.createTower(towerType);
-                if (tower) {
-                    this._towerPool[towerType].push(tower);
+                const projectile = ProjectileFactory.createProjectile(projectileType);
+                if (projectile) {
+                    this._projectilePool[projectileType].push(projectile);
                 } else {
-                    console.error(`Không thể tạo công trình với loại ${towerType}`);
+                    console.error(`Không thể tạo đạn với loại ${projectileType}`);
                 }
             }
         });
@@ -109,7 +112,7 @@ export class ObjectPool {
     }
 
     // Hàm trả projectile về pool
-    public returnProjectileToPool(towerType: string, projectile: Projectile) {
-        this._projectilePool[towerType].push(projectile);
+    public returnProjectileToPool(projectileType: string, projectile: Projectile) {
+        this._projectilePool[projectileType].push(projectile);
     }
 }

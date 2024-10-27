@@ -4,37 +4,55 @@ export const towersData: Tower[] = [
     new Tower(
         1,
         "Archer",
-        5, // Damage
-        150, // Range
-        4, // Fire rate (seconds per shot)
-        100, // Cost
+        2, // Damage
+        100, // Range
+        3, // Fire rate (seconds per shot)
+        80, // Cost
         "arrow" // Projectile type
     ),
     new Tower(
         2,
-        "Cannon",
-        20, // Damage
-        150, // Range
-        2, // Fire rate
-        150, // Cost
-        "cannonball" // Projectile type
+        "Mage",
+        3, // Damage
+        100, // Range
+        4, // Fire rate
+        100, // Cost
+        "magicball" // Projectile type
     ),
     new Tower(
         3,
-        "Mage",
-        10, // Damage
-        200, // Range
-        4, // Fire rate
-        200, // Cost
-        "magic_blast" // Projectile type
+        "Fire",
+        5, // Damage
+        120, // Range
+        3, // Fire rate
+        150, // Cost
+        "fireball" // Projectile type
     ),
     new Tower(
         4,
-        "Fire",
-        15, // Damage
-        200, // Range
+        "Ice",
+        4, // Damage
+        150, // Range
         3, // Fire rate
+        200, // Cost
+        "iceshard" // Projectile type
+    ),
+    new Tower(
+        5,
+        "Cannon",
+        7, // Damage
+        170, // Range
+        3, // Fire rate
+        200, // Cost
+        "cannonball" // Projectile type
+    ),
+    new Tower(
+        6,
+        "Tesla",
+        8, // Damage
+        180, // Range
+        5, // Fire rate
         250, // Cost
-        "fireball" // Projectile type
+        "lightning" // Projectile type
     )
 ];

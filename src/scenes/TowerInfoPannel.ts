@@ -56,6 +56,7 @@ export class TowerInfoPannel extends Container {
         removeTowerBtn.on('pointerdown', () => {
             PlayerController.instance.sellTower(tower, tower.cost);
             this.towerRange.texture = Texture.EMPTY;
+            this.visible = false;
         });
         this.addChild(removeTowerBtn);
     }
