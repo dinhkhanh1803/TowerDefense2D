@@ -1,4 +1,4 @@
-import { Container, Graphics, Sprite, Texture } from "pixi.js";
+import { AnimatedSprite, Container, Graphics, Sprite, Texture } from "pixi.js";
 import { Enemy } from "../models/Enemy";
 import { ObjectPool } from "../utils/ObjectPool";
 import { EnemyTypes } from "../types/EnemyTypes";
@@ -6,6 +6,7 @@ import { BfsPathfinding } from "../utils/BfsPathfinding";
 import { LevelTypes } from "../types/LevelTypes";
 import { PlayerController } from "./PlayerController";
 import { EventHandle } from "../utils/EventHandle";
+import AssetLoad from "../utils/AssetLoad";
 
 export class EnemyController {
     public static instance: EnemyController;
@@ -32,6 +33,11 @@ export class EnemyController {
     // Tạo enemy mới dựa trên vị trí spawnPoint và mục tiêu
     public createEnemy(spawnPoint: { x: number, y: number }, goal: { x: number, y: number }, enemyType: string) {
         const enemy = ObjectPool.instance.getEnemyFromPool(enemyType);
+
+        enemy.moveDownTextures = AssetLoad.getAnimation(`${enemyType}_move_down`);
+        enemy.moveLeftTextures = AssetLoad.getAnimation(`${enemyType}_move_left`);
+        enemy.moveRightTextures = AssetLoad.getAnimation(`${enemyType}_move_right`);
+        enemy.moveUpTextures = AssetLoad.getAnimation(`${enemyType}_move_up`);
 
         enemy.sprite.x = spawnPoint.x * 64 + 32;
         enemy.sprite.y = spawnPoint.y * 64 + 32;

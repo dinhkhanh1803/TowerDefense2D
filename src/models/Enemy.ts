@@ -1,11 +1,12 @@
-import { Container, Graphics, PointData, Sprite, Texture } from "pixi.js";
+import { AnimatedSprite, Container, Graphics, PointData, Sprite, Texture } from "pixi.js";
 import { BfsPathfinding } from "../utils/BfsPathfinding";
 import { EnemyController } from "../controllers/EnemyController";
+import AssetLoad from "../utils/AssetLoad";
 
 export class Enemy {
     id: number;
     name: string;
-    sprite: Container;
+    sprite: AnimatedSprite;
     hp: number;
     speed: number;
     damage: number;
@@ -17,6 +18,11 @@ export class Enemy {
     currentPathIndex: number = 0;
     isAlive: boolean;
 
+    moveLeftTextures: Texture[] = [Texture.EMPTY];
+    moveRightTextures: Texture[] = [Texture.EMPTY];
+    moveDownTextures: Texture[] = [Texture.EMPTY];
+    moveUpTextures: Texture[] = [Texture.EMPTY];
+
     constructor(
         id: number,
         name: string,
@@ -27,16 +33,17 @@ export class Enemy {
     ) {
         this.id = id;
         this.name = name;
-        this.sprite = new Container();
         this.hp = hp;
         this.speed = speed;
         this.damage = damage;
         this.reward = reward;
         this.isAlive = true;
 
-        const sprite = new Sprite(Texture.from('enemy1'));
-        sprite.anchor.set(0.5);
-        this.sprite.addChild(sprite);
+        this.sprite = new AnimatedSprite(this.moveDownTextures);
+        this.sprite.pivot.set(0.5);
+        this.sprite.animationSpeed = 0.1;
+        this.sprite.anchor.set(0.5, 0.5);
+        this.sprite.play();
     }
 
     setPosition(pointStart: { x: number, y: number }, pointEnd: { x: number, y: number }, path: BfsPathfinding) {
@@ -76,6 +83,8 @@ export class Enemy {
             if (dist > 1) {
                 this.sprite.x += (dx / dist) * this.speed * deltaTime;
                 this.sprite.y += (dy / dist) * this.speed * deltaTime;
+
+                this.updateAnimation(dx, dy);
             } else {
                 this.currentPathIndex++;
             }
@@ -93,5 +102,32 @@ export class Enemy {
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         return distance < 1;
+    }
+
+    updateAnimation(dx: number, dy: number) {
+        // Cập nhật animation theo hướng di chuyển
+        let newTexture;
+
+        if (Math.abs(dx) > Math.abs(dy)) {
+            if (dx > 0) {
+                newTexture = this.moveRightTextures;
+            } else {
+                newTexture = this.moveLeftTextures;
+            }
+        } else {
+            if (dy > 0) {
+                newTexture = this.moveDownTextures;
+            } else {
+                newTexture = this.moveUpTextures;
+            }
+        }
+
+        // Chỉ thay đổi textures khi cần thiết
+        if (this.sprite.textures !== newTexture) {
+            this.sprite.textures = newTexture;
+            this.sprite.play();
+        }
+
+        this.sprite.animationSpeed = 0.1;
     }
 }

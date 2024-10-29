@@ -16,7 +16,7 @@ export class Projectile {
         this.id = id;
         this.type = type;
         this.sprite = sprite;
-        this.sprite.scale.set(0.6);
+        this.sprite.scale.set(0.5);
         this.sprite.anchor.set(1, 0.5);
         this.damage = 0;
         this.speed = 0;

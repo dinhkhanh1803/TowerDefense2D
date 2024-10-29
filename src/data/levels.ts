@@ -24,7 +24,10 @@ export const levels = [
             {
                 enemies: [
                     { type: 'Grunt', count: 2 },
-                    { type: 'Monster', count: 3 }
+                    { type: 'Monster', count: 3 },
+                    { type: 'Giant', count: 3 },
+                    { type: 'Speedster', count: 3 },
+                    { type: 'Boss', count: 3 }
                 ],
                 spawnPoints: [{ x: 0, y: 1 }],
                 defendPoint: { x: 13, y: 9 },

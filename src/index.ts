@@ -25,6 +25,20 @@ import AssetLoad from './utils/AssetLoad';
         './atlas/ui_atlas.json'
     ]);
 
+    await AssetLoad.loadBitmap([
+        './atlas/fonts/Peaberry.xml',
+        './atlas/fonts/Peaberry.fnt',
+        './atlas/fonts/ShinyPeaberry.fnt',
+        './atlas/fonts/ShinyPeaberry.xml',
+        './atlas/fonts/RedPeaberry.fnt',
+        './atlas/fonts/RedPeaberry.xml'
+    ]);
+
+    await AssetLoad.loadAnimations([
+        './atlas/enemies_atlas.json',
+        './atlas/weapons_atlas.json'
+    ]);
+
 
     const game = new Game(app);
     game.start();

@@ -1,4 +1,4 @@
-import { Container, Graphics, Sprite } from "pixi.js";
+import { BitmapText, Container, Graphics, Sprite } from "pixi.js";
 import { TowerType } from "../types/TowerType";
 import AssetLoad from "../utils/AssetLoad";
 import { PlayerController } from "../controllers/PlayerController";
@@ -41,17 +41,38 @@ export class TowerSelectionPannel extends Container {
         const cardTower = new Sprite(AssetLoad.getTexture('card_tower'));
         cardTower.scale.set(0.5);
         cardTower.position.set(x, y);
+
         const spriteTower = new Sprite(AssetLoad.getTexture(`${type}_01`));
         spriteTower.position.set(x + 20, y + 5);
 
-        spriteTower.interactive = true;
-        spriteTower.cursor = 'pointer';
-        spriteTower.on('pointerdown', () => {
+        const nameTowerTxt = this.createText(type, x + 50, y + 80, '', 11);
+
+
+        card.interactive = true;
+        card.cursor = 'pointer';
+        card.on('pointerdown', () => {
             PlayerController.instance.buyTower(type, this.slotTower);
             this.visible = false;
         });
         card.addChild(cardTower);
         card.addChild(spriteTower);
+        card.addChild(nameTowerTxt);
         return card;
+    }
+
+    createText(text: string, x: number, y: number, font: string, size: number): BitmapText {
+        const bitmapTxt = new BitmapText({
+            text: text,
+            style: {
+                fontFamily: font,
+                fontSize: size,
+                align: 'center'
+            },
+        });
+        bitmapTxt.anchor.set(0.5, 0.5);
+        bitmapTxt.position.set(x, y);
+
+        this.addChild(bitmapTxt);
+        return bitmapTxt;
     }
 }
