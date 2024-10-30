@@ -2,6 +2,7 @@ import { AnimatedSprite, Container, Graphics, PointData, Sprite, Texture } from 
 import { BfsPathfinding } from "../utils/BfsPathfinding";
 import { EnemyController } from "../controllers/EnemyController";
 import AssetLoad from "../utils/AssetLoad";
+import { PlayerController } from "../controllers/PlayerController";
 
 export class Enemy {
     id: number;
@@ -62,6 +63,7 @@ export class Enemy {
                 this.hp = 0;
                 this.isAlive = false;
 
+                PlayerController.instance.addGold(this.reward);
                 EnemyController.instance.removeEnemy(this);
             }
         }

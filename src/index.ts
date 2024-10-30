@@ -1,6 +1,6 @@
 import { AnimatedSprite, Application, Assets, } from 'pixi.js';
 import { Game } from './game';
-import { GameScene } from './scenes/GameScene';
+import { GameBoard } from './scenes/GameBoard';
 import bundles from '../assets/assetBundle.json';
 import AssetLoad from './utils/AssetLoad';
 

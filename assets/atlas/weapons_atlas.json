@@ -1,91 +1,19 @@
 {
   "frames": {
-    "Archer_lv1_weapon_06": {
-      "frame": {
-        "x": 2,
-        "y": 2,
-        "w": 37,
-        "h": 60
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 2,
-        "y": 0,
-        "w": 37,
-        "h": 60
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Ice_lv1_weapon_09": {
-      "frame": {
-        "x": 43,
-        "y": 2,
-        "w": 40,
-        "h": 60
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 40,
-        "h": 60
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Fire_lv1_weapon_04": {
-      "frame": {
-        "x": 2,
-        "y": 66,
-        "w": 30,
-        "h": 59
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 6,
-        "y": 0,
-        "w": 30,
-        "h": 59
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
     "Cannon_lv1_weapon_01": {
       "frame": {
-        "x": 87,
+        "x": 2,
         "y": 2,
         "w": 16,
-        "h": 56
+        "h": 53
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
         "x": 12,
-        "y": 2,
+        "y": 7,
         "w": 16,
-        "h": 56
+        "h": 53
       },
       "sourceSize": {
         "w": 40,
@@ -98,186 +26,18 @@
     },
     "Cannon_lv1_weapon_03": {
       "frame": {
-        "x": 2,
-        "y": 100,
+        "x": 22,
+        "y": 2,
         "w": 16,
-        "h": 56
+        "h": 53
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
         "x": 12,
-        "y": 2,
+        "y": 7,
         "w": 16,
-        "h": 56
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Mage_lv1_weapon_01": {
-      "frame": {
-        "x": 107,
-        "y": 2,
-        "w": 38,
-        "h": 56
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 1,
-        "y": 2,
-        "w": 38,
-        "h": 56
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Mage_lv1_weapon_03": {
-      "frame": {
-        "x": 87,
-        "y": 62,
-        "w": 38,
-        "h": 56
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 1,
-        "y": 2,
-        "w": 38,
-        "h": 56
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Mage_lv1_weapon_04": {
-      "frame": {
-        "x": 2,
-        "y": 120,
-        "w": 38,
-        "h": 56
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 1,
-        "y": 2,
-        "w": 38,
-        "h": 56
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Mage_lv1_weapon_05": {
-      "frame": {
-        "x": 62,
-        "y": 104,
-        "w": 38,
-        "h": 56
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 1,
-        "y": 2,
-        "w": 38,
-        "h": 56
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Mage_lv1_weapon_06": {
-      "frame": {
-        "x": 149,
-        "y": 2,
-        "w": 38,
-        "h": 56
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 1,
-        "y": 2,
-        "w": 38,
-        "h": 56
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Mage_lv1_weapon_08": {
-      "frame": {
-        "x": 147,
-        "y": 62,
-        "w": 38,
-        "h": 56
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 1,
-        "y": 2,
-        "w": 38,
-        "h": 56
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Mage_lv1_weapon_10": {
-      "frame": {
-        "x": 2,
-        "y": 162,
-        "w": 38,
-        "h": 56
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 2,
-        "y": 2,
-        "w": 38,
-        "h": 56
+        "h": 53
       },
       "sourceSize": {
         "w": 40,
@@ -290,186 +50,18 @@
     },
     "Cannon_lv1_weapon_17": {
       "frame": {
-        "x": 122,
-        "y": 104,
-        "w": 16,
-        "h": 55
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 13,
-        "y": 4,
-        "w": 16,
-        "h": 55
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Ice_lv1_weapon_07": {
-      "frame": {
-        "x": 62,
-        "y": 163,
-        "w": 37,
-        "h": 54
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 2,
-        "y": 6,
-        "w": 37,
-        "h": 54
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Ice_lv1_weapon_08": {
-      "frame": {
-        "x": 120,
-        "y": 163,
-        "w": 37,
-        "h": 54
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 2,
-        "y": 6,
-        "w": 37,
-        "h": 54
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Ice_lv1_weapon_04": {
-      "frame": {
-        "x": 142,
-        "y": 122,
-        "w": 37,
-        "h": 53
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 1,
-        "y": 7,
-        "w": 37,
-        "h": 53
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Ice_lv1_weapon_05": {
-      "frame": {
-        "x": 191,
+        "x": 42,
         "y": 2,
-        "w": 37,
-        "h": 53
+        "w": 16,
+        "h": 52
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 2,
+        "x": 12,
         "y": 7,
-        "w": 37,
-        "h": 53
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Ice_lv1_weapon_06": {
-      "frame": {
-        "x": 191,
-        "y": 59,
-        "w": 37,
-        "h": 53
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 2,
-        "y": 7,
-        "w": 37,
-        "h": 53
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Ice_lv1_weapon_10": {
-      "frame": {
-        "x": 2,
-        "y": 204,
-        "w": 37,
-        "h": 53
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 1,
-        "y": 7,
-        "w": 37,
-        "h": 53
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Ice_lv1_weapon_11": {
-      "frame": {
-        "x": 59,
-        "y": 204,
-        "w": 37,
-        "h": 53
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 1,
-        "y": 7,
-        "w": 37,
-        "h": 53
+        "w": 16,
+        "h": 52
       },
       "sourceSize": {
         "w": 40,
@@ -482,90 +74,18 @@
     },
     "Cannon_lv1_weapon_07": {
       "frame": {
-        "x": 199,
-        "y": 116,
-        "w": 16,
-        "h": 51
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 12,
-        "y": 0,
-        "w": 16,
-        "h": 51
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Ice_lv1_weapon_03": {
-      "frame": {
-        "x": 116,
-        "y": 204,
-        "w": 37,
-        "h": 51
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
         "x": 2,
-        "y": 9,
-        "w": 37,
-        "h": 51
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Cannon_lv1_weapon_06": {
-      "frame": {
-        "x": 178,
-        "y": 171,
+        "y": 59,
         "w": 16,
-        "h": 50
+        "h": 49
       },
       "rotated": true,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 11,
-        "y": 0,
-        "w": 16,
-        "h": 50
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Cannon_lv1_weapon_11": {
-      "frame": {
-        "x": 178,
-        "y": 191,
-        "w": 16,
-        "h": 50
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
         "x": 12,
-        "y": 0,
+        "y": 4,
         "w": 16,
-        "h": 50
+        "h": 49
       },
       "sourceSize": {
         "w": 40,
@@ -578,18 +98,18 @@
     },
     "Cannon_lv1_weapon_16": {
       "frame": {
-        "x": 198,
-        "y": 191,
+        "x": 62,
+        "y": 2,
         "w": 16,
-        "h": 50
+        "h": 49
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
         "x": 12,
-        "y": 6,
+        "y": 9,
         "w": 16,
-        "h": 50
+        "h": 49
       },
       "sourceSize": {
         "w": 40,
@@ -600,20 +120,20 @@
         "y": 0.5
       }
     },
-    "Ice_lv1_weapon_12": {
+    "Archer_lv1_weapon_06": {
       "frame": {
-        "x": 232,
-        "y": 2,
-        "w": 37,
-        "h": 49
+        "x": 2,
+        "y": 79,
+        "w": 30,
+        "h": 48
       },
-      "rotated": false,
+      "rotated": true,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 2,
-        "y": 11,
-        "w": 37,
-        "h": 49
+        "x": 6,
+        "y": 0,
+        "w": 30,
+        "h": 48
       },
       "sourceSize": {
         "w": 40,
@@ -624,19 +144,43 @@
         "y": 0.5
       }
     },
-    "Ice_lv1_weapon_02": {
+    "Cannon_lv1_weapon_06": {
       "frame": {
-        "x": 232,
+        "x": 62,
         "y": 55,
-        "w": 37,
+        "w": 16,
         "h": 48
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 2,
-        "y": 12,
-        "w": 37,
+        "x": 12,
+        "y": 4,
+        "w": 16,
+        "h": 48
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Cannon_lv1_weapon_11": {
+      "frame": {
+        "x": 82,
+        "y": 2,
+        "w": 16,
+        "h": 48
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 4,
+        "w": 16,
         "h": 48
       },
       "sourceSize": {
@@ -650,18 +194,18 @@
     },
     "Fire_lv1_weapon_03": {
       "frame": {
-        "x": 219,
-        "y": 116,
-        "w": 30,
-        "h": 47
+        "x": 102,
+        "y": 2,
+        "w": 18,
+        "h": 48
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 6,
-        "y": 12,
-        "w": 30,
-        "h": 47
+        "x": 11,
+        "y": 2,
+        "w": 18,
+        "h": 48
       },
       "sourceSize": {
         "w": 40,
@@ -672,20 +216,20 @@
         "y": 0.5
       }
     },
-    "Ice_lv1_weapon_14": {
+    "Fire_lv1_weapon_04": {
       "frame": {
-        "x": 232,
-        "y": 150,
-        "w": 37,
-        "h": 45
+        "x": 82,
+        "y": 54,
+        "w": 18,
+        "h": 44
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 2,
-        "y": 15,
-        "w": 37,
-        "h": 45
+        "x": 11,
+        "y": 14,
+        "w": 18,
+        "h": 44
       },
       "sourceSize": {
         "w": 40,
@@ -698,18 +242,42 @@
     },
     "Cannon_lv1_weapon_15": {
       "frame": {
-        "x": 218,
-        "y": 199,
+        "x": 104,
+        "y": 54,
         "w": 16,
-        "h": 44
+        "h": 43
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 11,
+        "w": 16,
+        "h": 43
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Cannon_lv1_weapon_12": {
+      "frame": {
+        "x": 2,
+        "y": 113,
+        "w": 16,
+        "h": 37
       },
       "rotated": true,
       "trimmed": true,
       "spriteSourceSize": {
         "x": 12,
-        "y": 8,
+        "y": 12,
         "w": 16,
-        "h": 44
+        "h": 37
       },
       "sourceSize": {
         "w": 40,
@@ -722,18 +290,18 @@
     },
     "Archer_lv1_weapon_05": {
       "frame": {
-        "x": 2,
-        "y": 245,
-        "w": 35,
-        "h": 43
+        "x": 124,
+        "y": 2,
+        "w": 29,
+        "h": 35
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 2,
-        "y": 17,
-        "w": 35,
-        "h": 43
+        "x": 6,
+        "y": 13,
+        "w": 29,
+        "h": 35
       },
       "sourceSize": {
         "w": 40,
@@ -744,20 +312,236 @@
         "y": 0.5
       }
     },
-    "Ice_lv1_weapon_13": {
+    "Cannon_lv1_weapon_14": {
       "frame": {
-        "x": 218,
-        "y": 219,
-        "w": 37,
-        "h": 42
+        "x": 43,
+        "y": 113,
+        "w": 16,
+        "h": 35
       },
       "rotated": true,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 1,
-        "y": 18,
-        "w": 37,
-        "h": 42
+        "x": 12,
+        "y": 15,
+        "w": 16,
+        "h": 35
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Fire_lv1_weapon_02": {
+      "frame": {
+        "x": 82,
+        "y": 102,
+        "w": 18,
+        "h": 35
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 11,
+        "y": 10,
+        "w": 18,
+        "h": 35
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Mage_lv1_weapon_01": {
+      "frame": {
+        "x": 124,
+        "y": 41,
+        "w": 24,
+        "h": 34
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 8,
+        "y": 2,
+        "w": 24,
+        "h": 34
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Mage_lv1_weapon_02": {
+      "frame": {
+        "x": 124,
+        "y": 79,
+        "w": 24,
+        "h": 34
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 8,
+        "y": 2,
+        "w": 24,
+        "h": 34
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Mage_lv1_weapon_03": {
+      "frame": {
+        "x": 2,
+        "y": 133,
+        "w": 24,
+        "h": 34
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 8,
+        "y": 2,
+        "w": 24,
+        "h": 34
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Mage_lv1_weapon_04": {
+      "frame": {
+        "x": 40,
+        "y": 133,
+        "w": 24,
+        "h": 34
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 8,
+        "y": 2,
+        "w": 24,
+        "h": 34
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Mage_lv1_weapon_05": {
+      "frame": {
+        "x": 78,
+        "y": 133,
+        "w": 24,
+        "h": 34
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 8,
+        "y": 2,
+        "w": 24,
+        "h": 34
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Mage_lv1_weapon_06": {
+      "frame": {
+        "x": 116,
+        "y": 124,
+        "w": 24,
+        "h": 34
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 8,
+        "y": 2,
+        "w": 24,
+        "h": 34
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Mage_lv1_weapon_07": {
+      "frame": {
+        "x": 157,
+        "y": 2,
+        "w": 24,
+        "h": 34
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 8,
+        "y": 2,
+        "w": 24,
+        "h": 34
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Ice_lv1_weapon_05": {
+      "frame": {
+        "x": 152,
+        "y": 41,
+        "w": 28,
+        "h": 33
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 6,
+        "y": 0,
+        "w": 28,
+        "h": 33
       },
       "sourceSize": {
         "w": 40,
@@ -770,18 +554,18 @@
     },
     "Fire_lv1_weapon_05": {
       "frame": {
-        "x": 49,
-        "y": 245,
-        "w": 30,
-        "h": 41
+        "x": 154,
+        "y": 78,
+        "w": 18,
+        "h": 31
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 5,
-        "y": 18,
-        "w": 30,
-        "h": 41
+        "x": 11,
+        "y": 15,
+        "w": 18,
+        "h": 31
       },
       "sourceSize": {
         "w": 40,
@@ -792,20 +576,236 @@
         "y": 0.5
       }
     },
-    "Ice_lv1_weapon_01": {
+    "Ice_lv1_weapon_04": {
       "frame": {
-        "x": 273,
-        "y": 2,
-        "w": 37,
-        "h": 41
+        "x": 154,
+        "y": 113,
+        "w": 22,
+        "h": 31
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 1,
-        "y": 19,
-        "w": 37,
-        "h": 41
+        "x": 9,
+        "y": 2,
+        "w": 22,
+        "h": 31
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Fire_lv1_weapon_01": {
+      "frame": {
+        "x": 2,
+        "y": 161,
+        "w": 18,
+        "h": 30
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 11,
+        "y": 15,
+        "w": 18,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Fire_lv1_weapon_06": {
+      "frame": {
+        "x": 36,
+        "y": 161,
+        "w": 18,
+        "h": 30
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 11,
+        "y": 15,
+        "w": 18,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Ice_lv1_weapon_06": {
+      "frame": {
+        "x": 154,
+        "y": 148,
+        "w": 22,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 9,
+        "y": 3,
+        "w": 22,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Ice_lv1_weapon_03": {
+      "frame": {
+        "x": 116,
+        "y": 152,
+        "w": 22,
+        "h": 29
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 9,
+        "y": 4,
+        "w": 22,
+        "h": 29
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Archer_lv1_weapon_01": {
+      "frame": {
+        "x": 2,
+        "y": 183,
+        "w": 28,
+        "h": 24
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 6,
+        "y": 24,
+        "w": 28,
+        "h": 24
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Archer_lv1_weapon_02": {
+      "frame": {
+        "x": 70,
+        "y": 182,
+        "w": 28,
+        "h": 25
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 6,
+        "y": 23,
+        "w": 28,
+        "h": 25
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Archer_lv1_weapon_03": {
+      "frame": {
+        "x": 102,
+        "y": 182,
+        "w": 28,
+        "h": 25
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 6,
+        "y": 23,
+        "w": 28,
+        "h": 25
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Archer_lv1_weapon_04": {
+      "frame": {
+        "x": 185,
+        "y": 2,
+        "w": 28,
+        "h": 26
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 6,
+        "y": 22,
+        "w": 28,
+        "h": 26
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Ice_lv1_weapon_02": {
+      "frame": {
+        "x": 34,
+        "y": 183,
+        "w": 22,
+        "h": 28
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 9,
+        "y": 5,
+        "w": 22,
+        "h": 28
       },
       "sourceSize": {
         "w": 40,
@@ -818,18 +818,18 @@
     },
     "Tesla_lv1_weapon_04": {
       "frame": {
-        "x": 270,
-        "y": 107,
-        "w": 40,
-        "h": 34
+        "x": 184,
+        "y": 40,
+        "w": 27,
+        "h": 23
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 13,
-        "w": 40,
-        "h": 34
+        "x": 7,
+        "y": 16,
+        "w": 27,
+        "h": 23
       },
       "sourceSize": {
         "w": 40,
@@ -842,18 +842,18 @@
     },
     "Tesla_lv1_weapon_05": {
       "frame": {
-        "x": 273,
-        "y": 47,
-        "w": 40,
-        "h": 36
+        "x": 184,
+        "y": 67,
+        "w": 27,
+        "h": 24
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 11,
-        "w": 40,
-        "h": 36
+        "x": 7,
+        "y": 15,
+        "w": 27,
+        "h": 24
       },
       "sourceSize": {
         "w": 40,
@@ -866,18 +866,18 @@
     },
     "Tesla_lv1_weapon_07": {
       "frame": {
-        "x": 273,
-        "y": 145,
-        "w": 40,
-        "h": 37
+        "x": 134,
+        "y": 182,
+        "w": 27,
+        "h": 25
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 13,
-        "w": 40,
-        "h": 37
+        "x": 7,
+        "y": 16,
+        "w": 27,
+        "h": 25
       },
       "sourceSize": {
         "w": 40,
@@ -890,18 +890,18 @@
     },
     "Tesla_lv1_weapon_08": {
       "frame": {
-        "x": 94,
-        "y": 245,
-        "w": 40,
-        "h": 34
+        "x": 165,
+        "y": 182,
+        "w": 27,
+        "h": 23
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 13,
-        "w": 40,
-        "h": 34
+        "x": 7,
+        "y": 16,
+        "w": 27,
+        "h": 23
       },
       "sourceSize": {
         "w": 40,
@@ -914,18 +914,18 @@
     },
     "Tesla_lv1_weapon_09": {
       "frame": {
-        "x": 273,
-        "y": 189,
-        "w": 40,
-        "h": 36
+        "x": 180,
+        "y": 95,
+        "w": 27,
+        "h": 24
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 11,
-        "w": 40,
-        "h": 36
+        "x": 7,
+        "y": 15,
+        "w": 27,
+        "h": 24
       },
       "sourceSize": {
         "w": 40,
@@ -938,18 +938,18 @@
     },
     "Tesla_lv1_weapon_11": {
       "frame": {
-        "x": 264,
-        "y": 233,
-        "w": 40,
-        "h": 37
+        "x": 180,
+        "y": 123,
+        "w": 27,
+        "h": 25
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 13,
-        "w": 40,
-        "h": 37
+        "x": 7,
+        "y": 16,
+        "w": 27,
+        "h": 25
       },
       "sourceSize": {
         "w": 40,
@@ -962,18 +962,18 @@
     },
     "Tesla_lv1_weapon_12": {
       "frame": {
-        "x": 138,
-        "y": 245,
-        "w": 40,
-        "h": 34
+        "x": 180,
+        "y": 152,
+        "w": 27,
+        "h": 23
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 13,
-        "w": 40,
-        "h": 34
+        "x": 7,
+        "y": 16,
+        "w": 27,
+        "h": 23
       },
       "sourceSize": {
         "w": 40,
@@ -987,65 +987,17 @@
     "Tesla_lv1_weapon_13": {
       "frame": {
         "x": 2,
-        "y": 284,
-        "w": 40,
-        "h": 34
+        "y": 211,
+        "w": 27,
+        "h": 23
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 13,
-        "w": 40,
-        "h": 34
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Fire_lv1_weapon_01": {
-      "frame": {
-        "x": 49,
-        "y": 279,
-        "w": 30,
-        "h": 39
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 6,
-        "y": 20,
-        "w": 30,
-        "h": 39
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Fire_lv1_weapon_06": {
-      "frame": {
-        "x": 182,
-        "y": 245,
-        "w": 29,
-        "h": 39
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 6,
-        "y": 20,
-        "w": 29,
-        "h": 39
+        "x": 7,
+        "y": 16,
+        "w": 27,
+        "h": 23
       },
       "sourceSize": {
         "w": 40,
@@ -1058,18 +1010,18 @@
     },
     "Tesla_lv1_weapon_03": {
       "frame": {
-        "x": 215,
-        "y": 274,
-        "w": 39,
-        "h": 36
+        "x": 34,
+        "y": 209,
+        "w": 26,
+        "h": 24
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 11,
-        "w": 39,
-        "h": 36
+        "x": 8,
+        "y": 15,
+        "w": 26,
+        "h": 24
       },
       "sourceSize": {
         "w": 40,
@@ -1082,18 +1034,18 @@
     },
     "Tesla_lv1_weapon_06": {
       "frame": {
-        "x": 83,
-        "y": 283,
-        "w": 39,
-        "h": 34
+        "x": 64,
+        "y": 211,
+        "w": 26,
+        "h": 23
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 13,
-        "w": 39,
-        "h": 34
+        "x": 8,
+        "y": 16,
+        "w": 26,
+        "h": 23
       },
       "sourceSize": {
         "w": 40,
@@ -1106,42 +1058,18 @@
     },
     "Tesla_lv1_weapon_10": {
       "frame": {
-        "x": 126,
-        "y": 283,
-        "w": 39,
-        "h": 34
+        "x": 94,
+        "y": 211,
+        "w": 26,
+        "h": 23
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 13,
-        "w": 39,
-        "h": 34
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Cannon_lv1_weapon_12": {
-      "frame": {
-        "x": 169,
-        "y": 288,
-        "w": 16,
-        "h": 38
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 12,
-        "y": 9,
-        "w": 16,
-        "h": 38
+        "x": 8,
+        "y": 16,
+        "w": 26,
+        "h": 23
       },
       "sourceSize": {
         "w": 40,
@@ -1154,42 +1082,18 @@
     },
     "Tesla_lv1_weapon_14": {
       "frame": {
-        "x": 255,
-        "y": 274,
-        "w": 38,
-        "h": 34
-      },
-      "rotated": true,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 1,
-        "y": 13,
-        "w": 38,
-        "h": 34
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Cannon_lv1_weapon_14": {
-      "frame": {
-        "x": 293,
-        "y": 274,
-        "w": 16,
-        "h": 36
+        "x": 124,
+        "y": 211,
+        "w": 26,
+        "h": 23
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 12,
-        "y": 12,
-        "w": 16,
-        "h": 36
+        "x": 8,
+        "y": 16,
+        "w": 26,
+        "h": 23
       },
       "sourceSize": {
         "w": 40,
@@ -1202,18 +1106,18 @@
     },
     "Tesla_lv1_weapon_02": {
       "frame": {
-        "x": 314,
-        "y": 2,
-        "w": 36,
-        "h": 34
+        "x": 165,
+        "y": 209,
+        "w": 25,
+        "h": 23
       },
       "rotated": true,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 2,
-        "y": 14,
-        "w": 36,
-        "h": 34
+        "x": 8,
+        "y": 17,
+        "w": 25,
+        "h": 23
       },
       "sourceSize": {
         "w": 40,
@@ -1226,18 +1130,18 @@
     },
     "Tesla_lv1_weapon_15": {
       "frame": {
-        "x": 314,
-        "y": 42,
-        "w": 36,
-        "h": 34
+        "x": 192,
+        "y": 209,
+        "w": 25,
+        "h": 23
       },
       "rotated": true,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 2,
-        "y": 13,
-        "w": 36,
-        "h": 34
+        "x": 8,
+        "y": 16,
+        "w": 25,
+        "h": 23
       },
       "sourceSize": {
         "w": 40,
@@ -1248,92 +1152,20 @@
         "y": 0.5
       }
     },
-    "Archer_lv1_weapon_03": {
+    "Ice_lv1_weapon_01": {
       "frame": {
-        "x": 313,
-        "y": 189,
-        "w": 35,
-        "h": 31
+        "x": 215,
+        "y": 2,
+        "w": 22,
+        "h": 24
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 2,
-        "y": 29,
-        "w": 35,
-        "h": 31
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Archer_lv1_weapon_01": {
-      "frame": {
-        "x": 314,
-        "y": 82,
-        "w": 34,
-        "h": 29
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 3,
-        "y": 31,
-        "w": 34,
-        "h": 29
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Archer_lv1_weapon_02": {
-      "frame": {
-        "x": 314,
-        "y": 115,
-        "w": 34,
-        "h": 30
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 2,
-        "y": 30,
-        "w": 34,
-        "h": 30
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Archer_lv1_weapon_04": {
-      "frame": {
-        "x": 314,
-        "y": 149,
-        "w": 34,
-        "h": 32
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 2,
-        "y": 28,
-        "w": 34,
-        "h": 32
+        "x": 9,
+        "y": 9,
+        "w": 22,
+        "h": 24
       },
       "sourceSize": {
         "w": 40,
@@ -1346,42 +1178,18 @@
     },
     "Tesla_lv1_weapon_01": {
       "frame": {
-        "x": 313,
-        "y": 224,
-        "w": 34,
-        "h": 34
+        "x": 215,
+        "y": 30,
+        "w": 23,
+        "h": 24
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 3,
-        "y": 15,
-        "w": 34,
-        "h": 34
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Tesla_lv1_weapon_16": {
-      "frame": {
-        "x": 313,
-        "y": 262,
-        "w": 34,
-        "h": 34
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 3,
-        "y": 14,
-        "w": 34,
-        "h": 34
+        "x": 9,
+        "y": 17,
+        "w": 23,
+        "h": 24
       },
       "sourceSize": {
         "w": 40,
@@ -1394,16 +1202,16 @@
     },
     "Cannon_lv1_weapon_05": {
       "frame": {
-        "x": 65,
-        "y": 66,
+        "x": 70,
+        "y": 161,
         "w": 16,
         "h": 17
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 11,
-        "y": 14,
+        "x": 12,
+        "y": 18,
         "w": 16,
         "h": 17
       },
@@ -1418,16 +1226,16 @@
     },
     "Cannon_lv1_weapon_13": {
       "frame": {
-        "x": 65,
-        "y": 86,
+        "x": 90,
+        "y": 161,
         "w": 16,
         "h": 14
       },
-      "rotated": false,
+      "rotated": true,
       "trimmed": true,
       "spriteSourceSize": {
         "x": 12,
-        "y": 19,
+        "y": 22,
         "w": 16,
         "h": 14
       },
@@ -1442,18 +1250,18 @@
     },
     "Cannon_lv1_weapon_02": {
       "frame": {
-        "x": 87,
+        "x": 2,
         "y": 2,
         "w": 16,
-        "h": 56
+        "h": 53
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
         "x": 12,
-        "y": 2,
+        "y": 7,
         "w": 16,
-        "h": 56
+        "h": 53
       },
       "sourceSize": {
         "w": 40,
@@ -1466,18 +1274,18 @@
     },
     "Cannon_lv1_weapon_04": {
       "frame": {
-        "x": 2,
-        "y": 100,
+        "x": 22,
+        "y": 2,
         "w": 16,
-        "h": 56
+        "h": 53
       },
-      "rotated": true,
+      "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
         "x": 12,
-        "y": 2,
+        "y": 7,
         "w": 16,
-        "h": 56
+        "h": 53
       },
       "sourceSize": {
         "w": 40,
@@ -1490,18 +1298,18 @@
     },
     "Cannon_lv1_weapon_08": {
       "frame": {
-        "x": 199,
-        "y": 116,
+        "x": 2,
+        "y": 59,
         "w": 16,
-        "h": 51
+        "h": 49
       },
-      "rotated": false,
+      "rotated": true,
       "trimmed": true,
       "spriteSourceSize": {
         "x": 12,
-        "y": 0,
+        "y": 4,
         "w": 16,
-        "h": 51
+        "h": 49
       },
       "sourceSize": {
         "w": 40,
@@ -1514,18 +1322,18 @@
     },
     "Cannon_lv1_weapon_09": {
       "frame": {
-        "x": 199,
-        "y": 116,
+        "x": 2,
+        "y": 59,
         "w": 16,
-        "h": 51
+        "h": 49
       },
-      "rotated": false,
+      "rotated": true,
       "trimmed": true,
       "spriteSourceSize": {
         "x": 12,
-        "y": 0,
+        "y": 4,
         "w": 16,
-        "h": 51
+        "h": 49
       },
       "sourceSize": {
         "w": 40,
@@ -1538,186 +1346,42 @@
     },
     "Cannon_lv1_weapon_10": {
       "frame": {
-        "x": 199,
-        "y": 116,
-        "w": 16,
-        "h": 51
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 12,
-        "y": 0,
-        "w": 16,
-        "h": 51
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Cannon_lv1_weapon_18": {
-      "frame": {
-        "x": 122,
-        "y": 104,
-        "w": 16,
-        "h": 55
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 13,
-        "y": 4,
-        "w": 16,
-        "h": 55
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Fire_lv1_weapon_02": {
-      "frame": {
-        "x": 49,
-        "y": 279,
-        "w": 30,
-        "h": 39
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 6,
-        "y": 20,
-        "w": 30,
-        "h": 39
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Fire_lv1_weapon_07": {
-      "frame": {
-        "x": 182,
-        "y": 245,
-        "w": 29,
-        "h": 39
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 6,
-        "y": 20,
-        "w": 29,
-        "h": 39
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Mage_lv1_weapon_02": {
-      "frame": {
-        "x": 107,
-        "y": 2,
-        "w": 38,
-        "h": 56
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 1,
-        "y": 2,
-        "w": 38,
-        "h": 56
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Mage_lv1_weapon_07": {
-      "frame": {
-        "x": 149,
-        "y": 2,
-        "w": 38,
-        "h": 56
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 1,
-        "y": 2,
-        "w": 38,
-        "h": 56
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Mage_lv1_weapon_09": {
-      "frame": {
-        "x": 147,
-        "y": 62,
-        "w": 38,
-        "h": 56
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 1,
-        "y": 2,
-        "w": 38,
-        "h": 56
-      },
-      "sourceSize": {
-        "w": 40,
-        "h": 60
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "Mage_lv1_weapon_11": {
-      "frame": {
         "x": 2,
-        "y": 162,
-        "w": 38,
-        "h": 56
+        "y": 59,
+        "w": 16,
+        "h": 49
       },
       "rotated": true,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 2,
-        "y": 2,
-        "w": 38,
-        "h": 56
+        "x": 12,
+        "y": 4,
+        "w": 16,
+        "h": 49
+      },
+      "sourceSize": {
+        "w": 40,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Ice_lv1_weapon_07": {
+      "frame": {
+        "x": 34,
+        "y": 183,
+        "w": 22,
+        "h": 28
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 9,
+        "y": 5,
+        "w": 22,
+        "h": 28
       },
       "sourceSize": {
         "w": 40,
@@ -1729,14 +1393,86 @@
       }
     }
   },
+  "animations": {
+    "Archer_lv1": [
+      "Archer_lv1_weapon_01",
+      "Archer_lv1_weapon_02",
+      "Archer_lv1_weapon_03",
+      "Archer_lv1_weapon_04",
+      "Archer_lv1_weapon_05",
+      "Archer_lv1_weapon_06"
+    ],
+    "Mage_lv1": [
+      "Mage_lv1_weapon_01",
+      "Mage_lv1_weapon_02",
+      "Mage_lv1_weapon_03",
+      "Mage_lv1_weapon_04",
+      "Mage_lv1_weapon_05",
+      "Mage_lv1_weapon_06",
+      "Mage_lv1_weapon_07"
+    ],
+    "Cannon_lv1": [
+      "Cannon_lv1_weapon_01",
+      "Cannon_lv1_weapon_02",
+      "Cannon_lv1_weapon_03",
+      "Cannon_lv1_weapon_04",
+      "Cannon_lv1_weapon_05",
+      "Cannon_lv1_weapon_06",
+      "Cannon_lv1_weapon_07",
+      "Cannon_lv1_weapon_08",
+      "Cannon_lv1_weapon_09",
+      "Cannon_lv1_weapon_10",
+      "Cannon_lv1_weapon_11",
+      "Cannon_lv1_weapon_12",
+      "Cannon_lv1_weapon_13",
+      "Cannon_lv1_weapon_14",
+      "Cannon_lv1_weapon_15",
+      "Cannon_lv1_weapon_16",
+      "Cannon_lv1_weapon_17"
+    ],
+    "Fire_lv1": [
+      "Fire_lv1_weapon_01",
+      "Fire_lv1_weapon_02",
+      "Fire_lv1_weapon_03",
+      "Fire_lv1_weapon_04",
+      "Fire_lv1_weapon_05",
+      "Fire_lv1_weapon_06"
+    ],
+    "Ice_lv1": [
+      "Ice_lv1_weapon_01",
+      "Ice_lv1_weapon_02",
+      "Ice_lv1_weapon_03",
+      "Ice_lv1_weapon_04",
+      "Ice_lv1_weapon_05",
+      "Ice_lv1_weapon_06",
+      "Ice_lv1_weapon_07"
+    ],
+    "Tesla": [
+      "Tesla_lv1_weapon_01",
+      "Tesla_lv1_weapon_02",
+      "Tesla_lv1_weapon_03",
+      "Tesla_lv1_weapon_04",
+      "Tesla_lv1_weapon_05",
+      "Tesla_lv1_weapon_06",
+      "Tesla_lv1_weapon_07",
+      "Tesla_lv1_weapon_08",
+      "Tesla_lv1_weapon_09",
+      "Tesla_lv1_weapon_10",
+      "Tesla_lv1_weapon_11",
+      "Tesla_lv1_weapon_12",
+      "Tesla_lv1_weapon_13",
+      "Tesla_lv1_weapon_14",
+      "Tesla_lv1_weapon_15"
+    ]
+  },
   "meta": {
     "app": "http://github.com/odrick/free-tex-packer-core",
     "version": "0.3.4",
     "image": "weapons_atlas.png",
     "format": "RGBA8888",
     "size": {
-      "w": 350,
-      "h": 320
+      "w": 240,
+      "h": 236
     },
     "scale": 1
   }

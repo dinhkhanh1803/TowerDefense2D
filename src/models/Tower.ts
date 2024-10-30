@@ -1,12 +1,14 @@
-import { PointData, Sprite, Texture } from "pixi.js";
+import { AnimatedSprite, Container, PointData, Sprite, Texture } from "pixi.js";
 import AssetLoad from "../utils/AssetLoad";
 import { Enemy } from "./Enemy";
 import { ProjectileController } from "../controllers/ProjectileController";
 
 export class Tower {
     id: number;             // ID của tháp
-    name: string;           // Tên của tháp
-    sprite: Sprite;         // Sprite của tháp
+    name: string;       // Tên của tháp
+    towerContainer: Container;
+    sprite: Sprite;      // Sprite của tháp
+    weapon: AnimatedSprite;
     damage: number;         // Sát thương của tháp
     range: number;          // Phạm vi tấn công của tháp
     fireRate: number;       // Tốc độ bắn (giây giữa các lần bắn)
@@ -31,7 +33,9 @@ export class Tower {
     ) {
         this.id = id;
         this.name = name;
+        this.towerContainer = new Container();
         this.sprite = new Sprite(Texture.EMPTY);
+        this.weapon = new AnimatedSprite([Texture.EMPTY]);
         this.damage = damage;
         this.range = range;
         this.fireRate = fireRate;
@@ -42,7 +46,6 @@ export class Tower {
         this.attackTime = 0;
 
         this.projectileType = projectileType;
-
     }
 
     reset(level: number, damage: number, range: number, fireRange: number, cost: number) {
@@ -61,6 +64,7 @@ export class Tower {
     upgrade(): void {
         this.level++;
         this.sprite.texture = AssetLoad.getTexture(`${this.name}_0${this.level}`);
+        this.weapon.position.y -= 5;
         this.damage *= 1.2;     // Mỗi lần nâng cấp tăng sát thương 20%
         this.range *= 1.1;      // Phạm vi tăng 10%
         this.fireRate *= 1.2;   // Tốc độ bắn tăng (giảm thời gian giữa các lần bắn)
@@ -69,11 +73,14 @@ export class Tower {
 
     // Phương thức bắn đạn
     update(deltaTime: number): void {
-        // const dx = this.target.sprite.x - this.sprite.x;
-        // const dy = this.target.sprite.y - this.sprite.y;
 
-        // const angle = Math.atan2(dy, dx);
-        // this.spriteAniTower.rotation = angle + Math.PI / 2;
+        const dx = this.target.sprite.x - this.sprite.x;
+        const dy = this.target.sprite.y - this.sprite.y;
+
+        if (['Archer', 'Fire', 'Cannon'].includes(this.name)) {
+            const angle = Math.atan2(dy, dx);
+            this.weapon.rotation = angle + Math.PI / 2;
+        }
 
         this.attackTime += deltaTime;
         if (this.attackTime >= this.cooldownTime) {

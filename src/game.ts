@@ -1,5 +1,5 @@
 import { Application } from 'pixi.js';
-import { GameScene } from './scenes/GameScene';
+import { GameBoard } from './scenes/GameBoard';
 import { EventHandle } from './utils/EventHandle';
 
 
@@ -20,7 +20,7 @@ export class Game {
 
     // Chuyển đổi sang scene GameScene
     loadGameScene(): void {
-        const currentScene = new GameScene(1, 1);
+        const currentScene = new GameBoard(1, 1);
         this.app.ticker.add(time => {
             currentScene.update(time.deltaTime);
         });

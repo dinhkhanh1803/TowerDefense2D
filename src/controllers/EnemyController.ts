@@ -59,7 +59,6 @@ export class EnemyController {
             this.map.removeChild(enemy.sprite);
 
             ObjectPool.instance.returnEnemyToPool(enemy.name, enemy);
-            PlayerController.instance.addGold(enemy.reward);
         }
     }
 

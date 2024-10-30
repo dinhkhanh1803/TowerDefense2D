@@ -1,5 +1,5 @@
 import { Application } from "pixi.js";
-import { GameScene } from "./GameScene";
+import { GameBoard } from "./GameBoard";
 
 export class MapScene {
     private app: Application;
@@ -15,7 +15,7 @@ export class MapScene {
     }
 
     loadGame(mapId: number) {
-        const gameScene = new GameScene(mapId);
+        const gameScene = new GameBoard(mapId);
         this.app.stage.removeChildren(); // Xoá các scene hiện tại
         this.app.stage.addChild(gameScene);
         this.app.ticker.add(time => {

@@ -1,5 +1,5 @@
-import { TowerController } from './../controllers/TowerController';
-import { EnemyController } from './../controllers/EnemyController';
+import { TowerController } from '../controllers/TowerController';
+import { EnemyController } from '../controllers/EnemyController';
 import { Application, Container, Graphics, Sprite, Text, Texture } from "pixi.js";
 import { LevelManager } from "../managers/LevelManager";
 import { EnemyTypes } from "../types/EnemyTypes";
@@ -21,7 +21,7 @@ import { HeroController } from '../controllers/HeroController';
 import { SkillSystemPannel } from './SkillSystemPannel';
 
 
-export class GameScene extends Container {
+export class GameBoard extends Container {
     private levelManager: LevelManager;
     private objectPool: ObjectPool;
     private mapContainer: Container;

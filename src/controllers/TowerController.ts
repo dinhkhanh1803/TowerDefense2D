@@ -1,9 +1,9 @@
-import { Container, Graphics, Sprite, Texture } from "pixi.js";
+import { AnimatedSprite, Container, Graphics, Sprite, Texture } from "pixi.js";
 import { TowerType } from "../types/TowerType";
 import { Tower } from "../models/Tower";
 import { ObjectPool } from "../utils/ObjectPool";
 import AssetLoad from "../utils/AssetLoad";
-import { GameScene } from "../scenes/GameScene";
+import { GameBoard } from "../scenes/GameBoard";
 import { EnemyController } from "./EnemyController";
 import { towersData } from "../data/towers";
 import { TowerInfoPannel } from "../scenes/TowerInfoPannel";
@@ -26,23 +26,33 @@ export class TowerController {
         const tower = ObjectPool.instance.getTowerFromPool(towerType);
 
         const towerData = towersData.find(t => t.name === towerType);
-
         if (towerData) {
             tower.reset(towerData.level, towerData.damage, towerData.range, towerData.fireRate, towerData.cost);
         }
+
 
         baseSprite.removeAllListeners();
         this.map.removeChild(baseSprite);
 
         tower.sprite.texture = AssetLoad.getTexture(`${towerType}_01`);
         tower.sprite.position = baseSprite.position;
-        tower.sprite.interactive = true;
-        tower.sprite.cursor = 'pointer';
-        tower.sprite.on('pointerdown', () => {
+        tower.towerContainer.addChild(tower.sprite);
+
+        tower.weapon = new AnimatedSprite(AssetLoad.getAnimation(`${towerType}_lv1`));
+        tower.weapon.x = baseSprite.position.x + 30;
+        tower.weapon.y = baseSprite.position.y + 25;
+        tower.weapon.anchor.set(0.5);
+        tower.weapon.animationSpeed = 0.1;
+        tower.weapon.play();
+        tower.towerContainer.addChild(tower.weapon);
+
+        tower.towerContainer.interactive = true;
+        tower.towerContainer.cursor = 'pointer';
+        tower.towerContainer.on('pointerdown', () => {
             TowerInfoPannel.instance.infoTower(tower);
         });
         this.towers.push(tower);
-        this.map.addChild(tower.sprite);
+        this.map.addChild(tower.towerContainer);
     }
 
     removeTower(tower: Tower) {
@@ -50,7 +60,9 @@ export class TowerController {
 
         if (idx !== -1) {
             this.towers.splice(idx, 1);
-            this.map.removeChild(tower.sprite);
+
+            tower.towerContainer.removeChildren();
+            this.map.removeChild(tower.towerContainer);
             ObjectPool.instance.returnTowerToPool(tower.name, tower);
         }
 

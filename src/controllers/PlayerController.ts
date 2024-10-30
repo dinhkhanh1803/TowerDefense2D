@@ -4,7 +4,7 @@ import { Player } from "../models/Player";
 import { TowerType } from "../types/TowerType";
 import { towersData } from "../data/towers";
 import { TowerController } from "./TowerController";
-import { GameScene } from "../scenes/GameScene";
+import { GameBoard } from "../scenes/GameBoard";
 import { Tower } from "../models/Tower";
 import { HUD } from "../scenes/GameScenesHelpers/HUD";
 import { EnemyController } from "./EnemyController";
