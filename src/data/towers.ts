@@ -6,7 +6,7 @@ export const towersData: Tower[] = [
         "Archer",
         2, // Damage
         100, // Range
-        3, // Fire rate (seconds per shot)
+        60, // Fire rate (seconds per shot)
         80, // Cost
         "arrow" // Projectile type
     ),
@@ -15,7 +15,7 @@ export const towersData: Tower[] = [
         "Mage",
         3, // Damage
         100, // Range
-        4, // Fire rate
+        60, // Fire rate
         100, // Cost
         "magicball" // Projectile type
     ),
@@ -24,7 +24,7 @@ export const towersData: Tower[] = [
         "Fire",
         5, // Damage
         120, // Range
-        3, // Fire rate
+        80, // Fire rate
         150, // Cost
         "fireball" // Projectile type
     ),
@@ -33,7 +33,7 @@ export const towersData: Tower[] = [
         "Ice",
         4, // Damage
         150, // Range
-        3, // Fire rate
+        90, // Fire rate
         200, // Cost
         "iceshard" // Projectile type
     ),
@@ -42,7 +42,7 @@ export const towersData: Tower[] = [
         "Cannon",
         7, // Damage
         170, // Range
-        3, // Fire rate
+        120, // Fire rate
         200, // Cost
         "cannonball" // Projectile type
     ),
@@ -51,7 +51,7 @@ export const towersData: Tower[] = [
         "Tesla",
         8, // Damage
         180, // Range
-        5, // Fire rate
+        100, // Fire rate
         250, // Cost
         "lightning" // Projectile type
     )

@@ -45,10 +45,9 @@ export class GameBoard extends Container {
 
         this.levelId = levelId;
 
-        this.objectPool = new ObjectPool();
         this.mapContainer = new Container();
         this.addChild(this.mapContainer);
-
+        this.objectPool = new ObjectPool();
         this.levelManager = new LevelManager(this.levelId);
         this.levelData = this.levelManager.getLevelData();
 
@@ -56,6 +55,7 @@ export class GameBoard extends Container {
         this.projectileController = new ProjectileController(this.mapContainer);
         this.enemyController = new EnemyController(this.mapContainer, this.levelData.map.tiles);
         this.playerController = new PlayerController(this.levelData.id);
+
 
         if (heroId) {
             this.heroController = new HeroController(heroId, this.mapContainer, this.levelData);

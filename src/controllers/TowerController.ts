@@ -11,6 +11,7 @@ import { TowerSelectionPannel } from "../scenes/TowerSelectionPannel";
 
 export class TowerController {
     public static instance: TowerController;
+
     private map: Container;
     private towers: Tower[] = [];
 
@@ -43,7 +44,6 @@ export class TowerController {
         tower.weapon.y = baseSprite.position.y + 25;
         tower.weapon.anchor.set(0.5);
         tower.weapon.animationSpeed = 0.1;
-        tower.weapon.play();
         tower.towerContainer.addChild(tower.weapon);
 
         tower.towerContainer.interactive = true;
@@ -107,9 +107,11 @@ export class TowerController {
                 const target = tower.targets[0];
                 if (!target.isAlive || !tower.isInRange(target.getUpdatePositionEnemy())) {
                     tower.targets.shift();
+                    tower.weapon.gotoAndStop(0);
                 } else {
                     tower.setTarget(target);
                     tower.update(deltaTime);
+                    tower.weapon.play();
                 }
             }
         });

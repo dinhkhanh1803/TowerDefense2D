@@ -19,13 +19,12 @@ export class Projectile {
         this.sprite.scale.set(0.5);
         this.sprite.anchor.set(1, 0.5);
         this.damage = 0;
-        this.speed = 0;
+        this.speed = 8;
     }
 
-    setTarget(enemyTarget: Enemy, damage: number, speed: number) {
+    setTarget(enemyTarget: Enemy, damage: number) {
         this.target = enemyTarget;
         this.damage = damage;
-        this.speed = speed;
     }
 
     update(deltaTime: number): void {

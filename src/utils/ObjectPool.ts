@@ -7,6 +7,8 @@ import { TowerFactory } from '../factories/TowerFactory';
 import { Projectile } from '../models/Projectile';
 import { ProjectileFactory } from '../factories/ProjectileFactory';
 import { ProjectileType } from '../types/ProjectileTypes';
+import { AnimatedSprite } from 'pixi.js';
+import AssetLoad from './AssetLoad';
 
 
 export class ObjectPool {
@@ -16,7 +18,7 @@ export class ObjectPool {
     private _towerPool: { [towerType: string]: Tower[] } = {};
     private _enemyPool: { [enemyType: string]: Enemy[] } = {};
     private _projectilePool: { [projectileType: string]: Projectile[] } = {};
-
+    private _impactEffectPool: { [projectileType: string]: AnimatedSprite[] } = {};
 
     constructor() {
         ObjectPool.instance = this;
@@ -54,6 +56,16 @@ export class ObjectPool {
                     this._projectilePool[projectileType].push(projectile);
                 } else {
                     console.error(`Không thể tạo đạn với loại ${projectileType}`);
+                }
+            }
+
+            this._impactEffectPool[projectileType] = [];
+            for (let i = 0; i < this.poolSize; i++) {
+                const impactEffect = this.createImpactEffect(projectileType);
+                if (impactEffect) {
+                    this._impactEffectPool[projectileType].push(impactEffect);
+                } else {
+                    console.error(`Không thể tạo hiệu ứng va chạm cho ${projectileType}`);
                 }
             }
         });
@@ -114,5 +126,26 @@ export class ObjectPool {
     // Hàm trả projectile về pool
     public returnProjectileToPool(projectileType: string, projectile: Projectile) {
         this._projectilePool[projectileType].push(projectile);
+    }
+
+    // Hàm tạo hiệu ứng va chạm cho mỗi loại projectile
+    private createImpactEffect(projectileType: string): AnimatedSprite {
+        const impactEffect = new AnimatedSprite(AssetLoad.getAnimation(`${projectileType}_impact`));
+        return impactEffect;
+    }
+
+    // Hàm lấy hiệu ứng va chạm từ pool
+    public getImpactEffectFromPool(projectileType: string): AnimatedSprite {
+        if (this._impactEffectPool[projectileType] ?.length <= 0) {
+            const impactEffect = this.createImpactEffect(projectileType);
+            return impactEffect;
+        } else {
+            return this._impactEffectPool[projectileType].pop() as AnimatedSprite;
+        }
+    }
+
+    // Hàm trả hiệu ứng va chạm về pool
+    public returnImpactEffectToPool(projectileType: string, impactEffect: AnimatedSprite): void {
+        this._impactEffectPool[projectileType].push(impactEffect);
     }
 }

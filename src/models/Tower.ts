@@ -42,7 +42,7 @@ export class Tower {
         this.cost = cost;
         this.level = 1; // Tháp khởi đầu ở level 1
 
-        this.cooldownTime = 50;
+        this.cooldownTime = this.fireRate;
         this.attackTime = 0;
 
         this.projectileType = projectileType;
@@ -54,6 +54,7 @@ export class Tower {
         this.range = range;
         this.fireRate = fireRange;
         this.cost = cost;
+        this.cooldownTime = this.fireRate;
     }
 
     setTarget(target: Enemy) {
@@ -69,6 +70,7 @@ export class Tower {
         this.range *= 1.1;      // Phạm vi tăng 10%
         this.fireRate *= 1.2;   // Tốc độ bắn tăng (giảm thời gian giữa các lần bắn)
         this.cost *= 1.5;       // Chi phí tăng theo cấp độ
+
     }
 
     // Phương thức bắn đạn
