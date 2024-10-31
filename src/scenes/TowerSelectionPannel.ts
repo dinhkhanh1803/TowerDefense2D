@@ -1,3 +1,4 @@
+import { towersData } from './../data/towers';
 import { BitmapText, Container, Graphics, Sprite } from "pixi.js";
 import { TowerType } from "../types/TowerType";
 import AssetLoad from "../utils/AssetLoad";
@@ -23,7 +24,7 @@ export class TowerSelectionPannel extends Container {
         grapbg.fill(0xFEF9F2);
         this.addChild(grapbg);
 
-        const towerType: TowerType[] = [TowerType.Archer, TowerType.Mage, TowerType.Fire, TowerType.Ice, TowerType.Cannon];
+        const towerType: TowerType[] = [TowerType.Archer, TowerType.Mage, TowerType.Fire, TowerType.Ice, TowerType.Cannon, TowerType.Tesla];
         const startX = 50;
         const startY = 660;
         const cardSpacing = 20;
@@ -45,7 +46,8 @@ export class TowerSelectionPannel extends Container {
         const spriteTower = new Sprite(AssetLoad.getTexture(`${type}_01`));
         spriteTower.position.set(x + 20, y + 5);
 
-        const nameTowerTxt = this.createText(type, x + 50, y + 80, '', 11);
+        const nameTowerTxt = this.createText(type, x + 50, y + 80);
+        const priceTowerTxt = this.priceTowerTxt(type, x + 50, y + 100);
 
 
         card.interactive = true;
@@ -57,15 +59,17 @@ export class TowerSelectionPannel extends Container {
         card.addChild(cardTower);
         card.addChild(spriteTower);
         card.addChild(nameTowerTxt);
+        card.addChild(priceTowerTxt);
+
         return card;
     }
 
-    createText(text: string, x: number, y: number, font: string, size: number): BitmapText {
+    createText(text: string, x: number, y: number): BitmapText {
         const bitmapTxt = new BitmapText({
             text: text,
             style: {
-                fontFamily: font,
-                fontSize: size,
+                fontFamily: '',
+                fontSize: 11,
                 align: 'center'
             },
         });
@@ -74,5 +78,45 @@ export class TowerSelectionPannel extends Container {
 
         this.addChild(bitmapTxt);
         return bitmapTxt;
+    }
+
+    priceTowerTxt(type: string, x: number, y: number): Container {
+        const tower = towersData.find(tower => type === tower.name);
+
+        // Lấy số tiền của người chơi
+        const playerGold = PlayerController.instance.getGold();
+
+        const priceContainer = new Container();
+
+        // Kiểm tra nếu số tiền của người chơi nhỏ hơn giá tower
+        const fontColor = playerGold < (tower ?.cost || 0) ? 'RedPeaberry' : 'ShinyPeaberry';
+
+        // Tạo text cho giá tiền với font color theo điều kiện
+        const bitmapTxt = new BitmapText({
+            text: tower ? tower.cost.toString() : '0',
+            style: {
+                fontFamily: fontColor,
+                fontSize: 13,
+                align: 'center'
+            },
+        });
+        bitmapTxt.anchor.set(0.5, 0.5);
+        bitmapTxt.position.set(0, 0); // Đặt tại vị trí trung tâm của container
+
+        // Tạo hình đồng xu
+        const coin = new Sprite(AssetLoad.getTexture('coin'));
+        coin.anchor.set(0.5, 0.4);
+        coin.scale.set(0.7);
+        coin.position.set(bitmapTxt.width / 2 + 10, 0); // Đặt hình đồng xu bên phải của text
+
+        // Thêm cả text và đồng xu vào container
+        priceContainer.addChild(bitmapTxt);
+        priceContainer.addChild(coin);
+
+        // Đặt container vào vị trí mong muốn
+        priceContainer.position.set(x, y);
+
+        this.addChild(priceContainer);
+        return priceContainer;
     }
 }

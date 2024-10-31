@@ -41,18 +41,7 @@ export class ProjectileController {
             this.projectiles.splice(index, 1);
 
             ObjectPool.instance.returnProjectileToPool(projectileType, projectile);
-
             this.map.removeChild(projectile.sprite);
-
-            const impactEffect = this.createImpactEffect(projectileType, projectile);
-            this.map.addChild(impactEffect);
-
-            impactEffect.onFrameChange = () => {
-                if (impactEffect.currentFrame === impactEffect.totalFrames - 1) {
-                    ObjectPool.instance.returnImpactEffectToPool(projectileType, impactEffect);
-                    this.map.removeChild(impactEffect);
-                }
-            }
         }
     }
 
@@ -62,14 +51,22 @@ export class ProjectileController {
         });
     }
 
-    createImpactEffect(projectileType: string, projectile: Projectile): AnimatedSprite {
+    createImpactEffect(projectileType: string, x: number, y: number) {
         const impactEffect = ObjectPool.instance.getImpactEffectFromPool(projectileType);
         impactEffect.gotoAndStop(0);
-        impactEffect.x = projectile.sprite.x;
-        impactEffect.y = projectile.sprite.y;
+        impactEffect.x = x;
+        impactEffect.y = y;
         impactEffect.animationSpeed = 0.5;
         impactEffect.loop = false;
         impactEffect.play();
-        return impactEffect;
+        impactEffect.zIndex = 100;
+        this.map.addChild(impactEffect);
+
+        impactEffect.onFrameChange = () => {
+            if (impactEffect.currentFrame === impactEffect.totalFrames - 1) {
+                ObjectPool.instance.returnImpactEffectToPool(projectileType, impactEffect);
+                this.map.removeChild(impactEffect);
+            }
+        }
     }
 }

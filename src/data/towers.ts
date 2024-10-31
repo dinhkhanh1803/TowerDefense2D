@@ -4,7 +4,7 @@ export const towersData: Tower[] = [
     new Tower(
         1,
         "Archer",
-        2, // Damage
+        5, // Damage
         100, // Range
         60, // Fire rate (seconds per shot)
         80, // Cost
@@ -13,7 +13,7 @@ export const towersData: Tower[] = [
     new Tower(
         2,
         "Mage",
-        3, // Damage
+        5, // Damage
         100, // Range
         60, // Fire rate
         100, // Cost
@@ -31,7 +31,7 @@ export const towersData: Tower[] = [
     new Tower(
         4,
         "Ice",
-        4, // Damage
+        5, // Damage
         150, // Range
         90, // Fire rate
         200, // Cost
@@ -49,7 +49,7 @@ export const towersData: Tower[] = [
     new Tower(
         6,
         "Tesla",
-        8, // Damage
+        1, // Damage
         180, // Range
         100, // Fire rate
         250, // Cost

@@ -23,6 +23,30 @@
         "x": 0.5,
         "y": 0.5
       }
+    },
+    "coin": {
+      "frame": {
+        "x": 2,
+        "y": 273,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
     }
   },
   "meta": {
@@ -32,7 +56,7 @@
     "format": "RGBA8888",
     "size": {
       "w": 196,
-      "h": 271
+      "h": 291
     },
     "scale": 1
   }
