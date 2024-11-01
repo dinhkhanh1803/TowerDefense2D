@@ -7,6 +7,7 @@ import { LevelTypes } from "../types/LevelTypes";
 import { PlayerController } from "./PlayerController";
 import { EventHandle } from "../utils/EventHandle";
 import AssetLoad from "../utils/AssetLoad";
+import { enemiesData } from "../data/enemies";
 
 export class EnemyController {
     public static instance: EnemyController;
@@ -33,6 +34,12 @@ export class EnemyController {
     // Tạo enemy mới dựa trên vị trí spawnPoint và mục tiêu
     public createEnemy(spawnPoint: { x: number, y: number }, goal: { x: number, y: number }, enemyType: string) {
         const enemy = ObjectPool.instance.getEnemyFromPool(enemyType);
+
+        const enemyData = enemiesData.find(enemy => enemy.name === enemyType);
+        if (enemyData) {
+            enemy.hp = enemyData.hp;
+            enemy.isAlive = true;
+        }
 
         enemy.moveDownTextures = AssetLoad.getAnimation(`${enemyType}_move_down`);
         enemy.moveLeftTextures = AssetLoad.getAnimation(`${enemyType}_move_left`);

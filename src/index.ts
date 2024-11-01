@@ -37,7 +37,8 @@ import AssetLoad from './utils/AssetLoad';
     await AssetLoad.loadAnimations([
         './atlas/enemies_atlas.json',
         './atlas/weapons_atlas.json',
-        './atlas/impacts_atlas.json'
+        './atlas/impacts_atlas.json',
+        './atlas/projectiles_atlas.json'
     ]);
 
 

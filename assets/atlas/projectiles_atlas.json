@@ -5,15 +5,63 @@
         "x": 2,
         "y": 2,
         "w": 300,
-        "h": 40
+        "h": 32
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 8,
+        "w": 300,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 300,
+        "h": 40
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "lightning_lv1_02": {
+      "frame": {
+        "x": 2,
+        "y": 38,
+        "w": 300,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": true,
       "spriteSourceSize": {
         "x": 0,
         "y": 0,
         "w": 300,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 300,
         "h": 40
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "lightning_lv1_03": {
+      "frame": {
+        "x": 2,
+        "y": 74,
+        "w": 300,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 5,
+        "w": 300,
+        "h": 30
       },
       "sourceSize": {
         "w": 300,
@@ -27,7 +75,7 @@
     "fireball_lv1_04": {
       "frame": {
         "x": 2,
-        "y": 46,
+        "y": 108,
         "w": 56,
         "h": 25
       },
@@ -51,7 +99,7 @@
     "fireball_lv1_02": {
       "frame": {
         "x": 62,
-        "y": 46,
+        "y": 108,
         "w": 55,
         "h": 25
       },
@@ -75,7 +123,7 @@
     "fireball_lv1_03": {
       "frame": {
         "x": 121,
-        "y": 46,
+        "y": 108,
         "w": 53,
         "h": 25
       },
@@ -99,7 +147,7 @@
     "iceshard_lv1_01": {
       "frame": {
         "x": 178,
-        "y": 46,
+        "y": 108,
         "w": 39,
         "h": 34
       },
@@ -123,7 +171,7 @@
     "fireball_lv1_01": {
       "frame": {
         "x": 221,
-        "y": 46,
+        "y": 108,
         "w": 49,
         "h": 25
       },
@@ -147,7 +195,7 @@
     "iceshard_lv1_03": {
       "frame": {
         "x": 274,
-        "y": 46,
+        "y": 108,
         "w": 43,
         "h": 27
       },
@@ -171,7 +219,7 @@
     "iceshard_lv1_02": {
       "frame": {
         "x": 221,
-        "y": 75,
+        "y": 137,
         "w": 40,
         "h": 29
       },
@@ -195,7 +243,7 @@
     "cannonball_lv1_01": {
       "frame": {
         "x": 2,
-        "y": 75,
+        "y": 137,
         "w": 34,
         "h": 34
       },
@@ -219,7 +267,7 @@
     "cannonball_lv1_02": {
       "frame": {
         "x": 40,
-        "y": 75,
+        "y": 137,
         "w": 34,
         "h": 34
       },
@@ -243,7 +291,7 @@
     "cannonball_lv1_03": {
       "frame": {
         "x": 78,
-        "y": 75,
+        "y": 137,
         "w": 34,
         "h": 34
       },
@@ -267,7 +315,7 @@
     "iceshard_lv1_04": {
       "frame": {
         "x": 116,
-        "y": 75,
+        "y": 137,
         "w": 41,
         "h": 27
       },
@@ -291,7 +339,7 @@
     "magicball_lv1_01": {
       "frame": {
         "x": 265,
-        "y": 93,
+        "y": 155,
         "w": 32,
         "h": 32
       },
@@ -315,7 +363,7 @@
     "magicball_lv1_03": {
       "frame": {
         "x": 161,
-        "y": 84,
+        "y": 146,
         "w": 32,
         "h": 32
       },
@@ -339,7 +387,7 @@
     "magicball_lv1_02": {
       "frame": {
         "x": 116,
-        "y": 106,
+        "y": 168,
         "w": 32,
         "h": 31
       },
@@ -363,7 +411,7 @@
     "iceshard_lv1_05": {
       "frame": {
         "x": 197,
-        "y": 108,
+        "y": 170,
         "w": 39,
         "h": 25
       },
@@ -387,7 +435,7 @@
     "arrow_lv1_01": {
       "frame": {
         "x": 240,
-        "y": 129,
+        "y": 191,
         "w": 60,
         "h": 14
       },
@@ -411,7 +459,7 @@
     "arrow_lv1_02": {
       "frame": {
         "x": 2,
-        "y": 113,
+        "y": 175,
         "w": 60,
         "h": 10
       },
@@ -435,7 +483,7 @@
     "arrow_lv1_03": {
       "frame": {
         "x": 2,
-        "y": 127,
+        "y": 189,
         "w": 60,
         "h": 10
       },
@@ -457,6 +505,13 @@
       }
     }
   },
+  "animations": {
+    "lightning_lv1": [
+      "lightning_lv1_01",
+      "lightning_lv1_02",
+      "lightning_lv1_03"
+    ]
+  },
   "meta": {
     "app": "http://github.com/odrick/free-tex-packer-core",
     "version": "0.3.4",
@@ -464,7 +519,7 @@
     "format": "RGBA8888",
     "size": {
       "w": 304,
-      "h": 145
+      "h": 207
     },
     "scale": 1
   }

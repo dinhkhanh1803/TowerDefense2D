@@ -52,7 +52,6 @@ export class Enemy {
         this.goalPosition = { x: pointEnd.x, y: pointEnd.y };
         this.pathfinding = path;
         this.currentPathIndex = 0;
-        this.isAlive = true;
     }
 
     takeDamage(id: number, damage: number) {

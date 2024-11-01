@@ -49,7 +49,7 @@ export const towersData: Tower[] = [
     new Tower(
         6,
         "Tesla",
-        1, // Damage
+        6, // Damage
         180, // Range
         100, // Fire rate
         250, // Cost
