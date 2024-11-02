@@ -1,47 +1,48 @@
-import { Enemy } from "../models/Enemy";
 
-// Dữ liệu về các loại kẻ địch
-export const enemiesData: Enemy[] = [
-    new Enemy(
-        1,
-        "Grunt",
-        20,    // HP
-        1,    // Speed
-        1,     // Damage
-        20
-    ),
-    new Enemy(
-        2,
-        "Monster",
-        30,    // HP
-        1.5,    // Speed
-        1,     // Damage
-        50
+// Define data structure for enemy configuration
+interface EnemyConfig {
+    name: string;
+    hp: number;
+    speed: number;
+    damage: number;
+    reward: number;
+}
 
-    ),
-    new Enemy(
-        3,
-        "Giant",
-        50,    // HP
-        1.0,    // Speed
-        2,     // Damage
-        70
-
-    ),
-    new Enemy(
-        4,
-        "Speedster",
-        50,    // HP
-        0.8,    // Speed
-        2,     // Damage
-        80
-    ),
-    new Enemy(
-        5,
-        "Boss",
-        50,    // HP
-        0.8,    // Speed
-        2,     // Damage
-        100
-    )
+// Enemy data without creating actual Enemy objects
+export const enemiesData: EnemyConfig[] = [
+    {
+        name: "Grunt",
+        hp: 20,
+        speed: 1,
+        damage: 1,
+        reward: 20
+    },
+    {
+        name: "Monster",
+        hp: 30,
+        speed: 1.5,
+        damage: 1,
+        reward: 50
+    },
+    {
+        name: "Giant",
+        hp: 50,
+        speed: 1.0,
+        damage: 2,
+        reward: 70
+    },
+    {
+        name: "Speedster",
+        hp: 50,
+        speed: 0.8,
+        damage: 2,
+        reward: 80
+    },
+    {
+        name: "Boss",
+        hp: 50,
+        speed: 0.8,
+        damage: 2,
+        reward: 100
+    }
 ];

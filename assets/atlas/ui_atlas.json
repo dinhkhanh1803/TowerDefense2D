@@ -24,9 +24,57 @@
         "y": 0.5
       }
     },
-    "coin": {
+    "hpbar_down": {
       "frame": {
         "x": 2,
+        "y": 273,
+        "w": 30,
+        "h": 6
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 30,
+        "h": 6
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 6
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "hpbar_up": {
+      "frame": {
+        "x": 36,
+        "y": 273,
+        "w": 30,
+        "h": 6
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 30,
+        "h": 6
+      },
+      "sourceSize": {
+        "w": 30,
+        "h": 6
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "coin": {
+      "frame": {
+        "x": 70,
         "y": 273,
         "w": 16,
         "h": 16

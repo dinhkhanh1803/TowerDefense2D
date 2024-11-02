@@ -7,8 +7,11 @@ import { PlayerController } from "../controllers/PlayerController";
 export class Enemy {
     id: number;
     name: string;
-    sprite: AnimatedSprite;
+    sprite: Container = new Container();
+    healthBar: Container = new Container();
+    spriteAni: AnimatedSprite;
     hp: number;
+    maxHp: number;
     speed: number;
     damage: number;
     reward: number;
@@ -18,11 +21,15 @@ export class Enemy {
     pathfinding!: BfsPathfinding;
     currentPathIndex: number = 0;
     isAlive: boolean;
+    healthBarDown!: Sprite;
+    healthBarUp!: Sprite;
 
-    moveLeftTextures: Texture[] = [Texture.EMPTY];
-    moveRightTextures: Texture[] = [Texture.EMPTY];
-    moveDownTextures: Texture[] = [Texture.EMPTY];
-    moveUpTextures: Texture[] = [Texture.EMPTY];
+    moveLeftTextures!: Texture[];
+    moveRightTextures!: Texture[];
+    moveDownTextures!: Texture[];
+    moveUpTextures!: Texture[];
+    hpbardown!: Texture;
+    hpbarup!: Texture;
 
     constructor(
         id: number,
@@ -35,16 +42,20 @@ export class Enemy {
         this.id = id;
         this.name = name;
         this.hp = hp;
+        this.maxHp = hp;
         this.speed = speed;
         this.damage = damage;
         this.reward = reward;
         this.isAlive = true;
 
-        this.sprite = new AnimatedSprite(this.moveDownTextures);
-        this.sprite.pivot.set(0.5);
-        this.sprite.animationSpeed = 0.1;
-        this.sprite.anchor.set(0.5, 0.5);
-        this.sprite.play();
+        this.spriteAni = new AnimatedSprite([Texture.EMPTY]);
+        this.spriteAni.anchor.set(0.5);
+        this.spriteAni.animationSpeed = 0.1;
+        this.spriteAni.anchor.set(0.5, 0.5);
+        this.spriteAni.play();
+        this.sprite.addChild(this.spriteAni);
+
+        this.sprite.addChild(this.healthBar);
     }
 
     setPosition(pointStart: { x: number, y: number }, pointEnd: { x: number, y: number }, path: BfsPathfinding) {
@@ -52,6 +63,15 @@ export class Enemy {
         this.goalPosition = { x: pointEnd.x, y: pointEnd.y };
         this.pathfinding = path;
         this.currentPathIndex = 0;
+
+        this.healthBarDown = new Sprite(this.hpbardown);
+        this.healthBarUp = new Sprite(this.hpbarup);
+
+        this.healthBarDown.position.set(this.sprite.x - 45, this.sprite.y - 130);
+        this.healthBar.addChild(this.healthBarDown);
+
+        this.healthBarUp.position.set(this.sprite.x - 45, this.sprite.y - 130);
+        this.healthBar.addChild(this.healthBarUp);
     }
 
     takeDamage(id: number, damage: number) {
@@ -65,6 +85,9 @@ export class Enemy {
                 PlayerController.instance.addGold(this.reward);
                 EnemyController.instance.removeEnemy(this);
             }
+
+            const healthPer = this.hp / this.maxHp;
+            this.healthBarUp.scale.x = healthPer;
         }
     }
 
@@ -92,7 +115,7 @@ export class Enemy {
         }
     }
 
-    public getUpdatePositionEnemy(): PointData {
+    getUpdatePositionEnemy(): PointData {
         this.position = { x: this.sprite.x - 64 / 2, y: this.sprite.y - 64 / 2 };
         return this.position;
     }
@@ -124,11 +147,11 @@ export class Enemy {
         }
 
         // Chỉ thay đổi textures khi cần thiết
-        if (this.sprite.textures !== newTexture) {
-            this.sprite.textures = newTexture;
-            this.sprite.play();
+        if (this.spriteAni.textures !== newTexture) {
+            this.spriteAni.textures = newTexture;
+            this.spriteAni.play();
         }
 
-        this.sprite.animationSpeed = 0.1;
+        this.spriteAni.animationSpeed = 0.1;
     }
 }

@@ -38,6 +38,7 @@ export class EnemyController {
         const enemyData = enemiesData.find(enemy => enemy.name === enemyType);
         if (enemyData) {
             enemy.hp = enemyData.hp;
+            enemy.maxHp = enemyData.hp;
             enemy.isAlive = true;
         }
 
@@ -45,6 +46,8 @@ export class EnemyController {
         enemy.moveLeftTextures = AssetLoad.getAnimation(`${enemyType}_move_left`);
         enemy.moveRightTextures = AssetLoad.getAnimation(`${enemyType}_move_right`);
         enemy.moveUpTextures = AssetLoad.getAnimation(`${enemyType}_move_up`);
+        enemy.hpbardown = AssetLoad.getTexture('hpbar_down');
+        enemy.hpbarup = AssetLoad.getTexture('hpbar_up');
 
         enemy.sprite.x = spawnPoint.x * 64 + 32;
         enemy.sprite.y = spawnPoint.y * 64 + 32;
