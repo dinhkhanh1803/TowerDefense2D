@@ -48,8 +48,8 @@ export class Tower {
         this.projectileType = projectileType;
     }
 
-    reset(level: number, damage: number, range: number, fireRange: number, cost: number) {
-        this.level = level;
+    reset(damage: number, range: number, fireRange: number, cost: number) {
+        this.level = 1;
         this.damage = damage;
         this.range = range;
         this.fireRate = fireRange;

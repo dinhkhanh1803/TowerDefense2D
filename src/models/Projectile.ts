@@ -14,6 +14,7 @@ export class Projectile {
     target!: Enemy;
 
     lightAni: AnimatedSprite;
+
     constructor(id: number, sprite: Sprite, type: string) {
         this.id = id;
         this.type = type;
@@ -88,6 +89,8 @@ export class Projectile {
 
         ProjectileController.instance.createImpactEffect(this.type, impactX, impactY);
         this.target.takeDamage(this.target.id, this.damage);
+
+        ProjectileController.instance.displayDamage(this.damage, impactX, impactY);
         ProjectileController.instance.removeProjectile(this.type, this);
     }
 }

@@ -1,44 +1,29 @@
 import { Sprite, Texture } from 'pixi.js';
 import { Skill } from "./Skill";
 import { Enemy } from './Enemy';
-import AssetLoad from '../utils/AssetLoad';
-import { BfsPathfinding } from '../utils/BfsPathfinding';
+import { bfsPathfinding } from '../utils/BfsPathfinding';
+import { Character } from './Character';
 
-export class Hero {
-    id: number;            // ID của hero
-    name: string;          // Tên của hero
-    sprite: Sprite;
-    speed: number;
-    attackRadius: number
-    hp: number;            // Số lượng máu hiện tại
-    maxHp: number;         // Số lượng máu tối đa
-    mp: number;            // Số lượng năng lượng hiện tại
-    maxMp: number;         // Số lượng năng lượng tối đa
-    attackPower: number;   // Sức mạnh tấn công cơ bản
-    defense: number;       // Chỉ số phòng thủ
-    skills: Skill[];       // Danh sách các kỹ năng mà hero có thể sử dụng
-    target: Enemy[] = [];
-    isDead: boolean = false;
-    currentPosition!: { x: number, y: number };
-    goalPosition!: { x: number, y: number };
-    pathfinding!: BfsPathfinding;
-    currentPathIndex: number = 0;
-    isMoving: boolean = false;
+export class Hero extends Character {
+    private attackRadius: number
+    private mp: number;
+    private maxMp: number;
+    private defense: number;
+    private skills: Skill[];
+    private target: Enemy[] = [];
+    private isMoving: boolean = false;
 
     constructor(id: number, name: string, speed: number, attackRadius: number, maxHp: number, maxMp: number, attackPower: number, defense: number) {
-        this.id = id;
-        this.name = name;
-        this.sprite = new Sprite(Texture.from('enemy3'));
-        this.sprite.anchor.set(0.5);
-        this.speed = speed;
+        super(id, name, maxHp, speed, attackPower);
         this.attackRadius = attackRadius;
-        this.maxHp = maxHp;
-        this.hp = maxHp;
         this.maxMp = maxMp;
         this.mp = maxMp;
-        this.attackPower = attackPower;
         this.defense = defense;
         this.skills = [];
+
+
+        this.sprite.zIndex = 100;
+
     }
 
     spawnPosition(postion: { x: number, y: number }) {
@@ -52,7 +37,7 @@ export class Hero {
         this.currentPosition = { x: currentPosition.x, y: currentPosition.y };
         this.goalPosition = { x: targetPosition.x, y: targetPosition.y };
         console.log(this.currentPosition, this.goalPosition);
-        this.pathfinding = new BfsPathfinding(gridMap);
+        this.pathfinding = new bfsPathfinding(gridMap);
         const path = this.pathfinding.bfs(this.currentPosition, this.goalPosition);
         console.log(path);
         if (path) {
@@ -67,44 +52,36 @@ export class Hero {
         if (!this.isMoving || !this.goalPosition) return;
 
         const path = this.pathfinding.bfs(this.currentPosition, this.goalPosition);
-
         if (path && this.currentPathIndex < path.length) {
-            const target = path[this.currentPathIndex];
-            const dx = target.x * 64 - this.sprite.x;
-            const dy = target.y * 64 - this.sprite.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-
-            if (dist > 1) {
-                this.sprite.x += (dx / dist) * this.speed * deltaTime;
-                this.sprite.y += (dy / dist) * this.speed * deltaTime;
-
-
-            } else {
-                this.currentPathIndex++;
-            }
-        }
-
-        if (path && this.currentPathIndex >= path.length) {
+            this.moveAlongPath(path, deltaTime);
+        } else {
             this.isMoving = false;
+        }
+    }
+
+    private moveAlongPath(path: { x: number, y: number }[], deltaTime: number) {
+        const target = path[this.currentPathIndex];
+        const dx = target.x * 64 - this.sprite.x;
+        const dy = target.y * 64 - this.sprite.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist > 1) {
+            this.sprite.x += (dx / dist) * this.speed * deltaTime;
+            this.sprite.y += (dy / dist) * this.speed * deltaTime;
+        } else {
+            this.currentPathIndex++;
         }
     }
 
     // Hồi máu cho hero
     heal(amount: number): void {
-        this.hp += amount;
-        if (this.hp > this.maxHp) {
-            this.hp = this.maxHp;
-        }
-        console.log(`${this.name} đã được hồi ${amount} máu.`);
+        this.hp = Math.min(this.hp + amount, this.maxHp);
     }
 
     // Nhận sát thương
     takeDamage(amount: number): void {
         const damage = Math.max(amount - this.defense, 0); // Trừ phòng thủ ra khỏi sát thương nhận được
-        this.hp -= damage;
-        if (this.hp < 0) {
-            this.hp = 0;
-        }
+        super.receiveDamage(damage);
         console.log(`${this.name} nhận ${damage} sát thương, còn ${this.hp} HP.`);
     }
 

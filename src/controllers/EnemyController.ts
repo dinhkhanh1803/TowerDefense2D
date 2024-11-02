@@ -1,17 +1,17 @@
-import { AnimatedSprite, Container, Graphics, Sprite, Texture } from "pixi.js";
+import { AnimatedSprite, Container, Sprite, Texture } from "pixi.js";
 import { Enemy } from "../models/Enemy";
 import { ObjectPool } from "../utils/ObjectPool";
-import { EnemyTypes } from "../types/EnemyTypes";
-import { BfsPathfinding } from "../utils/BfsPathfinding";
+import { bfsPathfinding } from "../utils/BfsPathfinding";
 import { LevelTypes } from "../types/LevelTypes";
 import { PlayerController } from "./PlayerController";
-import { EventHandle } from "../utils/EventHandle";
 import AssetLoad from "../utils/AssetLoad";
 import { enemiesData } from "../data/enemies";
+import { EventHandle } from "../utils/EventHandle";
+import { GameTypes } from "../types/GameTypes";
 
 export class EnemyController {
     public static instance: EnemyController;
-    private map: Container;
+
     private grid: number[][];
     private enemies: Enemy[] = [];
 
@@ -25,9 +25,8 @@ export class EnemyController {
     private enemiesToSpawn: { type: string, count: number }[] = [];
     private currentEnemyIndex: number = 0;
 
-    constructor(map: Container, grid: number[][]) {
+    constructor(grid: number[][]) {
         EnemyController.instance = this;
-        this.map = map;
         this.grid = grid;
     }
 
@@ -46,19 +45,19 @@ export class EnemyController {
         enemy.moveLeftTextures = AssetLoad.getAnimation(`${enemyType}_move_left`);
         enemy.moveRightTextures = AssetLoad.getAnimation(`${enemyType}_move_right`);
         enemy.moveUpTextures = AssetLoad.getAnimation(`${enemyType}_move_up`);
-        enemy.hpbardown = AssetLoad.getTexture('hpbar_down');
-        enemy.hpbarup = AssetLoad.getTexture('hpbar_up');
+
 
         enemy.sprite.x = spawnPoint.x * 64 + 32;
         enemy.sprite.y = spawnPoint.y * 64 + 32;
 
-        const pathfinding = new BfsPathfinding(this.grid);
+        const pathfinding = new bfsPathfinding(this.grid);
 
         enemy.setPosition(spawnPoint, goal, pathfinding);
 
         this.enemies.push(enemy);
 
-        this.map.addChild(enemy.sprite);
+        EventHandle.emit(GameTypes.event.addChildToMap, (enemy.sprite));
+        //this.map.addChild(enemy.sprite);
     }
 
     //xóa enemy khi nó bị tiêu diệt
@@ -66,7 +65,8 @@ export class EnemyController {
         const index = this.enemies.indexOf(enemy);
         if (index !== -1) {
             this.enemies.splice(index, 1);
-            this.map.removeChild(enemy.sprite);
+            EventHandle.emit(GameTypes.event.removeChildFromMap, (enemy.sprite));
+            //this.map.removeChild(enemy.sprite);
 
             ObjectPool.instance.returnEnemyToPool(enemy.name, enemy);
         }
@@ -200,7 +200,8 @@ export class EnemyController {
 
         warningSprite.position.set(x, y);
         warningSprite.interactive = true;
-        this.map.addChild(warningSprite);
+        EventHandle.emit(GameTypes.event.addChildToMap, (warningSprite));
+
 
         return warningSprite;
     }

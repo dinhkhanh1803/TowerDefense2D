@@ -1,56 +1,65 @@
-import { Hero } from "../models/Hero";
+// Define data structure for hero configuration
+interface HeroConfig {
+    id: number;
+    name: string;
+    speed: number;
+    attackRange: number;
+    maxHealth: number;
+    maxMana: number;
+    attackPower: number;
+    defense: number;
+}
 
-
-// Tạo danh sách hero với thông tin chi tiết
-export const herosData: Hero[] = [
-    new Hero(
-        1,         // ID của hero
-        "Warrior", // Tên hero
-        1.2,       // Tốc độ
-        100,       // Bán kính tấn công
-        100,       // Máu tối đa
-        50,        // Mana tối đa
-        20,        // Sức mạnh tấn công
-        5          // Phòng thủ
-    ),
-    new Hero(
-        2,
-        "Mage",
-        1.0,       // Tốc độ chậm hơn so với Warrior
-        150,       // Bán kính tấn công xa hơn
-        80,        // Máu tối đa thấp hơn
-        100,       // Mana tối đa cao
-        30,        // Sức mạnh tấn công cao hơn
-        2          // Phòng thủ thấp hơn
-    ),
-    new Hero(
-        3,
-        "Archer",
-        1.5,       // Tốc độ nhanh hơn
-        120,       // Bán kính tấn công vừa phải
-        70,        // Máu tối đa
-        40,        // Mana tối đa thấp
-        15,        // Sức mạnh tấn công
-        3          // Phòng thủ vừa phải
-    ),
-    new Hero(
-        4,
-        "Paladin",
-        1.1,       // Tốc độ vừa phải
-        80,        // Bán kính tấn công thấp hơn
-        150,       // Máu tối đa cao
-        60,        // Mana tối đa vừa phải
-        25,        // Sức mạnh tấn công vừa phải
-        8          // Phòng thủ cao
-    ),
-    new Hero(
-        5,
-        "Assassin",
-        1.8,       // Tốc độ rất nhanh
-        90,        // Bán kính tấn công
-        60,        // Máu tối đa thấp
-        30,        // Mana tối đa
-        35,        // Sức mạnh tấn công cao
-        1          // Phòng thủ rất thấp
-    )
+// Hero data without creating actual Hero objects
+export const herosData: HeroConfig[] = [
+    {
+        id: 1,
+        name: "Warrior",
+        speed: 1.2,
+        attackRange: 100,
+        maxHealth: 100,
+        maxMana: 50,
+        attackPower: 20,
+        defense: 5
+    },
+    {
+        id: 2,
+        name: "Mage",
+        speed: 1.0,
+        attackRange: 150,
+        maxHealth: 80,
+        maxMana: 100,
+        attackPower: 30,
+        defense: 2
+    },
+    {
+        id: 3,
+        name: "Archer",
+        speed: 1.5,
+        attackRange: 120,
+        maxHealth: 70,
+        maxMana: 40,
+        attackPower: 15,
+        defense: 3
+    },
+    {
+        id: 4,
+        name: "Paladin",
+        speed: 1.1,
+        attackRange: 80,
+        maxHealth: 150,
+        maxMana: 60,
+        attackPower: 25,
+        defense: 8
+    },
+    {
+        id: 5,
+        name: "Assassin",
+        speed: 1.8,
+        attackRange: 90,
+        maxHealth: 60,
+        maxMana: 30,
+        attackPower: 35,
+        defense: 1
+    }
 ];

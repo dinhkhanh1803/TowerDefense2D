@@ -8,18 +8,15 @@ import { EnemyController } from "./EnemyController";
 import { towersData } from "../data/towers";
 import { TowerInfoPannel } from "../scenes/TowerInfoPannel";
 import { TowerSelectionPannel } from "../scenes/TowerSelectionPannel";
+import { EventHandle } from "../utils/EventHandle";
+import { GameTypes } from "../types/GameTypes";
 
 export class TowerController {
     public static instance: TowerController;
-
-    private map: Container;
     private towers: Tower[] = [];
 
-
-    constructor(map: Container) {
+    constructor() {
         TowerController.instance = this;
-        this.map = map;
-
     }
 
 
@@ -28,12 +25,13 @@ export class TowerController {
 
         const towerData = towersData.find(t => t.name === towerType);
         if (towerData) {
-            tower.reset(towerData.level, towerData.damage, towerData.range, towerData.fireRate, towerData.cost);
+            tower.reset(towerData.damage, towerData.range, towerData.fireRate, towerData.cost);
         }
 
 
         baseSprite.removeAllListeners();
-        this.map.removeChild(baseSprite);
+        EventHandle.emit(GameTypes.event.removeChildFromMap, (baseSprite));
+        //this.map.removeChild(baseSprite);
 
         tower.sprite.texture = AssetLoad.getTexture(`${towerType}_01`);
         tower.sprite.position = baseSprite.position;
@@ -52,7 +50,8 @@ export class TowerController {
             TowerInfoPannel.instance.infoTower(tower);
         });
         this.towers.push(tower);
-        this.map.addChild(tower.towerContainer);
+        EventHandle.emit(GameTypes.event.addChildToMap, (tower.towerContainer));
+        //this.map.addChild(tower.towerContainer);
     }
 
     removeTower(tower: Tower) {
@@ -62,7 +61,8 @@ export class TowerController {
             this.towers.splice(idx, 1);
 
             tower.towerContainer.removeChildren();
-            this.map.removeChild(tower.towerContainer);
+            EventHandle.emit(GameTypes.event.removeChildFromMap, (tower.towerContainer));
+            //this.map.removeChild(tower.towerContainer);
             ObjectPool.instance.returnTowerToPool(tower.name, tower);
         }
 
@@ -77,7 +77,8 @@ export class TowerController {
             TowerSelectionPannel.instance.menuTower();
         });
 
-        this.map.addChild(slotTowerSprite);
+        EventHandle.emit(GameTypes.event.addChildToMap, (slotTowerSprite));
+        // this.map.addChild(slotTowerSprite);
     }
 
     upgradeTower(id: number) {

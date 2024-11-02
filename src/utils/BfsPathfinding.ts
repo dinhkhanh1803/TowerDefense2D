@@ -1,4 +1,4 @@
-export class BfsPathfinding {
+export class bfsPathfinding {
     private grid: number[][];
 
     constructor(grid: number[][]) {

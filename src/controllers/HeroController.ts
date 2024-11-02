@@ -2,9 +2,10 @@ import { Container } from "pixi.js";
 import { herosData } from "../data/heros";
 import { Hero } from "../models/Hero";
 import { LevelTypes } from "../types/LevelTypes";
-import { BfsPathfinding } from "../utils/BfsPathfinding";
+import { bfsPathfinding } from "../utils/BfsPathfinding";
 import { Tween } from "@tweenjs/tween.js";
 import { EventHandle } from "../utils/EventHandle";
+import AssetLoad from "../utils/AssetLoad";
 
 export class HeroController {
     public static instance: HeroController;
@@ -21,13 +22,19 @@ export class HeroController {
         this.levelData = levelData;
         this.gridMap = levelData.map.tiles;
         this.map = map;
+
         this.heroInit();
     }
 
     heroInit() {
         const heroData = herosData.find(hero => hero.id === this.heroId);
         if (heroData) {
-            this.hero = new Hero(heroData.id, heroData.name, heroData.speed, heroData.attackRadius, heroData.maxHp, heroData.maxMp, heroData.attackPower, heroData.defense);
+            this.hero = new Hero(heroData.id, heroData.name, heroData.speed, heroData.attackRange, heroData.maxHealth, heroData.maxMana, heroData.attackPower, heroData.defense);
+
+            this.hero.moveDownTextures = AssetLoad.getAnimation(`Boss_move_down`);
+            this.hero.moveLeftTextures = AssetLoad.getAnimation(`Boss_move_left`);
+            this.hero.moveRightTextures = AssetLoad.getAnimation(`Boss_move_right`);
+            this.hero.moveUpTextures = AssetLoad.getAnimation(`Boss_move_up`);
 
             this.hero.sprite.x = this.levelData.waves[0].defendPoint.x * 64 + 32;
             this.hero.sprite.y = this.levelData.waves[0].defendPoint.y * 64 + 32;
@@ -36,7 +43,7 @@ export class HeroController {
             this.hero.spawnPosition(this.levelData.waves[0].defendPoint);
 
 
-            this.hero.sprite.zIndex = 2;
+            this.hero.spriteAni.zIndex = 2;
             this.map.addChild(this.hero.sprite);
         }
     }

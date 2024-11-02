@@ -5,18 +5,19 @@ import { Tower } from "../models/Tower";
 import { Enemy } from "../models/Enemy";
 import { ObjectPool } from "../utils/ObjectPool";
 import AssetLoad from "../utils/AssetLoad";
+import { DamageText } from "../scenes/Displays/DamageText";
+import { EventHandle } from "../utils/EventHandle";
+import { GameTypes } from "../types/GameTypes";
 
 export class ProjectileController {
     public static instance: ProjectileController;
-    public objectPool: ObjectPool;
-    private map: Container;
+
     private projectiles: Projectile[] = [];
+    private damageTexts: DamageText[] = [];
     private target!: Enemy;
 
-    constructor(map: Container) {
-        ProjectileController.instance = this;
-        this.objectPool = new ObjectPool();
-        this.map = map;
+    constructor() {
+        ProjectileController.instance = this
     }
 
 
@@ -31,7 +32,8 @@ export class ProjectileController {
         this.projectiles.push(projectile);
 
         projectile.sprite.zIndex = 100;
-        this.map.addChild(projectile.sprite);
+        EventHandle.emit(GameTypes.event.addChildToMap, (projectile.sprite));
+        //this.map.addChild(projectile.sprite);
     }
 
     removeProjectile(projectileType: string, projectile: Projectile) {
@@ -41,13 +43,22 @@ export class ProjectileController {
             this.projectiles.splice(index, 1);
 
             ObjectPool.instance.returnProjectileToPool(projectileType, projectile);
-            this.map.removeChild(projectile.sprite);
+            EventHandle.emit(GameTypes.event.removeChildFromMap, (projectile.sprite));
+            //this.map.removeChild(projectile.sprite);
         }
     }
 
     update(deltaTime: number) {
         this.projectiles.forEach((projectile) => {
             projectile.update(deltaTime);
+        });
+
+        this.damageTexts = this.damageTexts.filter((damageText) => {
+            const stillAlive = !damageText.update(deltaTime);
+            if (!stillAlive) {
+                damageText.removeFrom();
+            }
+            return stillAlive;
         });
     }
 
@@ -60,13 +71,22 @@ export class ProjectileController {
         impactEffect.loop = false;
         impactEffect.play();
         impactEffect.zIndex = 100;
-        this.map.addChild(impactEffect);
+        EventHandle.emit(GameTypes.event.addChildToMap, (impactEffect));
+        //this.map.addChild(impactEffect);
 
         impactEffect.onFrameChange = () => {
             if (impactEffect.currentFrame === impactEffect.totalFrames - 1) {
                 ObjectPool.instance.returnImpactEffectToPool(projectileType, impactEffect);
-                this.map.removeChild(impactEffect);
+                EventHandle.emit(GameTypes.event.removeChildFromMap, (impactEffect));
+                //this.map.removeChild(impactEffect);
             }
         }
+    }
+
+    // Tạo DamageText tại vị trí enemy khi bị va chạm
+    displayDamage(damage: number, x: number, y: number) {
+        const damageText = new DamageText(damage, x, y);
+        damageText.addTo();
+        this.damageTexts.push(damageText);
     }
 }

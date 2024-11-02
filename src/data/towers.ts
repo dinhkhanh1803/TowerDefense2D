@@ -1,58 +1,60 @@
-import { Tower } from "../models/Tower";
+interface TowerConfig {
+    name: string;
+    damage: number;
+    range: number;
+    fireRate: number;
+    cost: number;
+    projectileType: string;
+}
 
-export const towersData: Tower[] = [
-    new Tower(
-        1,
-        "Archer",
-        5, // Damage
-        100, // Range
-        60, // Fire rate (seconds per shot)
-        80, // Cost
-        "arrow" // Projectile type
-    ),
-    new Tower(
-        2,
-        "Mage",
-        5, // Damage
-        100, // Range
-        60, // Fire rate
-        100, // Cost
-        "magicball" // Projectile type
-    ),
-    new Tower(
-        3,
-        "Fire",
-        5, // Damage
-        120, // Range
-        80, // Fire rate
-        150, // Cost
-        "fireball" // Projectile type
-    ),
-    new Tower(
-        4,
-        "Ice",
-        5, // Damage
-        150, // Range
-        90, // Fire rate
-        200, // Cost
-        "iceshard" // Projectile type
-    ),
-    new Tower(
-        5,
-        "Cannon",
-        7, // Damage
-        170, // Range
-        120, // Fire rate
-        200, // Cost
-        "cannonball" // Projectile type
-    ),
-    new Tower(
-        6,
-        "Tesla",
-        6, // Damage
-        180, // Range
-        100, // Fire rate
-        250, // Cost
-        "lightning" // Projectile type
-    )
+// Tower data without creating actual Tower objects
+export const towersData: TowerConfig[] = [
+    {
+        name: "Archer",
+        damage: 5,
+        range: 100,
+        fireRate: 60,
+        cost: 80,
+        projectileType: "arrow"
+    },
+    {
+        name: "Mage",
+        damage: 5,
+        range: 100,
+        fireRate: 60,
+        cost: 100,
+        projectileType: "magicball"
+    },
+    {
+        name: "Fire",
+        damage: 5,
+        range: 120,
+        fireRate: 80,
+        cost: 150,
+        projectileType: "fireball"
+    },
+    {
+        name: "Ice",
+        damage: 5,
+        range: 150,
+        fireRate: 90,
+        cost: 200,
+        projectileType: "iceshard"
+    },
+    {
+        name: "Cannon",
+        damage: 7,
+        range: 170,
+        fireRate: 120,
+        cost: 200,
+        projectileType: "cannonball"
+    },
+    {
+        name: "Tesla",
+        damage: 6,
+        range: 180,
+        fireRate: 100,
+        cost: 250,
+        projectileType: "lightning"
+    }
 ];

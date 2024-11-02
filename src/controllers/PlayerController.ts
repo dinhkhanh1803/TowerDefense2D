@@ -6,7 +6,7 @@ import { towersData } from "../data/towers";
 import { TowerController } from "./TowerController";
 import { GameBoard } from "../scenes/GameBoard";
 import { Tower } from "../models/Tower";
-import { HUD } from "../scenes/GameScenesHelpers/HUD";
+import { HUD } from "../scenes/Displays/HUD";
 import { EnemyController } from "./EnemyController";
 import { EventHandle } from "../utils/EventHandle";
 
