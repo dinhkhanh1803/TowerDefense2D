@@ -9,6 +9,8 @@ import { Tower } from "../models/Tower";
 import { HUD } from "../scenes/Displays/HUD";
 import { EnemyController } from "./EnemyController";
 import { EventHandle } from "../utils/EventHandle";
+import { MapScene } from "../scenes/MapScene";
+import { Game } from "../game";
 
 export class PlayerController {
     public static instance: PlayerController;
@@ -20,9 +22,9 @@ export class PlayerController {
         PlayerController.instance = this;
         this.currentWave = 0;
 
-        const levelData = levels.find(lv => lv.id == idLevel);
+        const levelData = levels.find(lv => lv.levelNumber == idLevel);
         if (levelData) {
-            this.player = new Player(levelData.id, levelData.name, levelData.resources.gold, levelData.resources.health, levelData.waves.length);
+            this.player = new Player(levelData.resources.gold, levelData.resources.health, levelData.waves.length);
         }
     }
 
@@ -68,15 +70,17 @@ export class PlayerController {
 
             if (this.player.health === 0) {
                 this.isGameOver = true;
-                EventHandle.emit('gameResult', false);
+                EventHandle.emit('gameResult', false, this.getHealthPercentage());
             }
         }
     }
 
     checkWin() {
         if (!this.isGameOver && this.getCurrentWave() === this.getWaves()) {
-            if (this.player.health > 0)
-                EventHandle.emit('gameResult', true);
+            if (this.player.health > 0) {
+                Game.instance.currentLevel += 1;
+                EventHandle.emit('gameResult', true, this.getHealthPercentage());
+            }
         }
     }
 
@@ -101,4 +105,7 @@ export class PlayerController {
         return this.currentWave;
     }
 
+    getHealthPercentage(): number {
+        return (this.getHealth() / this.player.maxHealth) * 100;
+    }
 }

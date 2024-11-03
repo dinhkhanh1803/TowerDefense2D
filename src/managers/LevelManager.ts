@@ -13,7 +13,7 @@ export class LevelManager {
     // Phương thức để nạp dữ liệu cấp độ từ levels.ts
     loadLevel(levelId: number) {
         // Tìm cấp độ dựa trên ID
-        const selectedLevel = levels.find(level => level.id === levelId);
+        const selectedLevel = levels.find(level => level.levelNumber === levelId);
         if (selectedLevel) {
             // Gán dữ liệu vào levelData
             this.levelData = selectedLevel as LevelTypes;

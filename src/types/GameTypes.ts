@@ -12,6 +12,7 @@ export namespace GameTypes {
     export const event = {
         addChildToMap: 'add-child-to-scene',
         removeChildFromMap: 'remove-child-from-scene',
+        gameResult: 'gameResult',
         fireBullet: 'fire-bullet',
         createBullet: 'create-bullet',
         removeBullet: 'remove-bullet',

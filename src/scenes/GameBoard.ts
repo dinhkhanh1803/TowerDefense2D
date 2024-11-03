@@ -23,6 +23,7 @@ import { GameTypes } from '../types/GameTypes';
 
 
 export class GameBoard extends Container {
+    public static instance: GameBoard;
     private levelManager: LevelManager;
     private objectPool: ObjectPool;
     private mapContainer: Container;
@@ -39,16 +40,20 @@ export class GameBoard extends Container {
 
 
     private levelId: number;
+    private heroId?: number;
     private levelData: LevelTypes;
-    private isGameOver: boolean = false;
+    public isGameOver: boolean = false;
 
     constructor(levelId: number, heroId?: number) {
         super();
+        GameBoard.instance = this;
+
 
         this.levelId = levelId;
 
         this.mapContainer = new Container();
         this.addChild(this.mapContainer);
+        this._listenEventHandle();
 
         this.objectPool = new ObjectPool();
         this.levelManager = new LevelManager(this.levelId);
@@ -57,15 +62,15 @@ export class GameBoard extends Container {
         this.towerController = new TowerController();
         this.projectileController = new ProjectileController();
         this.enemyController = new EnemyController(this.levelData.map.tiles);
-        this.playerController = new PlayerController(this.levelData.id);
-
+        this.playerController = new PlayerController(this.levelData.levelNumber);
 
         if (heroId) {
+            this.heroId = heroId;
             this.heroController = new HeroController(heroId, this.mapContainer, this.levelData);
         }
 
-        this.mapBuilder = new MapBuilder(this.mapContainer, this.levelData);
-        this.mapBuilder.buildMap();
+        this.mapBuilder = new MapBuilder(this.levelData);
+
         this.skillSystemPannel = new SkillSystemPannel();
         this.addChild(this.skillSystemPannel);
         this.towerSelectionPannel = new TowerSelectionPannel();
@@ -74,23 +79,23 @@ export class GameBoard extends Container {
         this.addChild(this.towerInfoPannel)
         this.headsUpDisplay = new HUD();
         this.addChild(this.headsUpDisplay);
-
-
-        this._useEventEffect();
     }
 
-    private _useEventEffect() {
-        EventHandle.on(GameTypes.event.addChildToMap, (sprite: Sprite | AnimatedSprite | Graphics | Container) => {
-            this.mapContainer.addChild(sprite);
-        });
-        EventHandle.on(GameTypes.event.removeChildFromMap, (sprite: Sprite | AnimatedSprite | Graphics | Container) => {
-            this.mapContainer.removeChild(sprite);
-        });
-        EventHandle.on('gameResult', this.showResult.bind(this));
+    private _listenEventHandle() {
+        if (!this.isGameOver) {
+            EventHandle.on(GameTypes.event.addChildToMap, (sprite: Sprite | AnimatedSprite | Graphics | Container) => {
+                this.mapContainer.addChild(sprite);
+            });
+            EventHandle.on(GameTypes.event.removeChildFromMap, (sprite: Sprite | AnimatedSprite | Graphics | Container) => {
+                this.mapContainer.removeChild(sprite);
+            });
+            EventHandle.on(GameTypes.event.gameResult, this.showResult.bind(this));
+        }
     }
 
-    private showResult(isWin: boolean): void {
-        const resultPanel = new ResultPannel(isWin);
+
+    private showResult(isWin: boolean, healthPercentage: number): void {
+        const resultPanel = new ResultPannel(isWin, healthPercentage, this.levelId);
         this.addChild(resultPanel);
         this.isGameOver = true;
     }
@@ -101,11 +106,9 @@ export class GameBoard extends Container {
             this.enemyController.update(deltaTime);
             this.towerController.update(deltaTime);
             this.projectileController.update(deltaTime);
-            this.heroController.update(deltaTime);
+            if (this.heroId) {
+                this.heroController.update(deltaTime);
+            }
         }
-    }
-
-    private setTitleMap(): number[][] {
-        return this.levelData.map.tiles;
     }
 }

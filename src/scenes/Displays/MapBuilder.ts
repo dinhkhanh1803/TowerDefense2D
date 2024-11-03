@@ -5,14 +5,17 @@ import { LevelTypes } from "../../types/LevelTypes";
 import { EnemyController } from "../../controllers/EnemyController";
 import { EventHandle } from "../../utils/EventHandle";
 import { SkillSystemPannel } from "../SkillSystemPannel";
+import { GameTypes } from "../../types/GameTypes";
+import { GameBoard } from "../GameBoard";
+import AssetLoad from "../../utils/AssetLoad";
 
 export class MapBuilder {
-    private mapContainer: Container;
     private levelData: LevelTypes;
 
-    constructor(mapContainer: Container, levelData: LevelTypes) {
-        this.mapContainer = mapContainer;
+    constructor(levelData: LevelTypes) {
         this.levelData = levelData;
+
+        this.buildMap();
     }
 
     public buildMap(): void {
@@ -51,10 +54,11 @@ export class MapBuilder {
         grap.fill(0x72BF78);
         grap.interactive = true;
         grap.on('pointerdown', () => {
+            if (GameBoard.instance.isGameOver) return;
             TowerSelectionPannel.instance.visible = false;
             TowerInfoPannel.instance.visible = false;
         });
-        this.mapContainer.addChild(grap);
+        EventHandle.emit(GameTypes.event.addChildToMap, (grap));
     }
 
     private createPathTile(x: number, y: number) {
@@ -63,6 +67,7 @@ export class MapBuilder {
         grap.fill(0xF6EFBD);
         grap.interactive = true;
         grap.on('pointerdown', () => {
+            if (GameBoard.instance.isGameOver) return;
             TowerSelectionPannel.instance.visible = false;
             TowerInfoPannel.instance.visible = false;
 
@@ -70,7 +75,7 @@ export class MapBuilder {
                 EventHandle.emit('postion_click', x, y);
             }
         });
-        this.mapContainer.addChild(grap);
+        EventHandle.emit(GameTypes.event.addChildToMap, (grap));
     }
 
     private createTowerTile(x: number, y: number) {
@@ -82,17 +87,17 @@ export class MapBuilder {
         slotTowerSprite.cursor = 'pointer';
 
         slotTowerSprite.on('pointerdown', () => {
+            if (GameBoard.instance.isGameOver) return;
             TowerSelectionPannel.instance.slotTower = slotTowerSprite;
             TowerSelectionPannel.instance.menuTower();
         });
-
-        this.mapContainer.addChild(slotTowerSprite);
+        EventHandle.emit(GameTypes.event.addChildToMap, (slotTowerSprite));
     }
 
     // Tạo nút Start Spawn tại vị trí cụ thể
     private createStartSpawnTile(x: number, y: number): void {
-        const spawnButton = new Sprite(Texture.from('slot_tower'));
-
+        const spawnButton = new Sprite(AssetLoad.getTexture('btn_about'));
+        spawnButton.scale.set(0.8);
         spawnButton.position.set(x, y);
         spawnButton.interactive = true;
         spawnButton.eventMode = 'static';
@@ -102,7 +107,6 @@ export class MapBuilder {
             EnemyController.instance.spawnEnemyFromLevel(this.levelData);
             spawnButton.visible = false;
         });
-
-        this.mapContainer.addChild(spawnButton);
+        EventHandle.emit(GameTypes.event.addChildToMap, (spawnButton));
     }
 }

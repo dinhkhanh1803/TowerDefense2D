@@ -2,8 +2,8 @@
 
 // Xuất interface LevelData để các file khác có thể import
 export interface LevelTypes {
-    id: number;
-    name: string;
+    levelNumber: number;
+    nameMap: string;
     difficulty: string;
     map: {
         tiles: number[][];

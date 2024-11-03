@@ -2,22 +2,22 @@ import { EventHandle } from "../utils/EventHandle";
 import { Hero } from "./Hero";
 
 export class Player {
-    id: number;            // ID của người chơi
-    name: string;          // Tên người chơi
-    level: number;         // Cấp độ người chơi
-    experience: number;    // Điểm kinh nghiệm hiện tại
-    heroes: Hero[];        // Danh sách các hero mà người chơi sở hữu
-    coin: number;   // Tài nguyên mà người chơi có (ví dụ: vàng, năng lượng)
+    level: number;
+    experience: number;
+    heroes: Hero[];
+    coin: number;
     health: number;
+    maxHealth: number;
     wave: number;
-    constructor(id: number, name: string, coin: number, health: number, wave: number) {
-        this.id = id;
-        this.name = name;
+
+
+    constructor(coin: number, health: number, wave: number) {
         this.level = 1;
         this.experience = 0;
         this.heroes = [];
         this.coin = coin;
         this.health = health;
+        this.maxHealth = health;
         this.wave = wave;
     }
 

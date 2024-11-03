@@ -1,88 +1,96 @@
-import { Container, Text, Graphics } from 'pixi.js';
+import { Container, Text, Graphics, Sprite } from 'pixi.js';
 import { EventHandle } from '../../utils/EventHandle';
 import { Game } from '../../game';
+import AssetLoad from '../../utils/AssetLoad';
+import { GameTypes } from '../../types/GameTypes';
 
 export class ResultPannel extends Container {
-    private background: Graphics;
-    private resultText: Text;
-    private scoreText: Text;
-    private retryButton: Graphics;
-    private exitButton: Graphics;
+    private showPanel: Container;
+    private levelId: number;
 
-
-    constructor(isWin: boolean) {
+    constructor(isWin: boolean, healthPercentage: number, level: number) {
         super();
+        this.levelId = level;
 
+        this.showPanel = new Container();
 
         // Tạo background cho bảng kết quả
-        this.background = new Graphics();
-        this.background.fill(0x000000);
-        this.background.rect(0, 0, 400, 300); // Kích thước 400x300
-        this.background.alpha = 0.8;
-        this.background.x = 300;
-        this.background.y = 200;
-        this.background.pivot.set(.5);
-        this.addChild(this.background);
+        const texture = isWin ? 'vitory_ui' : 'lost_ui';
+        const virorySprite = this.createResultPanel(650, 430, texture);
+        this.showPanel.addChild(virorySprite);
 
-        // Tạo Text hiển thị kết quả (Win/Lose)
-        const resultMessage = isWin ? "You Win!" : "Game Over";
-        this.resultText = new Text(resultMessage, { fontSize: 36, fill: 0xffffff });
-        this.resultText.anchor.set(0.5);
-        this.resultText.x = this.background.x + 200;
-        this.resultText.y = this.background.y + 50;
-        this.addChild(this.resultText);
+        // Tạo button
+        const restartBtn = this.createButton(200, 80, 350, 450, 'restart-btn');
+        restartBtn.on('pointerdown', this.onRetry);
+        const closeBtn = this.createButton(200, 80, 650, 450, 'maplevel-btn');
+        closeBtn.on('pointerdown', this.onExit);
 
-        // Hiển thị số điểm
-        this.scoreText = new Text(`Score: 3 sao`, { fontSize: 24, fill: 0xffffff });
-        this.scoreText.anchor.set(0.5);
-        this.scoreText.x = this.background.x + 200;
-        this.scoreText.y = this.background.y + 120;
-        this.addChild(this.scoreText);
+        //Tao star
+        const starDis = this.starDisplay(400, 110, healthPercentage);
+        this.showPanel.addChild(starDis);
 
-        // Nút "Retry"
-        this.retryButton = new Graphics();
-        this.retryButton.beginFill(0x00FF00); // Màu xanh lá cây
-        this.retryButton.drawRoundedRect(0, 0, 150, 50, 10); // Kích thước 150x50
-        this.retryButton.endFill();
-        this.retryButton.x = this.background.x + 50;
-        this.retryButton.y = this.background.y + 200;
-        this.retryButton.interactive = true;
-        this.retryButton.eventMode = 'static';
-        this.retryButton.on('pointerdown', this.onRetry);
-        this.addChild(this.retryButton);
 
-        const retryText = new Text("Retry", { fontSize: 20, fill: 0xffffff });
-        retryText.anchor.set(0.5);
-        retryText.x = this.retryButton.x + 75;
-        retryText.y = this.retryButton.y + 25;
-        this.addChild(retryText);
+        this.showPanel.addChild(restartBtn);
+        this.showPanel.addChild(closeBtn);
 
-        // Nút "Exit"
-        this.exitButton = new Graphics();
-        this.exitButton.fill(0xFF0000); // Màu đỏ
-        this.exitButton.rect(0, 0, 150, 50); // Kích thước 150x50
-        this.exitButton.x = this.background.x + 210;
-        this.exitButton.y = this.background.y + 200;
-        this.exitButton.interactive = true;
-        this.exitButton.eventMode = 'static';
-        this.exitButton.on('pointerdown', this.onExit);
-        this.addChild(this.exitButton);
+        this.showPanel.position.set(this.width / 2, this.height / 2);
+        this.addChild(this.showPanel);
 
-        const exitText = new Text("Exit", { fontSize: 20, fill: 0xffffff });
-        exitText.anchor.set(0.5);
-        exitText.x = this.exitButton.x + 75;
-        exitText.y = this.exitButton.y + 25;
-        this.addChild(exitText);
+    }
+
+    private starDisplay(x: number, y: number, healthPercentage: number): Container {
+        const starContainer = new Container();
+        const star1 = new Sprite(AssetLoad.getTexture('star_1'));
+        star1.position.set(x - 5, y);
+        const star2 = new Sprite(AssetLoad.getTexture('star_2'));
+        star2.position.set(x + 145, y);
+        const star3 = new Sprite(AssetLoad.getTexture('star_3'));
+        star3.position.set(x + 65, y);
+
+
+        // Hiển thị số sao dựa trên phần trăm máu còn lại
+        if (healthPercentage >= 99) {
+            starContainer.addChild(star1, star2, star3); // 3 sao
+        } else if (healthPercentage < 99 && healthPercentage > 33) {
+            starContainer.addChild(star1, star3); // 2 sao
+        } else if (healthPercentage <= 33) {
+            starContainer.addChild(star1); // 1 sao
+        }
+
+        return starContainer;
     }
 
     private onRetry = () => {
         console.log('Retry clicked');
-        Game.instance.reloadGameScene();
+        Game.instance.reloadGameScene(this.levelId);
     };
 
     private onExit = () => {
         // Logic để thoát game hoặc quay lại menu chính
         console.log("Exit clicked");
-        this.emit("exit"); // Gửi sự kiện exit để GameScene lắng nghe
+        Game.instance.loadMapLevel();
     };
+
+    private createResultPanel(w: number, h: number, texture: string): Sprite {
+        const bgSprite = new Sprite(AssetLoad.getTexture(texture));
+        bgSprite.x = GameTypes.MAP_WIDTH / 2;
+        bgSprite.y = GameTypes.MAP_HEIGHT / 2;
+        bgSprite.width = w;
+        bgSprite.height = h;
+        bgSprite.anchor.set(0.5);
+        return bgSprite;
+    }
+
+    private createButton(w: number, h: number, x: number, y: number, texture: string): Sprite {
+        const button = new Sprite(AssetLoad.getTexture(texture));
+        button.x = x;
+        button.y = y;
+        button.width = w;
+        button.height = h;
+        button.anchor.set(0.5);
+        button.interactive = true;
+        button.eventMode = 'static';
+        button.cursor = 'pointer';
+        return button;
+    }
 }

@@ -3,16 +3,8 @@
     "name": "load-atlas",
     "assets": [
       {
-        "alias": "enemy1",
-        "src": "./atlas/images/Bandit.png"
-      },
-      {
-        "alias": "enemy2",
-        "src": "./atlas/images/Goblin.png"
-      },
-      {
-        "alias": "enemy3",
-        "src": "./atlas/images/Ogre.png"
+        "alias": "maplevel_bg",
+        "src": "./atlas/images/maplevel_bg.png"
       },
       {
         "alias": "slot_tower",

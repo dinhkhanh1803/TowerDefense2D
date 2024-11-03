@@ -2,6 +2,7 @@ import { Container, Graphics, Sprite, Texture, Text } from "pixi.js";
 import { Tower } from "../models/Tower";
 import { PlayerController } from "../controllers/PlayerController";
 import { TowerSelectionPannel } from "./TowerSelectionPannel";
+import AssetLoad from "../utils/AssetLoad";
 
 
 export class TowerInfoPannel extends Container {
@@ -17,7 +18,7 @@ export class TowerInfoPannel extends Container {
     infoTower(tower: Tower) {
         TowerSelectionPannel.instance.visible = false;
         this.visible = true;
-        this.towerRange.texture = Texture.from('range_tower');
+        this.towerRange.texture = AssetLoad.getTexture('range_tower');
         this.towerRange.anchor.set(0.5);
         this.towerRange.position.set(tower.sprite.x + 32, tower.sprite.y + 32);
         this.towerRange.width = tower.range * 2;
