@@ -16,7 +16,9 @@ import AssetLoad from './utils/AssetLoad';
 
 
     await Assets.init({ manifest: { bundles } });
-    await Assets.loadBundle('load-atlas');
+    await Assets.loadBundle('load-maps');
+    await Assets.loadBundle('load-uis');
+
 
     //load atlas
     await AssetLoad.loadAtlas([
@@ -31,14 +33,17 @@ import AssetLoad from './utils/AssetLoad';
         './atlas/fonts/ShinyPeaberry.fnt',
         './atlas/fonts/ShinyPeaberry.xml',
         './atlas/fonts/RedPeaberry.fnt',
-        './atlas/fonts/RedPeaberry.xml'
+        './atlas/fonts/RedPeaberry.xml',
+        './atlas/fonts/GoldPeaberry.fnt',
+        './atlas/fonts/GoldPeaberry.xml'
     ]);
 
     await AssetLoad.loadAnimations([
         './atlas/enemies_atlas.json',
         './atlas/weapons_atlas.json',
         './atlas/impacts_atlas.json',
-        './atlas/projectiles_atlas.json'
+        './atlas/projectiles_atlas.json',
+        './atlas/heros_atlas.json'
     ]);
 
 

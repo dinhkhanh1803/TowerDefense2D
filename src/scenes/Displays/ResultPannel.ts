@@ -53,7 +53,7 @@ export class ResultPannel extends Container {
             starContainer.addChild(star1, star2, star3); // 3 sao
         } else if (healthPercentage < 99 && healthPercentage > 33) {
             starContainer.addChild(star1, star3); // 2 sao
-        } else if (healthPercentage <= 33) {
+        } else if (healthPercentage > 0 && healthPercentage <= 33) {
             starContainer.addChild(star1); // 1 sao
         }
 

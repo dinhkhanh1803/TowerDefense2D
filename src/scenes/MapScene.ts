@@ -7,23 +7,35 @@ import { Game } from "../game";
 
 export class MapScene extends Container {
     public static instance: MapScene;
-    private bachground: Sprite;
+    private background: Sprite;
     public currentLevel: number;
+    private finger: Sprite;
+    private fingerOffset: number;
 
     constructor(currentLevel: number) {
         super();
         MapScene.instance = this;
 
         this.currentLevel = currentLevel;
-        this.bachground = new Sprite(Texture.from('maplevel_bg'));
-        this.bachground.anchor.set(0.5);
-        this.bachground.width = GameTypes.GAME_WIDTH;
-        this.bachground.height = GameTypes.GAME_HEIGHT;
-        this.bachground.x = GameTypes.GAME_WIDTH / 2;
-        this.bachground.y = GameTypes.GAME_HEIGHT / 2;
-        this.addChild(this.bachground);
+
+        this.background = new Sprite(Texture.from('maplevel_bg'));
+        this.background.anchor.set(0.5);
+        this.background.width = GameTypes.GAME_WIDTH;
+        this.background.height = GameTypes.GAME_HEIGHT;
+        this.background.x = GameTypes.GAME_WIDTH / 2;
+        this.background.y = GameTypes.GAME_HEIGHT / 2;
+        this.addChild(this.background);
 
         this.loadLevel();
+
+        // Khởi tạo ngón tay
+        this.finger = new Sprite(AssetLoad.getTexture('finger')); // Thay 'finger' bằng tên texture của ngón tay
+        this.finger.anchor.set(0.5);
+        this.finger.position.set((this.currentLevel - 1) * 170 + 170, 350); // Điều chỉnh vị trí ngón tay
+        this.addChild(this.finger);
+
+        this.fingerOffset = 0; // Bắt đầu không có offset
+        this.animateFinger();
     }
 
     private loadLevel() {
@@ -64,5 +76,16 @@ export class MapScene extends Container {
     // Giả sử có hàm này để chọn map
     selectMap(levelId: number) {
         Game.instance.loadGameScene(levelId)
+    }
+
+    private animateFinger() {
+        // Hàm này sẽ di chuyển ngón tay lên xuống
+        const up = () => {
+            this.fingerOffset = Math.sin(Date.now() / 500) * 10; // Điều chỉnh độ cao
+            this.finger.position.y = 350 + this.fingerOffset; // Cập nhật vị trí ngón tay
+            requestAnimationFrame(up); // Gọi lại hàm để tiếp tục animation
+        };
+
+        up(); // Bắt đầu animation
     }
 }

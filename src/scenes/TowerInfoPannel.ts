@@ -1,4 +1,4 @@
-import { Container, Graphics, Sprite, Texture, Text } from "pixi.js";
+import { Container, Graphics, Sprite, Texture, Text, BitmapText, TextStyle } from "pixi.js";
 import { Tower } from "../models/Tower";
 import { PlayerController } from "../controllers/PlayerController";
 import { TowerSelectionPannel } from "./TowerSelectionPannel";
@@ -25,22 +25,20 @@ export class TowerInfoPannel extends Container {
         this.towerRange.height = tower.range * 2;
         this.addChild(this.towerRange);
 
-        const grapbg = new Graphics();
-        grapbg.rect(0, 640, 1024, 160);
-        grapbg.fill(0x77CDFF);
-        this.addChild(grapbg);
+        const uiBoard = new Sprite(Texture.from('UI_board_info'));
+        uiBoard.position.set(0, 640);
+        this.addChild(uiBoard);
 
-        const infoText = new Text(`Tower: ${tower.name}\nLevel: ${tower.level}\nDamage: ${tower.damage}\nFireRate: ${tower.fireRate}\nCost: ${tower.cost}\nRange: ${tower.range}`, {
-            fontFamily: 'Arial',
-            fontSize: 16,
-            fill: 0x000000,
-        });
-        infoText.position.set(50, 650);
-        this.addChild(infoText);
+        const imageTower = new Sprite(AssetLoad.getTexture(`${tower.name}_0${tower.level}`));
+        imageTower.scale.set(2);
+        imageTower.anchor.set(0.5);
+        imageTower.position.set(150, 710);
+        this.addChild(imageTower);
 
-        const upgradeTowerBtn = new Graphics();
-        upgradeTowerBtn.rect(500, 650, 200, 50);
-        upgradeTowerBtn.fill(0xFFBD73);
+        const nameTower = this.createText(220, 650, `${tower.name}`, 32, 'ShinyPeaberry');
+        this.addChild(nameTower);
+
+        const upgradeTowerBtn = this.createBtn(700, 690, 'upgrade_btn');
         upgradeTowerBtn.interactive = true;
         upgradeTowerBtn.cursor = 'pointer';
         upgradeTowerBtn.on('pointerdown', () => {
@@ -49,9 +47,12 @@ export class TowerInfoPannel extends Container {
         });
         this.addChild(upgradeTowerBtn);
 
-        const removeTowerBtn = new Graphics();
-        removeTowerBtn.rect(500, 720, 200, 50);
-        removeTowerBtn.fill(0xFFCFB3);
+        let fontCost = tower.cost <= PlayerController.instance.getGold() ? 'GoldPeaberry' : 'RedPeaberry';
+        let towerCostTxt = tower.level < 3 ? tower.cost.toString() : 'Max';
+        const costUpgradeTxt = this.createText(695, 665, towerCostTxt, 24, fontCost);
+        this.addChild(costUpgradeTxt);
+
+        const removeTowerBtn = this.createBtn(700, 750, 'sell_btn');
         removeTowerBtn.interactive = true;
         removeTowerBtn.cursor = 'pointer';
         removeTowerBtn.on('pointerdown', () => {
@@ -60,6 +61,31 @@ export class TowerInfoPannel extends Container {
             this.visible = false;
         });
         this.addChild(removeTowerBtn);
+
+        let towerSellTxt = Math.round(tower.cost * 0.8);
+        const costSellTxt = this.createText(695, 725, towerSellTxt.toString(), 24, 'GoldPeaberry');
+        this.addChild(costSellTxt);
     }
 
+    private createText(x: number, y: number, text: string, fontSize: number, fontFamily: string): BitmapText {
+        const textTxt = new BitmapText({
+            text: text,
+            style: {
+                fontFamily: fontFamily,
+                fontSize: fontSize,
+                align: 'center',
+            }
+        });
+
+        textTxt.position.set(x, y);
+        return textTxt;
+    }
+
+    private createBtn(x: number, y: number, texture: string): Sprite {
+        const btn = new Sprite(AssetLoad.getTexture(texture));
+        btn.position.set(x, y);
+        btn.scale.set(0.8);
+        btn.anchor.set(0.5);
+        return btn;
+    }
 }

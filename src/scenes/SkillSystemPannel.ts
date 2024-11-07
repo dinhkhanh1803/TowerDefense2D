@@ -1,6 +1,7 @@
 import { Container, Graphics, Sprite, Texture } from "pixi.js";
 import { EventHandle } from "../utils/EventHandle";
 import { HeroController } from "../controllers/HeroController";
+import AssetLoad from "../utils/AssetLoad";
 
 export class SkillSystemPannel extends Container {
     public static instance: SkillSystemPannel;
@@ -10,7 +11,7 @@ export class SkillSystemPannel extends Container {
     constructor() {
         super();
         SkillSystemPannel.instance = this;
-        this.avtHero = new Sprite(Texture.from('Archer_02'));
+        this.avtHero = new Sprite(AssetLoad.getTexture('avatar_selected'));
         this.avtHero.anchor.set(0.5);
 
 

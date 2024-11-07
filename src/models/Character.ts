@@ -41,7 +41,7 @@ export abstract class Character {
         this.healthBar = new Container();
         this.healthBar.pivot.set(0.5);
 
-        this.spriteAni = new AnimatedSprite(AssetLoad.getAnimation('Boss_move_down'));
+        this.spriteAni = new AnimatedSprite(AssetLoad.getAnimation(`hero1_move_down`));
         this.initSpriteAnimation();
         this.setHealthBar();
         this.sprite.addChild(this.healthBar);
@@ -104,7 +104,7 @@ export abstract class Character {
     private initSpriteAnimation() {
         this.spriteAni.anchor.set(0.5);
         this.spriteAni.animationSpeed = 0.1;
-        this.spriteAni.play();
+        //this.spriteAni.play();
         this.sprite.addChild(this.spriteAni);
     }
 

@@ -1,18 +1,55 @@
 [
   {
-    "name": "load-atlas",
+    "name": "load-maps",
     "assets": [
       {
         "alias": "maplevel_bg",
-        "src": "./atlas/images/maplevel_bg.png"
+        "src": "./atlas/images/map_levels/maplevel_bg.png"
       },
       {
-        "alias": "slot_tower",
-        "src": "./atlas/images/slot_tower.png"
+        "alias": "bg_load",
+        "src": "./atlas/images/map_levels/bg_load.png"
       },
       {
-        "alias": "range_tower",
-        "src": "./atlas/images/range.png"
+        "alias": "load_map_01",
+        "src": "./atlas/images/map_levels/map_level_01.png"
+      },
+      {
+        "alias": "load_map_02",
+        "src": "./atlas/images/map_levels/map_level_02.png"
+      },
+      {
+        "alias": "load_map_03",
+        "src": "./atlas/images/map_levels/map_level_03.png"
+      },
+      {
+        "alias": "load_map_04",
+        "src": "./atlas/images/map_levels/map_level_04.png"
+      },
+      {
+        "alias": "load_map_05",
+        "src": "./atlas/images/map_levels/map_level_05.png"
+      }
+    ]
+  },
+  {
+    "name": "load-uis",
+    "assets": [
+      {
+        "alias": "UI_board_menu",
+        "src": "./atlas/images/uis/UI_board_menu.png"
+      },
+      {
+        "alias": "UI_board_info",
+        "src": "./atlas/images/uis/UI_board_info.png"
+      },
+      {
+        "alias": "loading_bar_bg",
+        "src": "./atlas/images/uis/loading_bar_bg.png"
+      },
+      {
+        "alias": "loading_bar_fill",
+        "src": "./atlas/images/uis/loading_bar_fill.png"
       }
     ]
   }

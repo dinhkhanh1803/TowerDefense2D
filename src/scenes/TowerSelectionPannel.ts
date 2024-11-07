@@ -1,40 +1,48 @@
+import { LevelTypes } from './../types/LevelTypes';
 import { towersData } from './../data/towers';
-import { BitmapText, Container, Graphics, Sprite } from "pixi.js";
+import { BitmapText, Container, Graphics, Sprite, Texture } from "pixi.js";
 import { TowerType } from "../types/TowerType";
 import AssetLoad from "../utils/AssetLoad";
 import { PlayerController } from "../controllers/PlayerController";
 import { TowerInfoPannel } from "./TowerInfoPannel";
+import { levels } from '../data/levels';
 
 export class TowerSelectionPannel extends Container {
     public static instance: TowerSelectionPannel;
     public slotTower!: Sprite;
+    private typeTower: TowerType[];
 
-    constructor() {
+    constructor(dataTower: TowerType[]) {
         super();
         TowerSelectionPannel.instance = this;
         this.visible = false;
+
+        this.typeTower = dataTower;
     }
 
     menuTower() {
         TowerInfoPannel.instance.visible = false;
         this.visible = true;
 
-        const grapbg = new Graphics();
-        grapbg.rect(0, 640, 1024, 160);
-        grapbg.fill(0xFEF9F2);
-        this.addChild(grapbg);
+        const uiBoard = new Sprite(Texture.from('UI_board_menu'));
+        uiBoard.position.set(0, 640);
+        this.addChild(uiBoard);
 
-        const towerType: TowerType[] = [TowerType.Archer, TowerType.Mage, TowerType.Fire, TowerType.Ice, TowerType.Cannon, TowerType.Tesla];
+
+
+
         const startX = 50;
-        const startY = 660;
+        const startY = 650;
         const cardSpacing = 20;
 
-        for (let i = 0; i < towerType.length; i++) {
+        for (let i = 0; i < this.typeTower.length; i++) {
+            const type = this.typeTower[i];
             const cardX = startX + i * (100 + cardSpacing);
             const cardY = startY;
-            const card = this.createCardTower(towerType[i], cardX, cardY);
+            const card = this.createCardTower(type, cardX, cardY);
             this.addChild(card);
         }
+
     }
 
     createCardTower(type: TowerType, x: number, y: number): Container {

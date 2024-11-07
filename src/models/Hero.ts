@@ -1,17 +1,23 @@
-import { Sprite, Texture } from 'pixi.js';
+import { AnimatedSprite, PointData, Sprite, Texture } from 'pixi.js';
 import { Skill } from "./Skill";
 import { Enemy } from './Enemy';
 import { bfsPathfinding } from '../utils/BfsPathfinding';
 import { Character } from './Character';
+import AssetLoad from '../utils/AssetLoad';
 
 export class Hero extends Character {
-    private attackRadius: number
+    public attackRadius: number
     private mp: number;
     private maxMp: number;
     private defense: number;
     private skills: Skill[];
-    private target: Enemy[] = [];
-    private isMoving: boolean = false;
+
+    public isMoving: boolean = false;
+
+    public attackDownTextures!: Texture[];
+    public attackLeftTextures!: Texture[];
+    public attackRightTextures!: Texture[];
+    public attackUpTextures!: Texture[];
 
     constructor(id: number, name: string, speed: number, attackRadius: number, maxHp: number, maxMp: number, attackPower: number, defense: number) {
         super(id, name, maxHp, speed, attackPower);
@@ -21,9 +27,7 @@ export class Hero extends Character {
         this.defense = defense;
         this.skills = [];
 
-
         this.sprite.zIndex = 100;
-
     }
 
     spawnPosition(postion: { x: number, y: number }) {
@@ -32,14 +36,14 @@ export class Hero extends Character {
         this.currentPosition = postion;
     }
 
-    setPosition(currentPosition: { x: number, y: number }, targetPosition: { x: number, y: number }, gridMap: number[][]) {
+    public setPosition(currentPosition: { x: number, y: number }, targetPosition: { x: number, y: number }, gridMap: number[][]) {
 
         this.currentPosition = { x: currentPosition.x, y: currentPosition.y };
         this.goalPosition = { x: targetPosition.x, y: targetPosition.y };
-        console.log(this.currentPosition, this.goalPosition);
+
         this.pathfinding = new bfsPathfinding(gridMap);
         const path = this.pathfinding.bfs(this.currentPosition, this.goalPosition);
-        console.log(path);
+
         if (path) {
             this.isMoving = true;
             this.currentPathIndex = 0;
@@ -48,7 +52,7 @@ export class Hero extends Character {
         }
     }
 
-    update(deltaTime: number) {
+    public update(deltaTime: number) {
         if (!this.isMoving || !this.goalPosition) return;
 
         const path = this.pathfinding.bfs(this.currentPosition, this.goalPosition);
@@ -61,31 +65,39 @@ export class Hero extends Character {
 
     private moveAlongPath(path: { x: number, y: number }[], deltaTime: number) {
         const target = path[this.currentPathIndex];
-        const dx = target.x * 64 - this.sprite.x;
-        const dy = target.y * 64 - this.sprite.y;
+        const tileCenterX = (target.x * 64) + (64 / 2);
+        const tileCenterY = (target.y * 64) + (64 / 2);
+        const dx = tileCenterX - this.sprite.x;
+        const dy = tileCenterY - this.sprite.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist > 1) {
             this.sprite.x += (dx / dist) * this.speed * deltaTime;
             this.sprite.y += (dy / dist) * this.speed * deltaTime;
+            this.updateAnimation(dx, dy);
         } else {
+            // Đạt đến mục tiêu hiện tại, chuyển sang điểm tiếp theo
             this.currentPathIndex++;
+
+            // Dừng animation khi đến đích
+            if (this.currentPathIndex >= path.length) {
+                this.isMoving = false;
+                this.spriteAni.gotoAndStop(0);
+            }
         }
     }
 
-    // Hồi máu cho hero
     heal(amount: number): void {
         this.hp = Math.min(this.hp + amount, this.maxHp);
     }
 
-    // Nhận sát thương
-    takeDamage(amount: number): void {
-        const damage = Math.max(amount - this.defense, 0); // Trừ phòng thủ ra khỏi sát thương nhận được
+    private takeDamage(amount: number): void {
+        const damage = Math.max(amount - this.defense, 0);
         super.receiveDamage(damage);
         console.log(`${this.name} nhận ${damage} sát thương, còn ${this.hp} HP.`);
     }
 
-    // Sử dụng kỹ năng
+
     useSkill(skillId: string): void {
         const skill = this.skills.find(s => s.id === skillId);
         if (skill && skill.isReady()) {
@@ -100,8 +112,59 @@ export class Hero extends Character {
         }
     }
 
-    // Thêm kỹ năng vào hero
     addSkill(skill: Skill): void {
         this.skills.push(skill);
+    }
+
+    private updateAnimation(dx: number, dy: number) {
+        let newTexture = this.getTextureBasedOnDirection(dx, dy);
+        if (this.spriteAni.textures !== newTexture) {
+            this.spriteAni.textures = newTexture;
+            this.spriteAni.animationSpeed = 0.1;
+            this.spriteAni.play();
+        }
+    }
+
+    private getTextureBasedOnDirection(dx: number, dy: number): Texture[] {
+        if (Math.abs(dx) > Math.abs(dy)) {
+            return dx > 0 ? this.moveRightTextures : this.moveLeftTextures;
+        }
+        return dy > 0 ? this.moveDownTextures : this.moveUpTextures;
+    }
+
+
+    public attack(enemy: Enemy) {
+        let attackTextures;
+
+        if (this.spriteAni.textures === this.moveDownTextures) {
+            attackTextures = this.attackDownTextures;
+        } else if (this.spriteAni.textures === this.moveLeftTextures) {
+            attackTextures = this.attackLeftTextures;
+        } else if (this.spriteAni.textures === this.moveRightTextures) {
+            attackTextures = this.attackRightTextures;
+        } else if (this.spriteAni.textures === this.moveUpTextures) {
+            attackTextures = this.attackUpTextures;
+        }
+
+        if (attackTextures) {
+            this.spriteAni.textures = attackTextures;
+        }
+
+        if (this.checkInRange(enemy.getUpdatePositionEnemy()) && !this.spriteAni.playing) {
+            this.spriteAni.play();
+
+            this.spriteAni.onFrameChange = (currentFrame: number) => {
+                if (currentFrame === this.spriteAni.totalFrames - 1) {
+                    enemy.takeDamage(enemy.id, this.damage);
+
+                    this.spriteAni.gotoAndStop(0);
+                }
+            };
+        }
+    }
+
+    public checkInRange(enemiesPos: PointData): boolean {
+        const distance = Math.sqrt(Math.pow(enemiesPos.x - this.sprite.x + 32, 2) + Math.pow(enemiesPos.y - this.sprite.y + 32, 2));
+        return distance <= this.attackRadius;
     }
 }

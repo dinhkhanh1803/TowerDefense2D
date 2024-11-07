@@ -1,5 +1,7 @@
 // src/types/LevelData.ts
 
+import { TowerType } from "./TowerType";
+
 // Xuất interface LevelData để các file khác có thể import
 export interface LevelTypes {
     levelNumber: number;
@@ -16,7 +18,7 @@ export interface LevelTypes {
     }>;
     spawnInterval: number;
     waveInterval: number;
-    towersAvailable: Array<{ type: string; count: number }>;
+    towersAvailable: TowerType[];
     resources: {
         gold: number;
         health: number;

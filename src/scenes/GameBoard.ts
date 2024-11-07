@@ -73,7 +73,7 @@ export class GameBoard extends Container {
 
         this.skillSystemPannel = new SkillSystemPannel();
         this.addChild(this.skillSystemPannel);
-        this.towerSelectionPannel = new TowerSelectionPannel();
+        this.towerSelectionPannel = new TowerSelectionPannel(this.levelData.towersAvailable);
         this.addChild(this.towerSelectionPannel);
         this.towerInfoPannel = new TowerInfoPannel();
         this.addChild(this.towerInfoPannel)

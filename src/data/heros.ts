@@ -19,7 +19,7 @@ export const herosData: HeroConfig[] = [
         attackRange: 100,
         maxHealth: 100,
         maxMana: 50,
-        attackPower: 20,
+        attackPower: 2,
         defense: 5
     },
     {

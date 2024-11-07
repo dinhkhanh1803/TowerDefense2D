@@ -15,14 +15,16 @@ import { Game } from "../game";
 export class PlayerController {
     public static instance: PlayerController;
     private player!: Player;
+    private currentLevel: number;
     private currentWave: number;
     private isGameOver: boolean = false;
 
     constructor(idLevel: number) {
         PlayerController.instance = this;
         this.currentWave = 0;
+        this.currentLevel = idLevel;
 
-        const levelData = levels.find(lv => lv.levelNumber == idLevel);
+        const levelData = levels.find(lv => lv.levelNumber == this.currentLevel);
         if (levelData) {
             this.player = new Player(levelData.resources.gold, levelData.resources.health, levelData.waves.length);
         }
@@ -78,7 +80,7 @@ export class PlayerController {
     checkWin() {
         if (!this.isGameOver && this.getCurrentWave() === this.getWaves()) {
             if (this.player.health > 0) {
-                Game.instance.currentLevel += 1;
+                Game.instance.unlockNextLevel(this.currentLevel);
                 EventHandle.emit('gameResult', true, this.getHealthPercentage());
             }
         }

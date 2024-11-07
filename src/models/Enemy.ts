@@ -3,6 +3,7 @@ import { bfsPathfinding } from "../utils/BfsPathfinding";
 import { EnemyController } from "../controllers/EnemyController";
 import { PlayerController } from "../controllers/PlayerController";
 import { Character } from "./Character";
+import AssetLoad from "../utils/AssetLoad";
 
 export class Enemy extends Character {
 
@@ -19,6 +20,7 @@ export class Enemy extends Character {
     ) {
         super(id, name, maxHp, speed, damage);
         this.reward = reward;
+
 
     }
 

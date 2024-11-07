@@ -1,4 +1,4 @@
-import { Container, Graphics, Sprite, Texture } from "pixi.js";
+import { applyMatrix, Container, Graphics, Sprite, Texture } from "pixi.js";
 import { TowerSelectionPannel } from "../TowerSelectionPannel";
 import { TowerInfoPannel } from "../TowerInfoPannel";
 import { LevelTypes } from "../../types/LevelTypes";
@@ -19,13 +19,16 @@ export class MapBuilder {
     }
 
     public buildMap(): void {
+        const pointX = 1024 / 2;
+        const pointY = 640 / 2;
+        this.loadMapLevel(pointX, pointY, `load_map_0${this.levelData.levelNumber}`);
         this.levelData.map.tiles.forEach((row, rowIndex) => {
             row.forEach((tile, colIndex) => {
                 const x = colIndex * 64;
                 const y = rowIndex * 64;
                 switch (tile) {
                     case 0:
-                        this.createEmptyTile(x, y);
+                        //this.createEmptyTile(x, y);
                         break;
                     case 1:
                         this.createPathTile(x, y);
@@ -46,36 +49,48 @@ export class MapBuilder {
             const y = pointStart[i].y * 64;
             this.createStartSpawnTile(x, y);
         }
+
+        const pointDefense = this.levelData.waves[0].defendPoint;
+        this.createDefenseSprite(pointDefense.x * 64, pointDefense.y * 64);
     }
 
-    private createEmptyTile(x: number, y: number) {
-        const grap = new Graphics();
-        grap.rect(x, y, 64, 64);
-        grap.fill(0x72BF78);
-        grap.interactive = true;
-        grap.on('pointerdown', () => {
+    private loadMapLevel(x: number, y: number, texture: string) {
+        const map = new Sprite(Texture.from(texture));
+        map.anchor.set(0.5);
+        map.position.x = x;
+        map.position.y = y;
+        map.interactive = true;
+        map.eventMode = 'static';
+        map.on('pointerdown', () => {
             if (GameBoard.instance.isGameOver) return;
             TowerSelectionPannel.instance.visible = false;
             TowerInfoPannel.instance.visible = false;
         });
-        EventHandle.emit(GameTypes.event.addChildToMap, (grap));
+        EventHandle.emit(GameTypes.event.addChildToMap, (map));
     }
 
     private createPathTile(x: number, y: number) {
-        const grap = new Graphics();
-        grap.rect(x, y, 64, 64);
-        grap.fill(0xF6EFBD);
-        grap.interactive = true;
-        grap.on('pointerdown', () => {
+        const transparentTexture = Texture.WHITE;
+        const path = new Sprite(transparentTexture);
+
+        path.width = 64;
+        path.height = 64;
+        path.alpha = 0;
+        path.position.set(x, y);
+        path.interactive = true;
+        path.eventMode = 'static';
+
+        path.on('pointerdown', () => {
             if (GameBoard.instance.isGameOver) return;
             TowerSelectionPannel.instance.visible = false;
             TowerInfoPannel.instance.visible = false;
 
             if (SkillSystemPannel.instance.isHeroSelected) {
+                console.log(x, y);
                 EventHandle.emit('postion_click', x, y);
             }
         });
-        EventHandle.emit(GameTypes.event.addChildToMap, (grap));
+        EventHandle.emit(GameTypes.event.addChildToMap, (path));
     }
 
     private createTowerTile(x: number, y: number) {
@@ -94,6 +109,19 @@ export class MapBuilder {
         EventHandle.emit(GameTypes.event.addChildToMap, (slotTowerSprite));
     }
 
+    private createEmptyTile(x: number, y: number) {
+        const grap = new Graphics();
+        grap.rect(x, y, 64, 64);
+        grap.fill(0x72BF78);
+        grap.interactive = true;
+        grap.on('pointerdown', () => {
+            if (GameBoard.instance.isGameOver) return;
+            TowerSelectionPannel.instance.visible = false;
+            TowerInfoPannel.instance.visible = false;
+        });
+        EventHandle.emit(GameTypes.event.addChildToMap, (grap));
+    }
+
     // Tạo nút Start Spawn tại vị trí cụ thể
     private createStartSpawnTile(x: number, y: number): void {
         const spawnButton = new Sprite(AssetLoad.getTexture('btn_about'));
@@ -108,5 +136,14 @@ export class MapBuilder {
             spawnButton.visible = false;
         });
         EventHandle.emit(GameTypes.event.addChildToMap, (spawnButton));
+    }
+
+    private createDefenseSprite(x: number, y: number): void {
+        const defenseSprite = new Sprite(AssetLoad.getTexture('point_defense'));
+        defenseSprite.position.set(x, y);
+        defenseSprite.alpha = 0.8;
+
+
+        EventHandle.emit(GameTypes.event.addChildToMap, (defenseSprite));
     }
 }
