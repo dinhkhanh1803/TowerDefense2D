@@ -1,0 +1,34 @@
+{
+  "resources": [
+    "./sounds/game_sounds.mp3",
+    "./sounds/game_sounds.ogg"
+  ],
+  "spritemap": {
+    "silence": {
+      "start": 0,
+      "end": 1,
+      "loop": true
+    },
+    "battlemusic": {
+      "start": 2,
+      "end": 207.89714285714285,
+      "loop": false
+    },
+    "gamelose": {
+      "start": 209,
+      "end": 214.90367346938774,
+      "loop": false
+    },
+    "gametitle": {
+      "start": 216,
+      "end": 326.55126984126986,
+      "loop": false
+    },
+    "win": {
+      "start": 328,
+      "end": 330.9478458049887,
+      "loop": false
+    }
+  },
+  "autoplay": "bg_loop"
+}

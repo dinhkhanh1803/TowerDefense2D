@@ -14,14 +14,13 @@ export class ProjectileController {
 
     private projectiles: Projectile[] = [];
     private damageTexts: DamageText[] = [];
-    private target!: Enemy;
 
     constructor() {
         ProjectileController.instance = this
     }
 
 
-    createProjectile(tower: Tower, enemy: Enemy) {
+    public createProjectile(tower: Tower, enemy: Enemy) {
         const projectile = ObjectPool.instance.getProjectileFromPool(tower.projectileType);
 
         projectile.sprite.x = tower.weapon.x;
@@ -33,10 +32,9 @@ export class ProjectileController {
 
         projectile.sprite.zIndex = 100;
         EventHandle.emit(GameTypes.event.addChildToMap, (projectile.sprite));
-        //this.map.addChild(projectile.sprite);
     }
 
-    removeProjectile(projectileType: string, projectile: Projectile) {
+    public removeProjectile(projectileType: string, projectile: Projectile) {
         const index = this.projectiles.indexOf(projectile);
 
         if (index !== -1) {
@@ -44,11 +42,10 @@ export class ProjectileController {
 
             ObjectPool.instance.returnProjectileToPool(projectileType, projectile);
             EventHandle.emit(GameTypes.event.removeChildFromMap, (projectile.sprite));
-            //this.map.removeChild(projectile.sprite);
         }
     }
 
-    update(deltaTime: number) {
+    public update(deltaTime: number) {
         this.projectiles.forEach((projectile) => {
             projectile.update(deltaTime);
         });
@@ -62,7 +59,7 @@ export class ProjectileController {
         });
     }
 
-    createImpactEffect(projectileType: string, x: number, y: number) {
+    public createImpactEffect(projectileType: string, x: number, y: number) {
         const impactEffect = ObjectPool.instance.getImpactEffectFromPool(projectileType);
         impactEffect.gotoAndStop(0);
         impactEffect.x = x;
@@ -72,19 +69,17 @@ export class ProjectileController {
         impactEffect.play();
         impactEffect.zIndex = 100;
         EventHandle.emit(GameTypes.event.addChildToMap, (impactEffect));
-        //this.map.addChild(impactEffect);
 
         impactEffect.onFrameChange = () => {
             if (impactEffect.currentFrame === impactEffect.totalFrames - 1) {
                 ObjectPool.instance.returnImpactEffectToPool(projectileType, impactEffect);
                 EventHandle.emit(GameTypes.event.removeChildFromMap, (impactEffect));
-                //this.map.removeChild(impactEffect);
             }
         }
     }
 
     // Tạo DamageText tại vị trí enemy khi bị va chạm
-    displayDamage(damage: number, x: number, y: number) {
+    public displayDamage(damage: number, x: number, y: number) {
         const damageText = new DamageText(damage, x, y);
         damageText.addTo();
         this.damageTexts.push(damageText);

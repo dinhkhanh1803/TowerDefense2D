@@ -4,35 +4,41 @@ import { EventHandle } from './utils/EventHandle';
 import { MapScene } from './scenes/MapScene';
 import { levels } from './data/levels';
 import { LoadingScene } from './scenes/LoadingScrene';
+import { SoundManager } from './managers/SoundManager';
+import { GameSave } from './utils/GameSave';
 
 
 export class Game {
     public static instance: Game;
     private app: Application;
+    private soundManager: SoundManager;
     private allLevels: number;
     public currentLevel: number;
+    private isMute: boolean;
     private levelUnlockStatus: boolean[];
 
 
     constructor(app: Application) {
         Game.instance = this;
         this.app = app;
+        this.soundManager = new SoundManager();
+
         this.allLevels = levels.length;
-        this.currentLevel = 1;
-        this.levelUnlockStatus = Array(this.allLevels).fill(false); // Mặc định tất cả đều khóa
-        this.levelUnlockStatus[0] = true; // Mở khóa cấp độ 1
+        this.currentLevel = GameSave.loadCurrentLevel();
+        this.isMute = GameSave.loadSoundSetting();
+        this.levelUnlockStatus = Array(this.allLevels).fill(false);
+        this.levelUnlockStatus[0] = true;
     }
 
     // Bắt đầu game
     start(): void {
-        this.loadGameScene(1);
+        this.loadAssets();
     }
 
-    loadAssets() {
+    private loadAssets() {
         const loadingScene = new LoadingScene();
         let simulatedProgress = 0;
         this.app.ticker.add((time) => {
-            // Cập nhật giá trị progress để thử nghiệm
             simulatedProgress += 0.01 * time.deltaTime; // Điều chỉnh tốc độ tăng
             loadingScene.progress = Math.min(simulatedProgress, 1); // Đảm bảo progress không vượt quá 1
 
@@ -42,13 +48,16 @@ export class Game {
         this.app.stage.addChild(loadingScene);
     }
 
-    loadMapLevel(): void {
+    public loadMapLevel(): void {
+        EventHandle.emit('scene-changed', 'map-scene');
         const maplevel = new MapScene(this.currentLevel);
         this.app.stage.addChild(maplevel);
     }
 
     // Chuyển đổi sang scene GameScene
     public loadGameScene(levelId: number): void {
+        EventHandle.emit('scene-changed', 'game-scene');
+
         this.app.stage.removeChildren(0);
         const currentScene = new GameBoard(levelId, 1);
         this.app.ticker.add(time => {
@@ -64,8 +73,9 @@ export class Game {
     // Hàm để mở khóa cấp độ tiếp theo
     public unlockNextLevel(currentLevel: number) {
         if (this.currentLevel < this.allLevels && currentLevel === this.currentLevel) {
-            this.levelUnlockStatus[this.currentLevel] = true; // Mở khóa cấp độ tiếp theo
+            this.levelUnlockStatus[this.currentLevel] = true;
             this.currentLevel++;
+            GameSave.saveCurrentLevel(this.currentLevel);
         }
     }
 }

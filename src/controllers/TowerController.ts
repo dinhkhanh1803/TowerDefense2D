@@ -19,7 +19,6 @@ export class TowerController {
         TowerController.instance = this;
     }
 
-
     createTower(towerType: TowerType, baseSprite: Sprite) {
         const tower = ObjectPool.instance.getTowerFromPool(towerType);
 
@@ -28,10 +27,8 @@ export class TowerController {
             tower.reset(towerData.damage, towerData.range, towerData.fireRate, towerData.cost);
         }
 
-
         baseSprite.removeAllListeners();
         EventHandle.emit(GameTypes.event.removeChildFromMap, (baseSprite));
-        //this.map.removeChild(baseSprite);
 
         tower.sprite.texture = AssetLoad.getTexture(`${towerType}_01`);
         tower.sprite.position = baseSprite.position;
@@ -51,7 +48,6 @@ export class TowerController {
         });
         this.towers.push(tower);
         EventHandle.emit(GameTypes.event.addChildToMap, (tower.towerContainer));
-        //this.map.addChild(tower.towerContainer);
     }
 
     removeTower(tower: Tower) {
@@ -62,7 +58,6 @@ export class TowerController {
 
             tower.towerContainer.removeChildren();
             EventHandle.emit(GameTypes.event.removeChildFromMap, (tower.towerContainer));
-            //this.map.removeChild(tower.towerContainer);
             ObjectPool.instance.returnTowerToPool(tower.name, tower);
         }
 
@@ -78,7 +73,6 @@ export class TowerController {
         });
 
         EventHandle.emit(GameTypes.event.addChildToMap, (slotTowerSprite));
-        // this.map.addChild(slotTowerSprite);
     }
 
     upgradeTower(id: number) {

@@ -1,7 +1,8 @@
-import { BitmapText, Container, Sprite, TextStyle, Texture } from "pixi.js";
+import { Assets, BitmapText, Container, Sprite, TextStyle, Texture } from "pixi.js";
 import { GameTypes } from "../types/GameTypes";
 import AssetLoad from "../utils/AssetLoad";
 import { Game } from "../game";
+import { sound } from "@pixi/sound";
 
 export class LoadingScene extends Container {
     private background: Sprite;
@@ -51,7 +52,6 @@ export class LoadingScene extends Container {
         this.startButton.on('pointerdown', () => this.onStartButtonClick());
 
         this.addChild(this.startButton);
-        console.log(this.loadingBarBackground.width);
     }
 
     public update(deltaTime: number) {

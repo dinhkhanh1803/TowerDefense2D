@@ -4,11 +4,15 @@ import { GameTypes } from "../types/GameTypes";
 import AssetLoad from "../utils/AssetLoad";
 import { levels } from "../data/levels";
 import { Game } from "../game";
+import { EventHandle } from "../utils/EventHandle";
+import { GameSave } from "../utils/GameSave";
+import { SoundManager } from "../managers/SoundManager";
 
 export class MapScene extends Container {
     public static instance: MapScene;
     private background: Sprite;
     public currentLevel: number;
+    private soundBtn: Sprite;
     private finger: Sprite;
     private fingerOffset: number;
 
@@ -18,24 +22,39 @@ export class MapScene extends Container {
 
         this.currentLevel = currentLevel;
 
-        this.background = new Sprite(Texture.from('maplevel_bg'));
-        this.background.anchor.set(0.5);
-        this.background.width = GameTypes.GAME_WIDTH;
-        this.background.height = GameTypes.GAME_HEIGHT;
-        this.background.x = GameTypes.GAME_WIDTH / 2;
-        this.background.y = GameTypes.GAME_HEIGHT / 2;
+        this.background = this.loadMapLevel();
         this.addChild(this.background);
+
+        this.soundBtn = SoundManager.instance.getSoundButton();
+        this.addChild(this.soundBtn);
 
         this.loadLevel();
 
-        // Khởi tạo ngón tay
-        this.finger = new Sprite(AssetLoad.getTexture('finger')); // Thay 'finger' bằng tên texture của ngón tay
+        this.finger = new Sprite(AssetLoad.getTexture('finger'));
         this.finger.anchor.set(0.5);
-        this.finger.position.set((this.currentLevel - 1) * 170 + 170, 350); // Điều chỉnh vị trí ngón tay
+        this.finger.position.set((this.currentLevel - 1) * 170 + 170, 350);
         this.addChild(this.finger);
 
-        this.fingerOffset = 0; // Bắt đầu không có offset
+        this.fingerOffset = 0;
         this.animateFinger();
+
+        if (!SoundManager.instance.isMuted) {
+            EventHandle.emit('play-sound', 'game_sound', {
+                sprite: 'gametitle',
+                loop: true,
+                volume: 0.8
+            });
+        }
+    }
+
+    private loadMapLevel(): Sprite {
+        const background = new Sprite(Texture.from('maplevel_bg'));
+        background.anchor.set(0.5);
+        background.width = GameTypes.GAME_WIDTH;
+        background.height = GameTypes.GAME_HEIGHT;
+        background.x = GameTypes.GAME_WIDTH / 2;
+        background.y = GameTypes.GAME_HEIGHT / 2;
+        return background;
     }
 
     private loadLevel() {
@@ -73,8 +92,7 @@ export class MapScene extends Container {
         }
     }
 
-    // Giả sử có hàm này để chọn map
-    selectMap(levelId: number) {
+    public selectMap(levelId: number) {
         Game.instance.loadGameScene(levelId)
     }
 
@@ -88,4 +106,5 @@ export class MapScene extends Container {
 
         up(); // Bắt đầu animation
     }
+
 }

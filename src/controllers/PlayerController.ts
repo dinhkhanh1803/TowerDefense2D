@@ -16,18 +16,21 @@ export class PlayerController {
     public static instance: PlayerController;
     private player!: Player;
     private currentLevel: number;
+    public currentStar: number;
+
     private currentWave: number;
     private isGameOver: boolean = false;
 
     constructor(idLevel: number) {
         PlayerController.instance = this;
-        this.currentWave = 0;
+        this.currentStar = 0;
         this.currentLevel = idLevel;
 
         const levelData = levels.find(lv => lv.levelNumber == this.currentLevel);
         if (levelData) {
             this.player = new Player(levelData.resources.gold, levelData.resources.health, levelData.waves.length);
         }
+        this.currentWave = 0;
     }
 
 

@@ -25,7 +25,7 @@ export class ResultPannel extends Container {
         const closeBtn = this.createButton(200, 80, 650, 450, 'maplevel-btn');
         closeBtn.on('pointerdown', this.onExit);
 
-        //Tao star
+        //Tạo star
         const starDis = this.starDisplay(400, 110, healthPercentage);
         this.showPanel.addChild(starDis);
 
@@ -36,6 +36,21 @@ export class ResultPannel extends Container {
         this.showPanel.position.set(this.width / 2, this.height / 2);
         this.addChild(this.showPanel);
 
+        //tạo sound
+
+        if (isWin) {
+            EventHandle.emit('play-sound', 'game_sound', {
+                sprite: 'win',
+                loop: false,
+                volume: 0.8
+            });
+        } else {
+            EventHandle.emit('play-sound', 'game_sound', {
+                sprite: 'gamelose',
+                loop: false,
+                volume: 0.8
+            });
+        }
     }
 
     private starDisplay(x: number, y: number, healthPercentage: number): Container {
@@ -61,13 +76,10 @@ export class ResultPannel extends Container {
     }
 
     private onRetry = () => {
-        console.log('Retry clicked');
         Game.instance.reloadGameScene(this.levelId);
     };
 
     private onExit = () => {
-        // Logic để thoát game hoặc quay lại menu chính
-        console.log("Exit clicked");
         Game.instance.loadMapLevel();
     };
 

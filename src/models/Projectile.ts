@@ -4,6 +4,7 @@ import AssetLoad from "../utils/AssetLoad";
 import { Enemy } from "./Enemy";
 import { ProjectileController } from "../controllers/ProjectileController";
 import { ObjectPool } from "../utils/ObjectPool";
+import { EventHandle } from "../utils/EventHandle";
 
 export class Projectile {
     id: number;
@@ -86,11 +87,18 @@ export class Projectile {
     private hit(): void {
         const impactX = this.target.sprite.x;
         const impactY = this.target.sprite.y;
+        const targetId = this.target.id;
+        const damage = Math.round(this.damage * (0.8 + Math.random() * 0.4));
 
+        this.target.takeDamage(targetId, damage);
         ProjectileController.instance.createImpactEffect(this.type, impactX, impactY);
-        this.target.takeDamage(this.target.id, this.damage);
+        EventHandle.emit('play-sound', 'effect_sound', {
+            sprite: 'slash',
+            loop: false,
+            volume: 0.8
+        });
 
-        ProjectileController.instance.displayDamage(this.damage, impactX, impactY);
+        ProjectileController.instance.displayDamage(damage, impactX, impactY);
         ProjectileController.instance.removeProjectile(this.type, this);
     }
 }

@@ -57,7 +57,6 @@ export class EnemyController {
         this.enemies.push(enemy);
 
         EventHandle.emit(GameTypes.event.addChildToMap, (enemy.sprite));
-        //this.map.addChild(enemy.sprite);
     }
 
     //xóa enemy khi nó bị tiêu diệt
@@ -66,7 +65,6 @@ export class EnemyController {
         if (index !== -1) {
             this.enemies.splice(index, 1);
             EventHandle.emit(GameTypes.event.removeChildFromMap, (enemy.sprite));
-            //this.map.removeChild(enemy.sprite);
 
             ObjectPool.instance.returnEnemyToPool(enemy.name, enemy);
         }

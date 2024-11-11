@@ -2,60 +2,167 @@ import { Container, Graphics, Sprite, Texture } from "pixi.js";
 import { EventHandle } from "../utils/EventHandle";
 import { HeroController } from "../controllers/HeroController";
 import AssetLoad from "../utils/AssetLoad";
+import { EnemyController } from "../controllers/EnemyController";
+import { GameTypes } from "../types/GameTypes";
 
 export class SkillSystemPannel extends Container {
     public static instance: SkillSystemPannel;
-    isHeroSelected: boolean = false;
-    avtHero: Sprite;
+    public isHeroSelected: boolean = false;
+    public isSkillSelected: boolean = false;
+    private avtHero: Sprite;
+    private avtSkill: Sprite;
+    private avatarSelected: Sprite;
+    private skillSelected: Sprite;
+    private cooldownInProgress: boolean = false;
 
-    constructor() {
+    constructor(idHero?: number) {
         super();
         SkillSystemPannel.instance = this;
-        this.avtHero = new Sprite(AssetLoad.getTexture('avatar_selected'));
+        this.avtHero = new Sprite(AssetLoad.getTexture('hero_avatar'));
+        this.avtSkill = new Sprite(AssetLoad.getTexture('FireRain_A'));
+        this.avatarSelected = new Sprite(AssetLoad.getTexture('avatar_selected'));
+        this.skillSelected = new Sprite(AssetLoad.getTexture('avatar_selected'));
         this.avtHero.anchor.set(0.5);
 
+        this.skillSystem();
 
-        this.SkillSystem();
+        if (idHero) {
+            this.avatarHero(100, 700, 80, 80);
+        }
+
 
         // Lắng nghe sự kiện "postion_click" để di chuyển hero
         EventHandle.on('postion_click', (x: number, y: number) => {
             this.moveHeroTo(x, y);
-            this.resetAvtHero(); // Reset sau khi hero đã được di chuyển
+            this.resetAvtHero();
+        });
+
+        EventHandle.on('postion_skill_click', (x: number, y: number) => {
+            this.createDamageZone(x, y);
+            this.startCooldown();
+            this.resetAvtHero();
         });
     }
 
-    SkillSystem() {
+    private skillSystem() {
         this.visible = true;
         const grapbg = new Graphics();
         grapbg.rect(0, 640, 1024, 160);
         grapbg.fill(0xFEF9F2);
         this.addChild(grapbg);
 
-        this.avatarHero();
+        this.addSkill(900, 700, 80, 80);
     }
 
-    avatarHero() {
-        this.avtHero.x = 50;
-        this.avtHero.y = 700;
-        this.avtHero.width = 80;
-        this.avtHero.height = 80;
-
+    private avatarHero(x: number, y: number, w: number, h: number) {
+        this.avtHero.x = x;
+        this.avtHero.y = y - 2;
+        this.avtHero.width = w;
+        this.avtHero.height = h;
         this.avtHero.interactive = true;
         this.avtHero.cursor = 'pointer';
 
+        this.avatarSelected.x = x;
+        this.avatarSelected.y = y;
+        this.avatarSelected.anchor.set(0.5);
+
         this.avtHero.on('pointerdown', () => {
-            this.isHeroSelected = true;
-            this.avtHero.scale.set(1.5);
+            if (!this.isSkillSelected) {
+                this.isHeroSelected = true;
+                this.isSkillSelected = false;
+                this.addChild(this.avatarSelected);
+                this.removeChild(this.skillSelected);
+            }
         });
         this.addChild(this.avtHero);
     }
 
-    resetAvtHero() {
-        this.isHeroSelected = false;
-        this.avtHero.scale.set(1);
+    private addSkill(x: number, y: number, w: number, h: number) {
+        this.avtSkill.x = x;
+        this.avtSkill.y = y;
+        this.avtSkill.width = w;
+        this.avtSkill.height = h;
+        this.avtSkill.anchor.set(0.5);
+        this.avtSkill.interactive = true;
+        this.avtSkill.cursor = 'pointer';
+
+        this.skillSelected.x = x;
+        this.skillSelected.y = y;
+        this.skillSelected.anchor.set(0.5);
+        this.avtSkill.on('pointerdown', () => {
+            if (!this.isHeroSelected && !this.cooldownInProgress) {
+                this.isSkillSelected = true;
+                this.isHeroSelected = false;
+                this.addChild(this.skillSelected);
+                this.removeChild(this.avatarSelected);
+            }
+        });
+        this.addChild(this.avtSkill);
     }
 
-    moveHeroTo(x: number, y: number) {
+    public resetAvtHero() {
+        this.isHeroSelected = false;
+        this.isSkillSelected = false;
+        this.removeChild(this.avatarSelected);
+        this.removeChild(this.skillSelected);
+
+    }
+
+    private moveHeroTo(x: number, y: number) {
         HeroController.instance.moveToTarget({ x, y });
+    }
+
+    createDamageZone(x: number, y: number) {
+
+        const damageZone = new Sprite(AssetLoad.getTexture('range_tower'));
+        damageZone.x = x;
+        damageZone.y = y;
+        damageZone.width = 150;
+        damageZone.height = 150;
+        damageZone.anchor.set(0.5);
+
+        EventHandle.emit(GameTypes.event.addChildToMap, (damageZone));
+        EventHandle.emit('play-sound', 'effect_sound', {
+            sprite: 'firerain',
+            loop: false,
+            volume: .6
+        });
+
+        // Hàm kiểm tra kẻ địch trong vùng tròn và gây sát thương
+        const damageInterval = setInterval(() => {
+            this.checkEnemiesInZone(damageZone);
+        }, 800); // Cứ mỗi giây sẽ kiểm tra và gây sát thương cho kẻ địch
+
+
+        setTimeout(() => {
+            clearInterval(damageInterval);
+            EventHandle.emit(GameTypes.event.removeChildFromMap, (damageZone));
+        }, 5000);
+
+    }
+
+    checkEnemiesInZone(zone: Sprite) {
+        const enemies = EnemyController.instance.getEnemy();
+        enemies.forEach(enemy => {
+            if (enemy.isAlive) {
+                const distance = Math.sqrt(
+                    Math.pow(enemy.sprite.x - zone.x, 2) + Math.pow(enemy.sprite.y - zone.y, 2)
+                );
+                if (distance <= 100) {
+                    enemy.takeDamage(enemy.id, 5);
+                }
+            }
+        });
+    }
+
+    startCooldown() {
+        this.cooldownInProgress = true;
+
+        this.avtSkill.texture = AssetLoad.getTexture('FireRain_U');
+        setTimeout(() => {
+            this.cooldownInProgress = false;
+
+            this.avtSkill.texture = AssetLoad.getTexture('FireRain_A');
+        }, 10000); // Thời gian hồi chiêu là 10 giây
     }
 }

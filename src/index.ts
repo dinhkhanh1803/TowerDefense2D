@@ -19,7 +19,6 @@ import AssetLoad from './utils/AssetLoad';
     await Assets.loadBundle('load-maps');
     await Assets.loadBundle('load-uis');
 
-
     //load atlas
     await AssetLoad.loadAtlas([
         './atlas/towers_atlas.json',
@@ -45,6 +44,12 @@ import AssetLoad from './utils/AssetLoad';
         './atlas/projectiles_atlas.json',
         './atlas/heros_atlas.json'
     ]);
+
+    await AssetLoad.loadSoundSprite
+        ([
+            { alias: 'game_sound', path: './sounds/game_sounds.json' },
+            { alias: 'effect_sound', path: './sounds/effect_sounds.json' }
+        ]);
 
 
     const game = new Game(app);

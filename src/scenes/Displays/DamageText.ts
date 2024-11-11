@@ -1,14 +1,14 @@
-import { Text, Container } from 'pixi.js';
+import { Text, Container, BitmapText } from 'pixi.js';
 import { EventHandle } from '../../utils/EventHandle';
 import { GameTypes } from '../../types/GameTypes';
 
 export class DamageText {
-    private text: Text;
+    private text: BitmapText;
     private lifetime: number;
     private fadeSpeed: number;
 
     constructor(damage: number, x: number, y: number) {
-        this.text = new Text("- " + damage.toString(), {
+        this.text = new BitmapText("- " + damage.toString(), {
             fontFamily: 'Arial',
             fontSize: 16,
             fill: 0xff0000, // Màu đỏ cho damage text
@@ -19,7 +19,7 @@ export class DamageText {
 
         this.text.x = x;
         this.text.y = y - 15;
-        this.lifetime = 30; // Thời gian tồn tại của text
+        this.lifetime = 20; // Thời gian tồn tại của text
         this.fadeSpeed = 0.01;
     }
 
@@ -35,12 +35,10 @@ export class DamageText {
     // Thêm text vào Container
     addTo() {
         EventHandle.emit(GameTypes.event.addChildToMap, (this.text));
-        //container.addChild(this.text);
     }
 
     // Xóa text khỏi Container
     removeFrom() {
         EventHandle.emit(GameTypes.event.removeChildFromMap, (this.text));
-        //container.removeChild(this.text);
     }
 }

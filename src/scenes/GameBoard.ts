@@ -20,7 +20,7 @@ import { ResultPannel } from './Displays/ResultPannel';
 import { HeroController } from '../controllers/HeroController';
 import { SkillSystemPannel } from './SkillSystemPannel';
 import { GameTypes } from '../types/GameTypes';
-
+import { SoundManager } from '../managers/SoundManager';
 
 export class GameBoard extends Container {
     public static instance: GameBoard;
@@ -48,7 +48,6 @@ export class GameBoard extends Container {
         super();
         GameBoard.instance = this;
 
-
         this.levelId = levelId;
 
         this.mapContainer = new Container();
@@ -71,7 +70,7 @@ export class GameBoard extends Container {
 
         this.mapBuilder = new MapBuilder(this.levelData);
 
-        this.skillSystemPannel = new SkillSystemPannel();
+        this.skillSystemPannel = new SkillSystemPannel(heroId);
         this.addChild(this.skillSystemPannel);
         this.towerSelectionPannel = new TowerSelectionPannel(this.levelData.towersAvailable);
         this.addChild(this.towerSelectionPannel);
@@ -79,6 +78,14 @@ export class GameBoard extends Container {
         this.addChild(this.towerInfoPannel)
         this.headsUpDisplay = new HUD();
         this.addChild(this.headsUpDisplay);
+
+        if (!SoundManager.instance.isMuted) {
+            EventHandle.emit('play-sound', 'game_sound', {
+                sprite: 'battlemusic',
+                loop: true,
+                volume: 0.8
+            });
+        }
     }
 
     private _listenEventHandle() {

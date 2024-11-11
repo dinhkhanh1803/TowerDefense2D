@@ -65,6 +65,7 @@ export class MapBuilder {
             if (GameBoard.instance.isGameOver) return;
             TowerSelectionPannel.instance.visible = false;
             TowerInfoPannel.instance.visible = false;
+            SkillSystemPannel.instance.resetAvtHero();
         });
         EventHandle.emit(GameTypes.event.addChildToMap, (map));
     }
@@ -86,8 +87,11 @@ export class MapBuilder {
             TowerInfoPannel.instance.visible = false;
 
             if (SkillSystemPannel.instance.isHeroSelected) {
-                console.log(x, y);
                 EventHandle.emit('postion_click', x, y);
+            }
+
+            if (SkillSystemPannel.instance.isSkillSelected) {
+                EventHandle.emit('postion_skill_click', x, y);
             }
         });
         EventHandle.emit(GameTypes.event.addChildToMap, (path));
@@ -124,7 +128,7 @@ export class MapBuilder {
 
     // Tạo nút Start Spawn tại vị trí cụ thể
     private createStartSpawnTile(x: number, y: number): void {
-        const spawnButton = new Sprite(AssetLoad.getTexture('btn_about'));
+        const spawnButton = new Sprite(AssetLoad.getTexture('ui-wave'));
         spawnButton.scale.set(0.8);
         spawnButton.position.set(x, y);
         spawnButton.interactive = true;

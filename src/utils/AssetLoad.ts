@@ -23,8 +23,14 @@ export default class AssetLoad {
         }
     }
 
-    static async loadSoundSprite(soundJsonPath: string) {
-        await Assets.load({ alias: "game-sound", src: soundJsonPath });
+    // Hàm để load nhiều sound sprite với alias và đường dẫn
+    static async loadSoundSprite(sounds: { alias: string; path: string }[]) {
+        for (const { alias, path: soundJsonPath } of sounds) {
+            const soundData = await Assets.load({ alias, src: soundJsonPath });
+
+            // Lưu sound sprite vào đối tượng sounds với alias làm key
+            AssetLoad.sounds[alias] = soundData;
+        }
     }
 
     static async loadAnimations(animationFiles: string[]) {

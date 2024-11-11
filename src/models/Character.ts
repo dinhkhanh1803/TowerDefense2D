@@ -110,9 +110,9 @@ export abstract class Character {
 
     private setHealthBar() {
         this.healthBarDown = new Sprite(AssetLoad.getTexture('hpbar_down'));
-        this.healthBarDown.position.set(this.sprite.x - 10, this.sprite.y - 30);
+        this.healthBarDown.position.set(this.sprite.x - 15, this.sprite.y - 35);
         this.healthBarUp = new Sprite(AssetLoad.getTexture('hpbar_up'));
-        this.healthBarUp.position.set(this.sprite.x - 10, this.sprite.y - 30);
+        this.healthBarUp.position.set(this.sprite.x - 15, this.sprite.y - 35);
         this.healthBar.addChild(this.healthBarDown);
         this.healthBar.addChild(this.healthBarUp);
     }

@@ -2,6 +2,7 @@ import { AnimatedSprite, Container, PointData, Sprite, Texture } from "pixi.js";
 import AssetLoad from "../utils/AssetLoad";
 import { Enemy } from "./Enemy";
 import { ProjectileController } from "../controllers/ProjectileController";
+import { EventHandle } from "../utils/EventHandle";
 
 export class Tower {
     id: number;             // ID của tháp
@@ -66,10 +67,10 @@ export class Tower {
         this.level++;
         this.sprite.texture = AssetLoad.getTexture(`${this.name}_0${this.level}`);
         this.weapon.position.y -= 5;
-        this.damage *= 1.2;     // Mỗi lần nâng cấp tăng sát thương 20%
-        this.range *= 1.1;      // Phạm vi tăng 10%
-        this.fireRate *= 1.2;   // Tốc độ bắn tăng (giảm thời gian giữa các lần bắn)
-        this.cost *= 1.5;       // Chi phí tăng theo cấp độ
+        this.damage *= 1.2;
+        this.range *= 1.1;
+        this.fireRate *= 1.2;
+        this.cost *= 1.5;
 
     }
 
@@ -87,6 +88,11 @@ export class Tower {
         this.attackTime += deltaTime;
         if (this.attackTime >= this.cooldownTime) {
             ProjectileController.instance.createProjectile(this, this.target);
+            EventHandle.emit('play-sound', 'effect_sound', {
+                sprite: this.name,
+                loop: false,
+                volume: 0.8
+            });
             this.attackTime = 0;
         }
     }
