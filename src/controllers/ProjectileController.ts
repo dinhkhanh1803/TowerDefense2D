@@ -5,7 +5,7 @@ import { Tower } from "../models/Tower";
 import { Enemy } from "../models/Enemy";
 import { ObjectPool } from "../utils/ObjectPool";
 import AssetLoad from "../utils/AssetLoad";
-import { DamageText } from "../scenes/Displays/DamageText";
+import { DamageText } from "../scenes/displays/DamageText";
 import { EventHandle } from "../utils/EventHandle";
 import { GameTypes } from "../types/GameTypes";
 

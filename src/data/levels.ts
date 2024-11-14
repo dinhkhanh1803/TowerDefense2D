@@ -26,7 +26,7 @@ export const levels = [
         waves: [
             {
                 enemies: [
-                    { type: 'Grunt', count: 5 },
+                    { type: 'Grunt', count: 1 },
                 ],
                 spawnPoints: [{ x: 0, y: 2 }],
                 defendPoint: { x: 15, y: 5 },

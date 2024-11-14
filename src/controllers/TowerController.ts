@@ -6,8 +6,8 @@ import AssetLoad from "../utils/AssetLoad";
 import { GameBoard } from "../scenes/GameBoard";
 import { EnemyController } from "./EnemyController";
 import { towersData } from "../data/towers";
-import { TowerInfoPannel } from "../scenes/TowerInfoPannel";
-import { TowerSelectionPannel } from "../scenes/TowerSelectionPannel";
+import { TowerInfoPannel } from "../scenes/systempannels/TowerInfoPannel";
+import { TowerSelectionPannel } from "../scenes/systempannels/TowerSelectionPannel";
 import { EventHandle } from "../utils/EventHandle";
 import { GameTypes } from "../types/GameTypes";
 

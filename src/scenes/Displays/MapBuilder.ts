@@ -1,10 +1,10 @@
 import { applyMatrix, Container, Graphics, Sprite, Texture } from "pixi.js";
-import { TowerSelectionPannel } from "../TowerSelectionPannel";
-import { TowerInfoPannel } from "../TowerInfoPannel";
+import { TowerSelectionPannel } from "../systempannels/TowerSelectionPannel";
+import { TowerInfoPannel } from "../systempannels/TowerInfoPannel";
 import { LevelTypes } from "../../types/LevelTypes";
 import { EnemyController } from "../../controllers/EnemyController";
 import { EventHandle } from "../../utils/EventHandle";
-import { SkillSystemPannel } from "../SkillSystemPannel";
+import { SkillSystemPannel } from "../systempannels/SkillSystemPannel";
 import { GameTypes } from "../../types/GameTypes";
 import { GameBoard } from "../GameBoard";
 import AssetLoad from "../../utils/AssetLoad";
@@ -87,11 +87,11 @@ export class MapBuilder {
             TowerInfoPannel.instance.visible = false;
 
             if (SkillSystemPannel.instance.isHeroSelected) {
-                EventHandle.emit('postion_click', x, y);
+                EventHandle.emit(GameTypes.event.movePosition, x, y);
             }
 
             if (SkillSystemPannel.instance.isSkillSelected) {
-                EventHandle.emit('postion_skill_click', x, y);
+                EventHandle.emit(GameTypes.event.skillPosition, x, y);
             }
         });
         EventHandle.emit(GameTypes.event.addChildToMap, (path));

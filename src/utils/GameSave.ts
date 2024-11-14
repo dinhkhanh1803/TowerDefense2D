@@ -2,6 +2,7 @@ export class GameSave {
     private static STORAGE_KEY = 'gameData_key_';
     private static SOUND_KEY = 'soundEnabled_';
     private static LEVEL_KEY = 'currentLevel_';
+    private static STAR_KEY = 'star_';
 
     private static hashKey(key: string, length: number = 10): string {
         let hash = 0;
@@ -58,5 +59,34 @@ export class GameSave {
         const hashedKey = GameSave.LEVEL_KEY + GameSave.hashKey(GameSave.LEVEL_KEY);
         const savedLevel = localStorage.getItem(hashedKey);
         return savedLevel ? JSON.parse(savedLevel) : 1;
+    }
+
+    // Lưu số sao cho mỗi level
+    public static saveStars(levelId: number, stars: number) {
+        const levelKey = GameSave.STAR_KEY + GameSave.hashKey(levelId.toString());
+        const savedStars = parseInt(localStorage.getItem(levelKey) || '0');
+        if (stars > savedStars) { // Chỉ lưu nếu sao đạt được lớn hơn
+            localStorage.setItem(levelKey, stars.toString());
+        }
+    }
+
+    // Tải số sao của level
+    public static loadStars(levelId: number): number {
+        const levelKey = GameSave.STAR_KEY + GameSave.hashKey(levelId.toString());
+        return parseInt(localStorage.getItem(levelKey) || '0');
+    }
+
+    public static getTotalStars(): number {
+        let totalStars = 0;
+
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && key.startsWith(GameSave.STAR_KEY)) {
+                const stars = parseInt(localStorage.getItem(key) || '0');
+                totalStars += stars;
+            }
+        }
+
+        return totalStars;
     }
 }

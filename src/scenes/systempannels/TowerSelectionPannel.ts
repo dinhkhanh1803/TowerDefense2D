@@ -1,11 +1,11 @@
-import { LevelTypes } from './../types/LevelTypes';
-import { towersData } from './../data/towers';
+import { LevelTypes } from '../../types/LevelTypes';
+import { towersData } from '../../data/towers';
 import { BitmapText, Container, Graphics, Sprite, Texture } from "pixi.js";
-import { TowerType } from "../types/TowerType";
-import AssetLoad from "../utils/AssetLoad";
-import { PlayerController } from "../controllers/PlayerController";
+import { TowerType } from "../../types/TowerType";
+import AssetLoad from "../../utils/AssetLoad";
+import { PlayerController } from "../../controllers/PlayerController";
 import { TowerInfoPannel } from "./TowerInfoPannel";
-import { levels } from '../data/levels';
+import { levels } from '../../data/levels';
 
 export class TowerSelectionPannel extends Container {
     public static instance: TowerSelectionPannel;

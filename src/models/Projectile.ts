@@ -5,6 +5,7 @@ import { Enemy } from "./Enemy";
 import { ProjectileController } from "../controllers/ProjectileController";
 import { ObjectPool } from "../utils/ObjectPool";
 import { EventHandle } from "../utils/EventHandle";
+import { GameTypes } from "../types/GameTypes";
 
 export class Projectile {
     id: number;
@@ -92,7 +93,7 @@ export class Projectile {
 
         this.target.takeDamage(targetId, damage);
         ProjectileController.instance.createImpactEffect(this.type, impactX, impactY);
-        EventHandle.emit('play-sound', 'effect_sound', {
+        EventHandle.emit(GameTypes.event.playSound, 'effect_sound', {
             sprite: 'slash',
             loop: false,
             volume: 0.8

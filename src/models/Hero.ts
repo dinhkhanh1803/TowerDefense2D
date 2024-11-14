@@ -30,7 +30,7 @@ export class Hero extends Character {
         this.sprite.zIndex = 100;
     }
 
-    spawnPosition(postion: { x: number, y: number }) {
+    public spawnPosition(postion: { x: number, y: number }) {
         this.sprite.x = postion.x * 64 + 32;
         this.sprite.y = postion.y * 64 + 32;
         this.currentPosition = postion;
@@ -87,7 +87,7 @@ export class Hero extends Character {
         }
     }
 
-    heal(amount: number): void {
+    private heal(amount: number): void {
         this.hp = Math.min(this.hp + amount, this.maxHp);
     }
 
@@ -98,7 +98,7 @@ export class Hero extends Character {
     }
 
 
-    useSkill(skillId: string): void {
+    private useSkill(skillId: string): void {
         const skill = this.skills.find(s => s.id === skillId);
         if (skill && skill.isReady()) {
             if (this.mp >= skill.manaCost) {
@@ -112,7 +112,7 @@ export class Hero extends Character {
         }
     }
 
-    addSkill(skill: Skill): void {
+    private addSkill(skill: Skill): void {
         this.skills.push(skill);
     }
 
@@ -120,7 +120,7 @@ export class Hero extends Character {
         let newTexture = this.getTextureBasedOnDirection(dx, dy);
         if (this.spriteAni.textures !== newTexture) {
             this.spriteAni.textures = newTexture;
-            this.spriteAni.animationSpeed = 0.1;
+            this.spriteAni.animationSpeed = 0.09;
             this.spriteAni.play();
         }
     }

@@ -2,25 +2,20 @@ import { TowerController } from '../controllers/TowerController';
 import { EnemyController } from '../controllers/EnemyController';
 import { AnimatedSprite, Application, Container, Graphics, Sprite, Text, Texture } from "pixi.js";
 import { LevelManager } from "../managers/LevelManager";
-import { EnemyTypes } from "../types/EnemyTypes";
 import { EventHandle } from '../utils/EventHandle';
-import { Tower } from '../models/Tower';
-import { TowerType } from '../types/TowerType';
-import AssetLoad from '../utils/AssetLoad';
 import { ObjectPool } from '../utils/ObjectPool';
 import { ProjectileController } from '../controllers/ProjectileController';
 import { LevelTypes } from '../types/LevelTypes';
-import { GameConfig } from '../config/GameConfig';
 import { PlayerController } from '../controllers/PlayerController';
-import { HUD } from './Displays/HUD';
-import { TowerInfoPannel } from './TowerInfoPannel';
-import { TowerSelectionPannel } from './TowerSelectionPannel';
-import { MapBuilder } from './Displays/MapBuilder';
-import { ResultPannel } from './Displays/ResultPannel';
+import { HUD } from './displays/HUD';
+import { TowerInfoPannel } from './systempannels/TowerInfoPannel';
+import { TowerSelectionPannel } from './systempannels/TowerSelectionPannel';
 import { HeroController } from '../controllers/HeroController';
-import { SkillSystemPannel } from './SkillSystemPannel';
+import { SkillSystemPannel } from './systempannels/SkillSystemPannel';
 import { GameTypes } from '../types/GameTypes';
 import { SoundManager } from '../managers/SoundManager';
+import { MapBuilder } from './displays/MapBuilder';
+import { ResultPannel } from './displays/ResultPannel';
 
 export class GameBoard extends Container {
     public static instance: GameBoard;
@@ -80,7 +75,7 @@ export class GameBoard extends Container {
         this.addChild(this.headsUpDisplay);
 
         if (!SoundManager.instance.isMuted) {
-            EventHandle.emit('play-sound', 'game_sound', {
+            EventHandle.emit(GameTypes.event.playSound, 'game_sound', {
                 sprite: 'battlemusic',
                 loop: true,
                 volume: 0.8

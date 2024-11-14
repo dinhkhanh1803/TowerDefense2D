@@ -16,7 +16,7 @@ export const herosData: HeroConfig[] = [
         id: 1,
         name: "Warrior",
         speed: 1.2,
-        attackRange: 100,
+        attackRange: 50,
         maxHealth: 100,
         maxMana: 50,
         attackPower: 2,

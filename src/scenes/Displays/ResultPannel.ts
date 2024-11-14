@@ -39,13 +39,13 @@ export class ResultPannel extends Container {
         //tạo sound
 
         if (isWin) {
-            EventHandle.emit('play-sound', 'game_sound', {
+            EventHandle.emit(GameTypes.event.playSound, 'game_sound', {
                 sprite: 'win',
                 loop: false,
                 volume: 0.8
             });
         } else {
-            EventHandle.emit('play-sound', 'game_sound', {
+            EventHandle.emit(GameTypes.event.playSound, 'game_sound', {
                 sprite: 'gamelose',
                 loop: false,
                 volume: 0.8

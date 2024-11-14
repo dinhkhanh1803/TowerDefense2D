@@ -1,8 +1,8 @@
 import { Container, Graphics, Sprite, Texture, Text, BitmapText, TextStyle } from "pixi.js";
-import { Tower } from "../models/Tower";
-import { PlayerController } from "../controllers/PlayerController";
+import { Tower } from "../../models/Tower";
+import { PlayerController } from "../../controllers/PlayerController";
 import { TowerSelectionPannel } from "./TowerSelectionPannel";
-import AssetLoad from "../utils/AssetLoad";
+import AssetLoad from "../../utils/AssetLoad";
 
 
 export class TowerInfoPannel extends Container {

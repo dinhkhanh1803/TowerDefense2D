@@ -11,6 +11,10 @@
         "src": "./atlas/images/map_levels/bg_load.png"
       },
       {
+        "alias": "bg_towerpedia",
+        "src": "./atlas/images/map_levels/bg_towerpedia.png"
+      },
+      {
         "alias": "load_map_01",
         "src": "./atlas/images/map_levels/map_level_01.png"
       },

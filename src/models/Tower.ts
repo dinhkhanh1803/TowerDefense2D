@@ -3,22 +3,23 @@ import AssetLoad from "../utils/AssetLoad";
 import { Enemy } from "./Enemy";
 import { ProjectileController } from "../controllers/ProjectileController";
 import { EventHandle } from "../utils/EventHandle";
+import { GameTypes } from "../types/GameTypes";
 
 export class Tower {
-    id: number;             // ID của tháp
-    name: string;       // Tên của tháp
-    towerContainer: Container;
-    sprite: Sprite;      // Sprite của tháp
-    weapon: AnimatedSprite;
-    damage: number;         // Sát thương của tháp
-    range: number;          // Phạm vi tấn công của tháp
-    fireRate: number;       // Tốc độ bắn (giây giữa các lần bắn)
-    cost: number;           // Chi phí để xây tháp
-    level: number;          // Cấp độ của tháp
-    position!: { x: number; y: number }; // Vị trí của tháp trên bản đồ
-    projectileType: string; // Loại đạn bắn ra (có thể là tên class đạn hoặc ID)
-    targets: Enemy[] = [];
-    target!: Enemy;
+    public id: number;
+    public name: string;
+    public towerContainer: Container;
+    public sprite: Sprite;
+    public weapon: AnimatedSprite;
+    public damage: number;
+    public range: number;
+    public fireRate: number;
+    public cost: number;
+    public level: number;
+    public position!: { x: number; y: number };
+    public projectileType: string;
+    public targets: Enemy[] = [];
+    public target!: Enemy;
 
     private cooldownTime: number;
     private attackTime: number;
@@ -41,7 +42,7 @@ export class Tower {
         this.range = range;
         this.fireRate = fireRate;
         this.cost = cost;
-        this.level = 1; // Tháp khởi đầu ở level 1
+        this.level = 1;
 
         this.cooldownTime = this.fireRate;
         this.attackTime = 0;
@@ -67,10 +68,10 @@ export class Tower {
         this.level++;
         this.sprite.texture = AssetLoad.getTexture(`${this.name}_0${this.level}`);
         this.weapon.position.y -= 5;
-        this.damage *= 1.2;
-        this.range *= 1.1;
-        this.fireRate *= 1.2;
-        this.cost *= 1.5;
+        this.damage *= GameTypes.tower.damageUpgrade;
+        this.range *= GameTypes.tower.rangeUpgrade;
+        this.fireRate *= GameTypes.tower.speedUpgrade;
+        this.cost *= GameTypes.tower.costUpgrade;
 
     }
 
@@ -88,7 +89,7 @@ export class Tower {
         this.attackTime += deltaTime;
         if (this.attackTime >= this.cooldownTime) {
             ProjectileController.instance.createProjectile(this, this.target);
-            EventHandle.emit('play-sound', 'effect_sound', {
+            EventHandle.emit(GameTypes.event.playSound, 'effect_sound', {
                 sprite: this.name,
                 loop: false,
                 volume: 0.8

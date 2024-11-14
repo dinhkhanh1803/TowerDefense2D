@@ -1,9 +1,9 @@
-import { Container, Graphics, Sprite, Texture } from "pixi.js";
-import { EventHandle } from "../utils/EventHandle";
-import { HeroController } from "../controllers/HeroController";
-import AssetLoad from "../utils/AssetLoad";
-import { EnemyController } from "../controllers/EnemyController";
-import { GameTypes } from "../types/GameTypes";
+import { AnimatedSprite, Container, Graphics, Sprite, Texture } from "pixi.js";
+import { EventHandle } from "../../utils/EventHandle";
+import { HeroController } from "../../controllers/HeroController";
+import AssetLoad from "../../utils/AssetLoad";
+import { EnemyController } from "../../controllers/EnemyController";
+import { GameTypes } from "../../types/GameTypes";
 
 export class SkillSystemPannel extends Container {
     public static instance: SkillSystemPannel;
@@ -27,17 +27,17 @@ export class SkillSystemPannel extends Container {
         this.skillSystem();
 
         if (idHero) {
-            this.avatarHero(100, 700, 80, 80);
+            this.avatarHero(100, 720, 80, 80);
         }
 
 
         // Lắng nghe sự kiện "postion_click" để di chuyển hero
-        EventHandle.on('postion_click', (x: number, y: number) => {
+        EventHandle.on(GameTypes.event.movePosition, (x: number, y: number) => {
             this.moveHeroTo(x, y);
             this.resetAvtHero();
         });
 
-        EventHandle.on('postion_skill_click', (x: number, y: number) => {
+        EventHandle.on(GameTypes.event.skillPosition, (x: number, y: number) => {
             this.createDamageZone(x, y);
             this.startCooldown();
             this.resetAvtHero();
@@ -46,12 +46,11 @@ export class SkillSystemPannel extends Container {
 
     private skillSystem() {
         this.visible = true;
-        const grapbg = new Graphics();
-        grapbg.rect(0, 640, 1024, 160);
-        grapbg.fill(0xFEF9F2);
-        this.addChild(grapbg);
+        const bgSprite = new Sprite(Texture.from('UI_board_menu'));
+        bgSprite.position.set(0, 640);
+        this.addChild(bgSprite);
 
-        this.addSkill(900, 700, 80, 80);
+        this.addSkill(900, 720, 80, 80);
     }
 
     private avatarHero(x: number, y: number, w: number, h: number) {
@@ -114,15 +113,19 @@ export class SkillSystemPannel extends Container {
 
     createDamageZone(x: number, y: number) {
 
-        const damageZone = new Sprite(AssetLoad.getTexture('range_tower'));
+        const damageZone = new AnimatedSprite(AssetLoad.getAnimation('firerain'));
         damageZone.x = x;
         damageZone.y = y;
         damageZone.width = 150;
         damageZone.height = 150;
         damageZone.anchor.set(0.5);
+        damageZone.loop = true;
+        damageZone.animationSpeed = 0.1;
+        damageZone.play();
+
 
         EventHandle.emit(GameTypes.event.addChildToMap, (damageZone));
-        EventHandle.emit('play-sound', 'effect_sound', {
+        EventHandle.emit(GameTypes.event.playSound, 'effect_sound', {
             sprite: 'firerain',
             loop: false,
             volume: .6

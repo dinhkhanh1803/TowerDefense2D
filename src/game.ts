@@ -6,6 +6,8 @@ import { levels } from './data/levels';
 import { LoadingScene } from './scenes/LoadingScrene';
 import { SoundManager } from './managers/SoundManager';
 import { GameSave } from './utils/GameSave';
+import { GameTypes } from './types/GameTypes';
+import { TowerPediaScene } from './scenes/TowerPediaScene';
 
 
 export class Game {
@@ -42,21 +44,28 @@ export class Game {
             simulatedProgress += 0.01 * time.deltaTime; // Điều chỉnh tốc độ tăng
             loadingScene.progress = Math.min(simulatedProgress, 1); // Đảm bảo progress không vượt quá 1
 
-            // Cập nhật loadingScene với deltaTime
             loadingScene.update(time.deltaTime);
         });
         this.app.stage.addChild(loadingScene);
     }
 
     public loadMapLevel(): void {
-        EventHandle.emit('scene-changed', 'map-scene');
+        EventHandle.emit(GameTypes.event.sceneChange, 'map-scene');
+        this.app.stage.removeChildren(0);
         const maplevel = new MapScene(this.currentLevel);
         this.app.stage.addChild(maplevel);
     }
 
+    public loadTowerpedia(): void {
+        EventHandle.emit(GameTypes.event.sceneChange, 'map-scene');
+        this.app.stage.removeChildren(0);
+        const towerpedia = new TowerPediaScene();
+        this.app.stage.addChild(towerpedia);
+    }
+
     // Chuyển đổi sang scene GameScene
     public loadGameScene(levelId: number): void {
-        EventHandle.emit('scene-changed', 'game-scene');
+        EventHandle.emit(GameTypes.event.sceneChange, 'game-scene');
 
         this.app.stage.removeChildren(0);
         const currentScene = new GameBoard(levelId, 1);

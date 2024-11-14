@@ -5,6 +5,7 @@ import { PlayerController } from "../controllers/PlayerController";
 import { Character } from "./Character";
 import AssetLoad from "../utils/AssetLoad";
 import { EventHandle } from "../utils/EventHandle";
+import { GameTypes } from "../types/GameTypes";
 
 export class Enemy extends Character {
 
@@ -81,7 +82,7 @@ export class Enemy extends Character {
             if (!this.isAlive) {
                 PlayerController.instance.addGold(this.reward);
                 EnemyController.instance.removeEnemy(this);
-                EventHandle.emit('play-sound', 'effect_sound', {
+                EventHandle.emit(GameTypes.event.playSound, 'effect_sound', {
                     sprite: 'enemydie',
                     loop: false,
                     volume: .6

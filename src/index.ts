@@ -1,18 +1,19 @@
-import { AnimatedSprite, Application, Assets, } from 'pixi.js';
+import { Application, Assets, } from 'pixi.js';
 import { Game } from './game';
-import { GameBoard } from './scenes/GameBoard';
 import bundles from '../assets/assetBundle.json';
 import AssetLoad from './utils/AssetLoad';
 
 (async () => {
     const app = new Application();
+    const canvas = <HTMLCanvasElement>document.getElementById('GameCanvas');
     await app.init({
         background: '#1099bb',
+        canvas: canvas,
         width: 1024, height: 800,
         resolution: window.devicePixelRatio || 1,
         autoDensity: true,
     });
-    document.body.appendChild(app.canvas);
+
 
 
     await Assets.init({ manifest: { bundles } });
@@ -23,7 +24,9 @@ import AssetLoad from './utils/AssetLoad';
     await AssetLoad.loadAtlas([
         './atlas/towers_atlas.json',
         './atlas/projectiles_atlas.json',
-        './atlas/ui_atlas.json'
+        './atlas/ui_atlas.json',
+        './atlas/ui_atlas-0.json',
+        './atlas/ui_atlas-1.json'
     ]);
 
     await AssetLoad.loadBitmap([
@@ -42,7 +45,8 @@ import AssetLoad from './utils/AssetLoad';
         './atlas/weapons_atlas.json',
         './atlas/impacts_atlas.json',
         './atlas/projectiles_atlas.json',
-        './atlas/heros_atlas.json'
+        './atlas/heros_atlas.json',
+        './atlas/skills_atlas.json'
     ]);
 
     await AssetLoad.loadSoundSprite

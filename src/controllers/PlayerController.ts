@@ -6,11 +6,13 @@ import { towersData } from "../data/towers";
 import { TowerController } from "./TowerController";
 import { GameBoard } from "../scenes/GameBoard";
 import { Tower } from "../models/Tower";
-import { HUD } from "../scenes/Displays/HUD";
+import { HUD } from "../scenes/displays/HUD";
 import { EnemyController } from "./EnemyController";
 import { EventHandle } from "../utils/EventHandle";
 import { MapScene } from "../scenes/MapScene";
 import { Game } from "../game";
+import { GameTypes } from "../types/GameTypes";
+import { GameSave } from "../utils/GameSave";
 
 export class PlayerController {
     public static instance: PlayerController;
@@ -75,7 +77,7 @@ export class PlayerController {
 
             if (this.player.health === 0) {
                 this.isGameOver = true;
-                EventHandle.emit('gameResult', false, this.getHealthPercentage());
+                EventHandle.emit(GameTypes.event.gameResult, false, this.getHealthPercentage());
             }
         }
     }
@@ -84,7 +86,12 @@ export class PlayerController {
         if (!this.isGameOver && this.getCurrentWave() === this.getWaves()) {
             if (this.player.health > 0) {
                 Game.instance.unlockNextLevel(this.currentLevel);
-                EventHandle.emit('gameResult', true, this.getHealthPercentage());
+
+                this.currentStar = this.calculateStars(this.getHealthPercentage());
+
+                GameSave.saveStars(this.currentLevel, this.currentStar);
+
+                EventHandle.emit(GameTypes.event.gameResult, true, this.getHealthPercentage());
             }
         }
     }
@@ -112,5 +119,12 @@ export class PlayerController {
 
     getHealthPercentage(): number {
         return (this.getHealth() / this.player.maxHealth) * 100;
+    }
+
+    private calculateStars(healthPercentage: number): number {
+        if (healthPercentage >= 99) return 3;
+        else if (healthPercentage >= 33 && healthPercentage < 99) return 2;
+        else if (healthPercentage > 0 && healthPercentage < 33) return 1;
+        return 0;
     }
 }

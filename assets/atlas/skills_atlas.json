@@ -1,0 +1,194 @@
+{
+  "frames": {
+    "firerain_4": {
+      "frame": {
+        "x": 2,
+        "y": 2,
+        "w": 186,
+        "h": 180
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 6,
+        "y": 5,
+        "w": 186,
+        "h": 180
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "firerain_5": {
+      "frame": {
+        "x": 192,
+        "y": 2,
+        "w": 187,
+        "h": 177
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 7,
+        "w": 187,
+        "h": 177
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "firerain_6": {
+      "frame": {
+        "x": 2,
+        "y": 186,
+        "w": 180,
+        "h": 168
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 7,
+        "y": 18,
+        "w": 180,
+        "h": 168
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "firerain_3": {
+      "frame": {
+        "x": 174,
+        "y": 193,
+        "w": 168,
+        "h": 156
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 13,
+        "y": 16,
+        "w": 168,
+        "h": 156
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "firerain_7": {
+      "frame": {
+        "x": 346,
+        "y": 193,
+        "w": 159,
+        "h": 162
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 19,
+        "y": 27,
+        "w": 159,
+        "h": 162
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "firerain_2": {
+      "frame": {
+        "x": 373,
+        "y": 2,
+        "w": 132,
+        "h": 114
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 34,
+        "w": 132,
+        "h": 114
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "firerain_1": {
+      "frame": {
+        "x": 373,
+        "y": 120,
+        "w": 69,
+        "h": 72
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 64,
+        "y": 70,
+        "w": 69,
+        "h": 72
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "animations": {
+    "firerain": [
+      "firerain_1",
+      "firerain_2",
+      "firerain_3",
+      "firerain_4",
+      "firerain_5",
+      "firerain_6",
+      "firerain_7"
+    ]
+  },
+  "meta": {
+    "app": "http://github.com/odrick/free-tex-packer-core",
+    "version": "0.3.4",
+    "image": "skills_atlas.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 507,
+      "h": 368
+    },
+    "scale": 1
+  }
+}

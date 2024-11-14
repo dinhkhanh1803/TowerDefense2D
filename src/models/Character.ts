@@ -102,7 +102,8 @@ export abstract class Character {
     // }
 
     private initSpriteAnimation() {
-        this.spriteAni.anchor.set(0.5);
+        this.spriteAni.anchor.set(0.5, 1);
+        this.spriteAni.scale.set(0.8);
         this.spriteAni.animationSpeed = 0.1;
         //this.spriteAni.play();
         this.sprite.addChild(this.spriteAni);
@@ -110,9 +111,9 @@ export abstract class Character {
 
     private setHealthBar() {
         this.healthBarDown = new Sprite(AssetLoad.getTexture('hpbar_down'));
-        this.healthBarDown.position.set(this.sprite.x - 15, this.sprite.y - 35);
+        this.healthBarDown.position.set(this.sprite.x - 15, this.sprite.y - 55);
         this.healthBarUp = new Sprite(AssetLoad.getTexture('hpbar_up'));
-        this.healthBarUp.position.set(this.sprite.x - 15, this.sprite.y - 35);
+        this.healthBarUp.position.set(this.sprite.x - 15, this.sprite.y - 55);
         this.healthBar.addChild(this.healthBarDown);
         this.healthBar.addChild(this.healthBarUp);
     }
