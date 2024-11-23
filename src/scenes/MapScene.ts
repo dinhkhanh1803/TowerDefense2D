@@ -136,7 +136,9 @@ export class MapScene extends Container {
         btn.anchor.set(0.5, 0.5);
         btn.interactive = true;
         btn.cursor = 'pointer';
-        btn.on('pointerdown', () => this.openTowerpedia());
+        btn.on('pointerdown', () => {
+            this.openTowerpedia();
+        });
         return btn;
     }
 

@@ -49,24 +49,29 @@
       "end": 27.799569160997734,
       "loop": false
     },
-    "Mage": {
+    "info": {
       "start": 29,
-      "end": 31.520997732426302,
+      "end": 30.5,
+      "loop": false
+    },
+    "Mage": {
+      "start": 32,
+      "end": 34.5209977324263,
       "loop": false
     },
     "slash": {
-      "start": 33,
-      "end": 33.592018140589566,
+      "start": 36,
+      "end": 36.592018140589566,
       "loop": false
     },
     "Tesla": {
-      "start": 35,
-      "end": 36.89097505668934,
+      "start": 38,
+      "end": 39.89097505668934,
       "loop": false
     },
     "upgrade": {
-      "start": 38,
-      "end": 38.767709750566894,
+      "start": 41,
+      "end": 41.767709750566894,
       "loop": false
     }
   },

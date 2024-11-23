@@ -3,6 +3,8 @@ import { Game } from "../game";
 import AssetLoad from "../utils/AssetLoad";
 import { TowerType } from "../types/TowerType";
 import { towersData } from "../data/towers";
+import { EventHandle } from "../utils/EventHandle";
+import { GameTypes } from "../types/GameTypes";
 
 export class TowerPediaScene extends Container {
     private towers: TowerType[];
@@ -77,6 +79,11 @@ export class TowerPediaScene extends Container {
                 this.currentIndex--;
                 this.updateTowerInfo();
                 this.updateArrowStates();
+                EventHandle.emit(GameTypes.event.playSound, 'effect_sound', {
+                    sprite: 'button',
+                    loop: false,
+                    volume: 0.8
+                });
             }
         });
         return btn;
@@ -93,6 +100,11 @@ export class TowerPediaScene extends Container {
                 this.currentIndex++;
                 this.updateTowerInfo();
                 this.updateArrowStates();
+                EventHandle.emit(GameTypes.event.playSound, 'effect_sound', {
+                    sprite: 'button',
+                    loop: false,
+                    volume: 0.8
+                });
             }
         });
         return btn;
@@ -106,7 +118,13 @@ export class TowerPediaScene extends Container {
         if (towerData) {
             this.towerImage.texture = AssetLoad.getTexture(`${towerData.name}_01`);
             this.towerNameText.text = towerData.name;
-            this.towerDescriptionText.text = `Name: ${towerData.name}\nDamage: ${towerData.damage}`;
+            this.towerDescriptionText.text = `
+            Range Attack: ${towerData.range}\n
+            \n
+            Damage: ${towerData.damage}\n
+            \n
+            Fire Rate: ${towerData.fireRate}
+            `;
         } else {
             console.log("Tower data not found");
         }
@@ -129,15 +147,15 @@ export class TowerPediaScene extends Container {
 
     private descriptionTowerBitmapText(): BitmapText {
         const style = {
-            fontFamily: 'Peaberry',
+            fontFamily: '',
             fontSize: 24,
-            fill: '#ffffff',
+            fill: '#000000',
         }
         const text = new BitmapText({
             text: '',
             style: style
         });
-        text.position.set(600, 300);
+        text.position.set(550, 400);
         text.anchor.set(0.5);
         return text;
     }

@@ -6,7 +6,8 @@ import { Character } from './Character';
 import AssetLoad from '../utils/AssetLoad';
 
 export class Hero extends Character {
-    public attackRadius: number
+    public attackRadius: number;
+    private attackRadiusSprite: Sprite;
     private mp: number;
     private maxMp: number;
     private defense: number;
@@ -27,6 +28,11 @@ export class Hero extends Character {
         this.defense = defense;
         this.skills = [];
 
+        this.attackRadiusSprite = new Sprite(AssetLoad.getTexture('range_tower'));
+        this.attackRadiusSprite.anchor.set(0.5, 0.5);
+        this.attackRadiusSprite.scale.set(attackRadius / 100);
+        this.attackRadiusSprite.position = this.spriteAni.position;
+        this.spriteAni.addChild(this.attackRadiusSprite);
         this.sprite.zIndex = 100;
     }
 

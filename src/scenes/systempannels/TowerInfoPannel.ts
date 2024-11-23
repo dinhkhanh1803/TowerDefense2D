@@ -3,6 +3,8 @@ import { Tower } from "../../models/Tower";
 import { PlayerController } from "../../controllers/PlayerController";
 import { TowerSelectionPannel } from "./TowerSelectionPannel";
 import AssetLoad from "../../utils/AssetLoad";
+import { EventHandle } from "../../utils/EventHandle";
+import { GameTypes } from "../../types/GameTypes";
 
 
 export class TowerInfoPannel extends Container {
@@ -44,6 +46,11 @@ export class TowerInfoPannel extends Container {
         upgradeTowerBtn.on('pointerdown', () => {
             PlayerController.instance.upgradeTower(tower.id, tower.level, tower.cost);
             this.infoTower(tower);
+            EventHandle.emit(GameTypes.event.playSound, 'effect_sound', {
+                sprite: 'upgrade',
+                loop: false,
+                volume: 0.8
+            });
         });
         this.addChild(upgradeTowerBtn);
 

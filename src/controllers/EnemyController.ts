@@ -80,6 +80,11 @@ export class EnemyController {
 
             if (enemy.hasReachedGoal()) {
                 PlayerController.instance.takeDamage(enemy.damage);
+                EventHandle.emit(GameTypes.event.playSound, 'effect_sound', {
+                    sprite: 'info',
+                    loop: false,
+                    volume: 0.5
+                });
             }
 
         });
