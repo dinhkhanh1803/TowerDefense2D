@@ -16,6 +16,7 @@ import { GameTypes } from '../types/GameTypes';
 import { SoundManager } from '../managers/SoundManager';
 import { MapBuilder } from './displays/MapBuilder';
 import { ResultPannel } from './displays/ResultPannel';
+import { PauseGame } from './displays/PauseGame';
 
 export class GameBoard extends Container {
     public static instance: GameBoard;
@@ -32,12 +33,14 @@ export class GameBoard extends Container {
     private heroController!: HeroController;
     private mapBuilder: MapBuilder;
     private headsUpDisplay: HUD;
+    private pauseGame: PauseGame;
 
 
     private levelId: number;
     private heroId?: number;
     private levelData: LevelTypes;
     public isGameOver: boolean = false;
+    public isGamePaused: boolean = false;
 
     constructor(levelId: number, heroId?: number) {
         super();
@@ -73,6 +76,8 @@ export class GameBoard extends Container {
         this.addChild(this.towerInfoPannel)
         this.headsUpDisplay = new HUD();
         this.addChild(this.headsUpDisplay);
+        this.pauseGame = new PauseGame(levelId);
+        this.addChild(this.pauseGame);
 
         if (!SoundManager.instance.isMuted) {
             EventHandle.emit(GameTypes.event.playSound, 'game_sound', {
@@ -92,6 +97,7 @@ export class GameBoard extends Container {
                 this.mapContainer.removeChild(sprite);
             });
             EventHandle.on(GameTypes.event.gameResult, this.showResult.bind(this));
+            EventHandle.on(GameTypes.event.togglePause, this.togglePause.bind(this));
         }
     }
 
@@ -102,15 +108,18 @@ export class GameBoard extends Container {
         this.isGameOver = true;
     }
 
+    private togglePause(isPaused: boolean) {
+        this.isGamePaused = isPaused;
+    }
+
 
     update(deltaTime: number) {
-        if (!this.isGameOver) {
+        if (!this.isGameOver && !this.isGamePaused) {
             this.enemyController.update(deltaTime);
             this.towerController.update(deltaTime);
             this.projectileController.update(deltaTime);
-            if (this.heroId) {
-                this.heroController.update(deltaTime);
-            }
+            if (this.heroId) this.heroController.update(deltaTime);
+
         }
     }
 }

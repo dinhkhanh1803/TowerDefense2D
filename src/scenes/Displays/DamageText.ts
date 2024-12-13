@@ -8,12 +8,14 @@ export class DamageText {
     private fadeSpeed: number;
 
     constructor(damage: number, x: number, y: number) {
-        this.text = new BitmapText("- " + damage.toString(), {
-            fontFamily: 'Arial',
-            fontSize: 16,
-            fill: 0xff0000, // Màu đỏ cho damage text
-            align: 'center',
-            stroke: 0x000000,
+        this.text = new BitmapText({
+            text: "- " + damage.toString(), style: {
+                fontFamily: 'Arial',
+                fontSize: 16,
+                fill: 0xff0000, // Màu đỏ cho damage text
+                align: 'center',
+                stroke: 0x000000,
+            }
         });
 
 

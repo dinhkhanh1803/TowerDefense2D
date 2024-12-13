@@ -58,7 +58,6 @@ import AssetLoad from './utils/AssetLoad';
 
     const game = new Game(app);
     game.start();
-
 })();
 
 

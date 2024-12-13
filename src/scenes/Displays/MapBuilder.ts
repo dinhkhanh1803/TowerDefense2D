@@ -1,4 +1,4 @@
-import { applyMatrix, Container, Graphics, Sprite, Texture } from "pixi.js";
+import { applyMatrix, BitmapText, Container, Graphics, Sprite, Texture } from "pixi.js";
 import { TowerSelectionPannel } from "../systempannels/TowerSelectionPannel";
 import { TowerInfoPannel } from "../systempannels/TowerInfoPannel";
 import { LevelTypes } from "../../types/LevelTypes";
@@ -128,23 +128,63 @@ export class MapBuilder {
 
     // Tạo nút Start Spawn tại vị trí cụ thể
     private createStartSpawnTile(x: number, y: number): void {
-        const spawnButton = new Sprite(AssetLoad.getTexture('ui-wave'));
-        spawnButton.scale.set(0.8);
-        spawnButton.position.set(x, y);
+        let posX = x + 32;
+        let posY = y + 32;
+
+        const spawnWaveContainer = new Container();
+
+        if (posX === 32) {
+            spawnWaveContainer.x += 50;
+        } else if (posX === 992) {
+            spawnWaveContainer.x -= 50;
+        }
+
+        if (posY === 32) {
+            spawnWaveContainer.y += 10;
+        } else if (posY === 608) {
+            spawnWaveContainer.y -= 10;
+        }
+
+        const noticePanl = new Sprite(AssetLoad.getTexture('start_wave_notice'));
+        noticePanl.anchor.set(0.5);
+        noticePanl.scale.set(0.4);
+        noticePanl.position.set(posX, posY);
+
+        const noticeText = new BitmapText({
+            text: "press the 'Start Wave' button to \nspawn the enemies!",
+            style: {
+                fontFamily: '',
+                fontSize: 10,
+                fill: '#000000',
+                align: 'center'
+            }
+        });
+        noticeText.position.set(posX, posY);
+        noticeText.anchor.set(0.5);
+
+        const spawnButton = new Sprite(AssetLoad.getTexture('start_wave_btn'));
+        spawnButton.scale.set(0.25);
+        spawnButton.anchor.set(0.5);
+        spawnButton.position.set(posX, posY + 30);
         spawnButton.interactive = true;
         spawnButton.eventMode = 'static';
         spawnButton.cursor = 'pointer';
 
         spawnButton.once('pointerdown', () => {
             EnemyController.instance.spawnEnemyFromLevel(this.levelData);
-            spawnButton.visible = false;
+            spawnWaveContainer.visible = false;
         });
-        EventHandle.emit(GameTypes.event.addChildToMap, (spawnButton));
+
+        spawnWaveContainer.addChild(noticePanl);
+        spawnWaveContainer.addChild(noticeText);
+        spawnWaveContainer.addChild(spawnButton);
+        EventHandle.emit(GameTypes.event.addChildToMap, (spawnWaveContainer));
     }
 
     private createDefenseSprite(x: number, y: number): void {
         const defenseSprite = new Sprite(AssetLoad.getTexture('point_defense'));
-        defenseSprite.position.set(x, y);
+        defenseSprite.position.set(x + 32, y + 32);
+        defenseSprite.anchor.set(0.5);
         defenseSprite.alpha = 0.8;
 
 

@@ -24,6 +24,7 @@ export namespace GameTypes {
         stopSound: 'stop-sound',
         sceneChange: 'scene-changed',
         toggleSound: 'toggle-sound',
+        togglePause: 'toggle-pause',
         movePosition: 'postion_click',
         skillPosition: 'postion_skill_click',
         addStar: 'add_star'

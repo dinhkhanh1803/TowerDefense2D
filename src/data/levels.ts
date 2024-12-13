@@ -186,7 +186,7 @@ export const levels = [
                     { type: 'Monster', count: 7 },
                     { type: 'Giant', count: 6 }
                 ],
-                spawnPoints: [{ x: 15, y: 3 }],
+                spawnPoints: [{ x: 11, y: 0 }],
                 defendPoint: { x: 7, y: 9 },
             },
             {
@@ -196,7 +196,7 @@ export const levels = [
                     { type: 'Giant', count: 6 }
 
                 ],
-                spawnPoints: [{ x: 11, y: 0 }],
+                spawnPoints: [{ x: 15, y: 3 }],
                 defendPoint: { x: 3, y: 9 },
             },
         ],

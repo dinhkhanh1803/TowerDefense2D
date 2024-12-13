@@ -64,7 +64,7 @@ export class HUD extends Container {
             fill: '#ffffff',
             align: 'center'
         });
-        const text = new BitmapText('', style);
+        const text = new BitmapText({ text: '', style });
         text.anchor.set(0.5);
         text.position.set(x, y);
         return text;
