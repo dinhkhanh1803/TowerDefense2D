@@ -19,6 +19,8 @@ import AssetLoad from './utils/AssetLoad';
     await Assets.init({ manifest: { bundles } });
     await Assets.loadBundle('load-maps');
     await Assets.loadBundle('load-uis');
+    await Assets.loadBundle('load-tutorial');
+
 
     //load atlas
     await AssetLoad.loadAtlas([

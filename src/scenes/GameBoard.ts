@@ -17,6 +17,7 @@ import { SoundManager } from '../managers/SoundManager';
 import { MapBuilder } from './displays/MapBuilder';
 import { ResultPannel } from './displays/ResultPannel';
 import { PauseGame } from './displays/PauseGame';
+import { TutorialGame } from './displays/TutorialGame';
 
 export class GameBoard extends Container {
     public static instance: GameBoard;
@@ -34,6 +35,7 @@ export class GameBoard extends Container {
     private mapBuilder: MapBuilder;
     private headsUpDisplay: HUD;
     private pauseGame: PauseGame;
+    private tutorialGame: TutorialGame;
 
 
     private levelId: number;
@@ -78,6 +80,9 @@ export class GameBoard extends Container {
         this.addChild(this.headsUpDisplay);
         this.pauseGame = new PauseGame(levelId);
         this.addChild(this.pauseGame);
+        this.tutorialGame = new TutorialGame();
+        this.addChild(this.tutorialGame);
+
 
         if (!SoundManager.instance.isMuted) {
             EventHandle.emit(GameTypes.event.playSound, 'game_sound', {

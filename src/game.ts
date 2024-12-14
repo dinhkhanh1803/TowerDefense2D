@@ -68,7 +68,7 @@ export class Game {
         EventHandle.emit(GameTypes.event.sceneChange, 'game-scene');
 
         this.app.stage.removeChildren(0);
-        const currentScene = new GameBoard(levelId, 1);
+        const currentScene = new GameBoard(levelId);
         this.app.ticker.add(time => {
             currentScene.update(time.deltaTime);
         });

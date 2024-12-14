@@ -33,6 +33,10 @@
       {
         "alias": "load_map_05",
         "src": "./atlas/images/map_levels/map_level_05.png"
+      },
+      {
+        "alias": "bg_tutorial",
+        "src": "./atlas/images/map_levels/bg_tutorial.png"
       }
     ]
   },
@@ -54,6 +58,23 @@
       {
         "alias": "loading_bar_fill",
         "src": "./atlas/images/uis/loading_bar_fill.png"
+      }
+    ]
+  },
+  {
+    "name": "load-tutorial",
+    "assets": [
+      {
+        "alias": "tutorial_1",
+        "src": "./atlas/images/tutorial/tutorial_1.png"
+      },
+      {
+        "alias": "tutorial_2",
+        "src": "./atlas/images/tutorial/tutorial_2.png"
+      },
+      {
+        "alias": "tutorial_3",
+        "src": "./atlas/images/tutorial/tutorial_3.png"
       }
     ]
   }
