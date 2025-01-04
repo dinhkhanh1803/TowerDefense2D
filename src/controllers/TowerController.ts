@@ -11,9 +11,12 @@ import { TowerSelectionPannel } from "../scenes/systempannels/TowerSelectionPann
 import { EventHandle } from "../utils/EventHandle";
 import { GameTypes } from "../types/GameTypes";
 
+
 export class TowerController {
     public static instance: TowerController;
     private towers: Tower[] = [];
+    public rangeSprite!: Sprite;
+
 
     constructor() {
         TowerController.instance = this;
@@ -43,8 +46,14 @@ export class TowerController {
 
         tower.towerContainer.interactive = true;
         tower.towerContainer.cursor = 'pointer';
-        tower.towerContainer.on('pointerdown', () => {
-            TowerInfoPannel.instance.infoTower(tower);
+        tower.towerContainer.on('pointerup', () => {
+            EventHandle.emit(GameTypes.event.removeChildFromMap, (this.rangeSprite));
+            if (!TowerInfoPannel.instance.isShowPanel) {
+                TowerInfoPannel.instance.showPanel(tower);
+            } else {
+                TowerInfoPannel.instance.inforTower(tower);
+            }
+
         });
         this.towers.push(tower);
         EventHandle.emit(GameTypes.event.addChildToMap, (tower.towerContainer));
@@ -67,9 +76,9 @@ export class TowerController {
         slotTowerSprite.eventMode = 'static';
         slotTowerSprite.cursor = 'pointer';
 
-        slotTowerSprite.on('pointerdown', () => {
+        slotTowerSprite.on('pointerup', () => {
             TowerSelectionPannel.instance.slotTower = slotTowerSprite;
-            TowerSelectionPannel.instance.menuTower();
+            TowerSelectionPannel.instance.showPanel();
         });
 
         EventHandle.emit(GameTypes.event.addChildToMap, (slotTowerSprite));

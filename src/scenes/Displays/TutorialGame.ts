@@ -31,7 +31,7 @@ export class TutorialGame extends Container {
         this.abountBtn.interactive = true;
         this.abountBtn.cursor = 'pointer';
         this.eventMode = 'static';
-        this.abountBtn.on('pointerdown', () => {
+        this.abountBtn.on('pointerup', () => {
             this.isPaused = true;
             this.tutorialPanel = this.GameTurorialPanel();
             this.addChild(this.tutorialPanel);
@@ -49,7 +49,7 @@ export class TutorialGame extends Container {
         background.alpha = 0.5;
         background.interactive = true;
         background.cursor = 'default';
-        background.on('pointerdown', (e) => {
+        background.on('pointerup', (e) => {
             e.stopPropagation();
         });
 
@@ -59,7 +59,7 @@ export class TutorialGame extends Container {
         bgSprite.anchor.set(0.5);
 
         const continueBtn = this.createButton(50, 50, 850, 100, 'btn_close');
-        continueBtn.on('pointerdown', this.close);
+        continueBtn.on('pointerup', this.close);
 
         this.tutorialImageSprite = new Sprite(Texture.from(`tutorial_${this.currentIndex}`));
         this.tutorialImageSprite.x = GameTypes.MAP_WIDTH / 2;

@@ -29,7 +29,7 @@ export class PauseGame extends Container {
         this.pauseBtn.interactive = true;
         this.pauseBtn.cursor = 'pointer';
         this.eventMode = 'static';
-        this.pauseBtn.on('pointerdown', () => {
+        this.pauseBtn.on('pointerup', () => {
             this.isPaused = true;
             this.pausePanel = this.GamePausePanel();
             this.addChild(this.pausePanel);
@@ -47,7 +47,7 @@ export class PauseGame extends Container {
         background.alpha = 0.5;
         background.interactive = true;
         background.cursor = 'default';
-        background.on('pointerdown', (e) => {
+        background.on('pointerup', (e) => {
             e.stopPropagation();
         });
 
@@ -57,13 +57,13 @@ export class PauseGame extends Container {
         bgSprite.anchor.set(0.5);
 
         const continueBtn = this.createButton(200, 80, 260, 400, 'continue-btn');
-        continueBtn.on('pointerdown', this.onContinue);
+        continueBtn.on('pointerup', this.onContinue);
 
         const restartBtn = this.createButton(200, 80, 510, 400, 'restart-btn');
-        restartBtn.on('pointerdown', this.onRetry);
+        restartBtn.on('pointerup', this.onRetry);
 
         const maplevelBtn = this.createButton(200, 80, 760, 400, 'maplevel-btn');
-        maplevelBtn.on('pointerdown', this.onExit);
+        maplevelBtn.on('pointerup', this.onExit);
 
         pausePanel.addChild(background);
         pausePanel.addChild(bgSprite);

@@ -33,7 +33,7 @@ module.exports = {
                 patterns: [
                     { from: 'assets/atlas', to: './atlas' },
                     { from: 'assets/sounds', to: './sounds' },
-
+                    { from: 'assets/css', to: './css' },
                 ],
             }),
             new WebpackObfuscator({

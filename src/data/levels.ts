@@ -26,21 +26,21 @@ export const levels = [
         waves: [
             {
                 enemies: [
-                    { type: 'Grunt', count: 3 },
+                    { type: 'Grunt', count: 5 },
                 ],
                 spawnPoints: [{ x: 0, y: 2 }],
                 defendPoint: { x: 15, y: 5 },
             },
             {
                 enemies: [
-                    { type: 'Grunt', count: 2 },
-                    { type: 'Monster', count: 3 },
+                    { type: 'Grunt', count: 3 },
+                    { type: 'Monster', count: 5 },
                 ],
                 spawnPoints: [{ x: 0, y: 2 }],
                 defendPoint: { x: 15, y: 5 },
             },
         ],
-        spawnInterval: 200,
+        spawnInterval: 100,
         waveInterval: 500,
         towersAvailable: [TowerType.Archer, TowerType.Mage, TowerType.Cannon],
         resources: {
@@ -70,8 +70,8 @@ export const levels = [
         waves: [
             {
                 enemies: [
-                    { type: 'Grunt', count: 5 },
-                    { type: 'Monster', count: 4 }
+                    { type: 'Grunt', count: 6 },
+                    { type: 'Monster', count: 5 }
 
                 ],
                 spawnPoints: [{ x: 2, y: 9 }],
@@ -79,27 +79,27 @@ export const levels = [
             },
             {
                 enemies: [
-                    { type: 'Grunt', count: 4 },
-                    { type: 'Monster', count: 6 }
+                    { type: 'Grunt', count: 5 },
+                    { type: 'Monster', count: 7 }
                 ],
                 spawnPoints: [{ x: 2, y: 9 }],
                 defendPoint: { x: 15, y: 5 },
             },
             {
                 enemies: [
-                    { type: 'Grunt', count: 5 },
-                    { type: 'Monster', count: 5 },
-                    { type: 'Giant', count: 3 }
+                    { type: 'Grunt', count: 6 },
+                    { type: 'Monster', count: 6 },
+                    { type: 'Giant', count: 4 }
                 ],
                 spawnPoints: [{ x: 2, y: 9 }],
                 defendPoint: { x: 15, y: 5 },
             },
         ],
-        spawnInterval: 200,
-        waveInterval: 500,
+        spawnInterval: 100,
+        waveInterval: 600,
         towersAvailable: [TowerType.Archer, TowerType.Mage, TowerType.Cannon, TowerType.Fire],
         resources: {
-            gold: 350,
+            gold: 250,
             health: 10
         }
     },
@@ -125,8 +125,8 @@ export const levels = [
         waves: [
             {
                 enemies: [
-                    { type: 'Grunt', count: 5 },
-                    { type: 'Monster', count: 6 }
+                    { type: 'Grunt', count: 7 },
+                    { type: 'Monster', count: 8 }
 
                 ],
                 spawnPoints: [{ x: 0, y: 5 }],
@@ -134,29 +134,29 @@ export const levels = [
             },
             {
                 enemies: [
-                    { type: 'Grunt', count: 7 },
+                    { type: 'Grunt', count: 8 },
                     { type: 'Monster', count: 6 },
-                    { type: 'Giant', count: 5 },
+                    { type: 'Giant', count: 6 },
                 ],
                 spawnPoints: [{ x: 10, y: 0 }],
                 defendPoint: { x: 15, y: 7 },
             },
             {
                 enemies: [
-                    { type: 'Grunt', count: 7 },
-                    { type: 'Monster', count: 6 },
-                    { type: 'Giant', count: 5 },
+                    { type: 'Grunt', count: 8 },
+                    { type: 'Monster', count: 7 },
+                    { type: 'Giant', count: 6 },
                     { type: 'Speedster', count: 3 },
                 ],
                 spawnPoints: [{ x: 0, y: 5 }, { x: 10, y: 0 }],
                 defendPoint: { x: 15, y: 7 },
             },
         ],
-        spawnInterval: 200,
-        waveInterval: 500,
+        spawnInterval: 100,
+        waveInterval: 600,
         towersAvailable: [TowerType.Archer, TowerType.Mage, TowerType.Cannon, TowerType.Fire, TowerType.Ice],
         resources: {
-            gold: 400,
+            gold: 300,
             health: 10
         }
     },
@@ -191,20 +191,31 @@ export const levels = [
             },
             {
                 enemies: [
-                    { type: 'Grunt', count: 8 },
-                    { type: 'Monster', count: 7 },
-                    { type: 'Giant', count: 6 }
+                    { type: 'Grunt', count: 9 },
+                    { type: 'Monster', count: 8 },
+                    { type: 'Giant', count: 7 }
 
                 ],
                 spawnPoints: [{ x: 15, y: 3 }],
                 defendPoint: { x: 3, y: 9 },
             },
+            {
+                enemies: [
+                    { type: 'Grunt', count: 7 },
+                    { type: 'Monster', count: 6 },
+                    { type: 'Giant', count: 5 },
+                    { type: 'Speedster', count: 5 }
+
+                ],
+                spawnPoints: [{ x: 15, y: 3 }, { x: 11, y: 0 }],
+                defendPoint: { x: 3, y: 9 },
+            }
         ],
-        spawnInterval: 200,
-        waveInterval: 500,
+        spawnInterval: 100,
+        waveInterval: 600,
         towersAvailable: [TowerType.Archer, TowerType.Mage, TowerType.Cannon, TowerType.Fire, TowerType.Ice, TowerType.Tesla],
         resources: {
-            gold: 500,
+            gold: 400,
             health: 10
         }
     },
@@ -275,8 +286,8 @@ export const levels = [
                 defendPoint: { x: 15, y: 3 },
             },
         ],
-        spawnInterval: 200,
-        waveInterval: 500,
+        spawnInterval: 100,
+        waveInterval: 600,
         towersAvailable: [TowerType.Archer, TowerType.Mage, TowerType.Cannon, TowerType.Fire, TowerType.Ice, TowerType.Tesla],
         resources: {
             gold: 500,

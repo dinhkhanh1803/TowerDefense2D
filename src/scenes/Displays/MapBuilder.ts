@@ -8,10 +8,11 @@ import { SkillSystemPannel } from "../systempannels/SkillSystemPannel";
 import { GameTypes } from "../../types/GameTypes";
 import { GameBoard } from "../GameBoard";
 import AssetLoad from "../../utils/AssetLoad";
+import { TowerController } from "../../controllers/TowerController";
 
 export class MapBuilder {
     private levelData: LevelTypes;
-
+    private range: Sprite = new Sprite();
     constructor(levelData: LevelTypes) {
         this.levelData = levelData;
 
@@ -61,10 +62,11 @@ export class MapBuilder {
         map.position.y = y;
         map.interactive = true;
         map.eventMode = 'static';
-        map.on('pointerdown', () => {
+        map.on('pointerup', () => {
             if (GameBoard.instance.isGameOver) return;
-            TowerSelectionPannel.instance.visible = false;
-            TowerInfoPannel.instance.visible = false;
+            TowerSelectionPannel.instance.hidePanel();
+            TowerInfoPannel.instance.hidePanel();
+            EventHandle.emit(GameTypes.event.removeChildFromMap, (this.range));
             SkillSystemPannel.instance.resetAvtHero();
         });
         EventHandle.emit(GameTypes.event.addChildToMap, (map));
@@ -81,10 +83,12 @@ export class MapBuilder {
         path.interactive = true;
         path.eventMode = 'static';
 
-        path.on('pointerdown', () => {
+        path.on('pointerup', () => {
             if (GameBoard.instance.isGameOver) return;
-            TowerSelectionPannel.instance.visible = false;
-            TowerInfoPannel.instance.visible = false;
+            TowerSelectionPannel.instance.hidePanel();
+            TowerInfoPannel.instance.hidePanel();
+
+            EventHandle.emit(GameTypes.event.removeChildFromMap, (this.range));
 
             if (SkillSystemPannel.instance.isHeroSelected) {
                 EventHandle.emit(GameTypes.event.movePosition, x, y);
@@ -105,10 +109,19 @@ export class MapBuilder {
         slotTowerSprite.eventMode = 'static';
         slotTowerSprite.cursor = 'pointer';
 
-        slotTowerSprite.on('pointerdown', () => {
+        slotTowerSprite.on('pointerup', () => {
             if (GameBoard.instance.isGameOver) return;
+            this.range.texture = AssetLoad.getTexture('range_tower');
+            this.range.anchor.set(0.5);
+            this.range.scale.set(0.5);
+            this.range.position.set(x + 32, y + 32);
+
+            EventHandle.emit(GameTypes.event.addChildToMap, (this.range));
+
             TowerSelectionPannel.instance.slotTower = slotTowerSprite;
-            TowerSelectionPannel.instance.menuTower();
+            TowerSelectionPannel.instance.rangeSprite = this.range;
+            TowerController.instance.rangeSprite = this.range;
+            TowerSelectionPannel.instance.showPanel();
         });
         EventHandle.emit(GameTypes.event.addChildToMap, (slotTowerSprite));
     }
@@ -118,10 +131,10 @@ export class MapBuilder {
         grap.rect(x, y, 64, 64);
         grap.fill(0x72BF78);
         grap.interactive = true;
-        grap.on('pointerdown', () => {
+        grap.on('pointerup', () => {
             if (GameBoard.instance.isGameOver) return;
-            TowerSelectionPannel.instance.visible = false;
-            TowerInfoPannel.instance.visible = false;
+            TowerSelectionPannel.instance.hidePanel();
+            TowerInfoPannel.instance.hidePanel();
         });
         EventHandle.emit(GameTypes.event.addChildToMap, (grap));
     }
@@ -170,7 +183,7 @@ export class MapBuilder {
         spawnButton.eventMode = 'static';
         spawnButton.cursor = 'pointer';
 
-        spawnButton.once('pointerdown', () => {
+        spawnButton.once('pointerup', () => {
             EnemyController.instance.spawnEnemyFromLevel(this.levelData);
             spawnWaveContainer.visible = false;
         });

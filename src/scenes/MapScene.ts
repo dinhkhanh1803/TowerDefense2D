@@ -6,6 +6,7 @@ import { Game } from "../game";
 import { EventHandle } from "../utils/EventHandle";
 import { GameSave } from "../utils/GameSave";
 import { SoundManager } from "../managers/SoundManager";
+import { gsap } from 'gsap';
 
 export class MapScene extends Container {
     public static instance: MapScene;
@@ -102,7 +103,7 @@ export class MapScene extends Container {
                 levelSprite.addChild(levelText);
                 levelSprite.interactive = true;
                 levelSprite.cursor = 'pointer';
-                levelSprite.on('pointerdown', () => this.selectLevel(i));
+                levelSprite.on('pointerup', () => this.selectLevel(i));
             }
         }
     }
@@ -136,7 +137,7 @@ export class MapScene extends Container {
         btn.anchor.set(0.5, 0.5);
         btn.interactive = true;
         btn.cursor = 'pointer';
-        btn.on('pointerdown', () => {
+        btn.on('pointerup', () => {
             this.openTowerpedia();
         });
         return btn;
@@ -159,12 +160,21 @@ export class MapScene extends Container {
 
     private animateFinger() {
 
-        const up = () => {
-            this.fingerOffset = Math.sin(Date.now() / 500) * 10; // Điều chỉnh độ cao
-            this.finger.position.y = 350 + this.fingerOffset; // Cập nhật vị trí ngón tay
-            requestAnimationFrame(up); // Gọi lại hàm để tiếp tục animation
-        };
+        const initialY = 350;
+        gsap.to(this.finger.position, {
+            y: initialY + 20,
+            duration: 0.8,
+            yoyo: true,
+            repeat: -1,
+            ease: "sine.inOut"
+        });
 
-        up(); // Bắt đầu animation
+        // const up = () => {
+        //     this.fingerOffset = Math.sin(Date.now() / 500) * 10; // Điều chỉnh độ cao
+        //     this.finger.position.y = 350 + this.fingerOffset; // Cập nhật vị trí ngón tay
+        //     requestAnimationFrame(up); // Gọi lại hàm để tiếp tục animation
+        // };
+
+        // up(); // Bắt đầu animation
     }
 }

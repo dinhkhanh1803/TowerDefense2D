@@ -21,9 +21,9 @@ export class ResultPannel extends Container {
 
         // Tạo button
         const restartBtn = this.createButton(200, 80, 350, 450, 'restart-btn');
-        restartBtn.on('pointerdown', this.onRetry);
+        restartBtn.on('pointerup', this.onRetry);
         const closeBtn = this.createButton(200, 80, 650, 450, 'maplevel-btn');
-        closeBtn.on('pointerdown', this.onExit);
+        closeBtn.on('pointerup', this.onExit);
 
         //Tạo star
         const starDis = this.starDisplay(400, 110, healthPercentage);

@@ -91,7 +91,7 @@ export class SoundManager {
         soundBtn.eventMode = 'static';
         soundBtn.cursor = 'pointer';
         soundBtn.scale.set(0.8);
-        soundBtn.on('pointerdown', () => {
+        soundBtn.on('pointerup', () => {
             EventHandle.emit(GameTypes.event.toggleSound, 'game_sound', {
                 sprite: 'gametitle',
                 loop: true,

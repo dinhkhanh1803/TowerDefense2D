@@ -65,7 +65,7 @@ export class SkillSystemPannel extends Container {
         this.avatarSelected.y = y;
         this.avatarSelected.anchor.set(0.5);
 
-        this.avtHero.on('pointerdown', () => {
+        this.avtHero.on('pointerup', () => {
             if (!this.isSkillSelected) {
                 this.isHeroSelected = true;
                 this.isSkillSelected = false;
@@ -88,7 +88,7 @@ export class SkillSystemPannel extends Container {
         this.skillSelected.x = x;
         this.skillSelected.y = y;
         this.skillSelected.anchor.set(0.5);
-        this.avtSkill.on('pointerdown', () => {
+        this.avtSkill.on('pointerup', () => {
             if (!this.isHeroSelected && !this.cooldownInProgress) {
                 this.isSkillSelected = true;
                 this.isHeroSelected = false;

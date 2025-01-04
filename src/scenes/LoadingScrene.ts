@@ -49,7 +49,7 @@ export class LoadingScene extends Container {
         this.startButton.visible = false;
         this.startButton.interactive = true;
         this.startButton.eventMode = 'static';
-        this.startButton.on('pointerdown', () => this.onStartButtonClick());
+        this.startButton.on('pointerup', () => this.onStartButtonClick());
 
         this.addChild(this.startButton);
     }

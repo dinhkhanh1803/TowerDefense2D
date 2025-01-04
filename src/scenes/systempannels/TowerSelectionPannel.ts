@@ -6,43 +6,75 @@ import AssetLoad from "../../utils/AssetLoad";
 import { PlayerController } from "../../controllers/PlayerController";
 import { TowerInfoPannel } from "./TowerInfoPannel";
 import { levels } from '../../data/levels';
+import { gsap } from "gsap";
+import { EventHandle } from '../../utils/EventHandle';
+import { GameTypes } from '../../types/GameTypes';
 
 export class TowerSelectionPannel extends Container {
     public static instance: TowerSelectionPannel;
     public slotTower!: Sprite;
+    public rangeSprite!: Sprite;
     private typeTower: TowerType[];
+    public isShowPanel = false;
+    private uiBoard!: Sprite;
 
     constructor(dataTower: TowerType[]) {
         super();
         TowerSelectionPannel.instance = this;
         this.visible = false;
+        this.uiBoard = new Sprite(Texture.from('UI_board_info'));
+        this.uiBoard.position.set(0, GameTypes.GAME_HEIGHT);
+        this.addChild(this.uiBoard);
 
         this.typeTower = dataTower;
     }
 
-    menuTower() {
-        TowerInfoPannel.instance.visible = false;
+    public showPanel() {
+        if (this.isShowPanel) return;
+        this.isShowPanel = true;
+        TowerInfoPannel.instance.hidePanel();
         this.visible = true;
 
-        const uiBoard = new Sprite(Texture.from('UI_board_menu'));
-        uiBoard.position.set(0, 640);
-        this.addChild(uiBoard);
+        gsap.to(this.uiBoard.position, {
+            y: 630, // Đưa UI lên cao hơn một chút để nhún
+            duration: 0.2, // Thời gian nhún ban đầu
+            ease: "power2.out", // Hiệu ứng easing
+            onComplete: () => {
+                gsap.to(this.uiBoard.position, {
+                    y: 640, // Đưa về vị trí cuối cùng
+                    duration: 0.1, // Thời gian đưa về vị trí
+                    ease: "bounce.out", // Hiệu ứng nhún tự nhiên
+                    onComplete: () => {
+                        const startX = 50;
+                        const startY = 650;
+                        const cardSpacing = 20;
 
+                        for (let i = 0; i < this.typeTower.length; i++) {
+                            const type = this.typeTower[i];
+                            const cardX = startX + i * (100 + cardSpacing);
+                            const cardY = startY;
+                            const card = this.createCardTower(type, cardX, cardY);
+                            this.addChild(card);
+                        }
+                    }
+                });
 
+            }
+        });
 
+    }
 
-        const startX = 50;
-        const startY = 650;
-        const cardSpacing = 20;
+    public hidePanel() {
+        this.isShowPanel = false;
+        this.visible = false;
+        gsap.to(this.uiBoard.position, {
+            y: GameTypes.GAME_HEIGHT, // Di chuyển xuống ngoài màn hình
+            duration: 0.3,
+            ease: "power2.in",
+            onComplete: () => {
 
-        for (let i = 0; i < this.typeTower.length; i++) {
-            const type = this.typeTower[i];
-            const cardX = startX + i * (100 + cardSpacing);
-            const cardY = startY;
-            const card = this.createCardTower(type, cardX, cardY);
-            this.addChild(card);
-        }
-
+            }
+        });
     }
 
     createCardTower(type: TowerType, x: number, y: number): Container {
@@ -60,9 +92,10 @@ export class TowerSelectionPannel extends Container {
 
         card.interactive = true;
         card.cursor = 'pointer';
-        card.on('pointerdown', () => {
+        card.on('pointerup', () => {
             PlayerController.instance.buyTower(type, this.slotTower);
-            this.visible = false;
+            EventHandle.emit(GameTypes.event.removeChildFromMap, (this.rangeSprite));
+            this.hidePanel();
         });
         card.addChild(cardTower);
         card.addChild(spriteTower);

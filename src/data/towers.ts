@@ -12,33 +12,33 @@ export const towersData: TowerConfig[] = [
     {
         name: "Archer",
         damage: 5,
-        range: 100,
+        range: 130,
         fireRate: 60,
-        cost: 80,
+        cost: 70,
         projectileType: "arrow"
     },
     {
         name: "Mage",
-        damage: 5,
-        range: 100,
+        damage: 7,
+        range: 120,
         fireRate: 60,
-        cost: 100,
+        cost: 110,
         projectileType: "magicball"
     },
     {
         name: "Fire",
-        damage: 5,
-        range: 120,
+        damage: 8,
+        range: 180,
         fireRate: 80,
         cost: 150,
         projectileType: "fireball"
     },
     {
         name: "Ice",
-        damage: 5,
-        range: 150,
+        damage: 6,
+        range: 120,
         fireRate: 90,
-        cost: 200,
+        cost: 130,
         projectileType: "iceshard"
     },
     {
@@ -46,13 +46,13 @@ export const towersData: TowerConfig[] = [
         damage: 7,
         range: 170,
         fireRate: 120,
-        cost: 200,
+        cost: 120,
         projectileType: "cannonball"
     },
     {
         name: "Tesla",
-        damage: 6,
-        range: 180,
+        damage: 9,
+        range: 160,
         fireRate: 100,
         cost: 250,
         projectileType: "lightning"

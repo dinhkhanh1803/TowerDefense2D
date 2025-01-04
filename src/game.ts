@@ -34,7 +34,7 @@ export class Game {
 
     // Bắt đầu game
     start(): void {
-        this.loadAssets();
+        this.loadGameScene(1);
     }
 
     private loadAssets() {
