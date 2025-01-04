@@ -4,6 +4,7 @@ import { HeroController } from "../../controllers/HeroController";
 import AssetLoad from "../../utils/AssetLoad";
 import { EnemyController } from "../../controllers/EnemyController";
 import { GameTypes } from "../../types/GameTypes";
+import { PauseGame } from "../displays/PauseGame";
 
 export class SkillSystemPannel extends Container {
     public static instance: SkillSystemPannel;
@@ -145,6 +146,7 @@ export class SkillSystemPannel extends Container {
     }
 
     checkEnemiesInZone(zone: Sprite) {
+        if (PauseGame.instance.isPaused) return;
         const enemies = EnemyController.instance.getEnemy();
         enemies.forEach(enemy => {
             if (enemy.isAlive) {
@@ -159,13 +161,26 @@ export class SkillSystemPannel extends Container {
     }
 
     startCooldown() {
+        if (this.cooldownInProgress) return;
+
         this.cooldownInProgress = true;
-
         this.avtSkill.texture = AssetLoad.getTexture('FireRain_U');
-        setTimeout(() => {
-            this.cooldownInProgress = false;
 
-            this.avtSkill.texture = AssetLoad.getTexture('FireRain_A');
-        }, 10000); // Thời gian hồi chiêu là 10 giây
+        let remainingTime = 10000; // Thời gian hồi chiêu (10 giây)
+        const startTime = Date.now();
+
+        const cooldownInterval = setInterval(() => {
+            if (PauseGame.instance.isPaused) return; // Không làm gì khi game bị pause
+
+            const elapsedTime = Date.now() - startTime;
+            remainingTime = 10000 - elapsedTime;
+
+            if (remainingTime <= 0) {
+                clearInterval(cooldownInterval);
+                this.cooldownInProgress = false;
+                this.avtSkill.texture = AssetLoad.getTexture('FireRain_A');
+            }
+        }, 100); // Kiểm tra mỗi 100ms
     }
+
 }

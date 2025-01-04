@@ -17,6 +17,7 @@ export class Projectile {
 
     lightAni: AnimatedSprite;
 
+
     constructor(id: number, sprite: Sprite, type: string) {
         this.id = id;
         this.type = type;
@@ -29,6 +30,7 @@ export class Projectile {
         this.lightAni = new AnimatedSprite(AssetLoad.getAnimation("lightning_lv1"));
         this.lightAni.animationSpeed = 0.2;
         this.lightAni.loop = false;
+
     }
 
     setTarget(enemyTarget: Enemy, damage: number) {
@@ -91,7 +93,7 @@ export class Projectile {
         const targetId = this.target.id;
         const damage = Math.round(this.damage * (0.8 + Math.random() * 0.4));
 
-        this.target.takeDamage(targetId, damage);
+        this.target.takeDamage(targetId, damage, this.type);
         ProjectileController.instance.createImpactEffect(this.type, impactX, impactY);
         EventHandle.emit(GameTypes.event.playSound, 'effect_sound', {
             sprite: 'slash',

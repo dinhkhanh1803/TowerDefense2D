@@ -9,7 +9,7 @@ export class PauseGame extends Container {
     private pauseBtn: Sprite;
     private pausePanel!: Container;
     private levelId: number;
-    private isPaused: boolean = false;
+    public isPaused: boolean = false;
 
     constructor(level: number) {
         super();
